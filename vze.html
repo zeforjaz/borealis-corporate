@@ -1,0 +1,1962 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Borealis Corporate — Programas para Equipas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Lora:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #1a4a2e;
+      --green-light: #e8f0eb;
+      --orange: #e05a1a;
+      --orange-hover: #c94e12;
+      --text: #1c2b1e;
+      --text-mid: #5a6b5c;
+      --text-light: #8a9b8c;
+      --border: #e2e8e3;
+      --bg: #ffffff;
+      --bg-soft: #f7f9f7;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── TOP BAR ─── */
+    .topbar {
+      background: var(--green);
+      padding: 0.5rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .topbar a { color: rgba(255,255,255,0.75); text-decoration: none; }
+    .topbar a:hover { color: #fff; }
+    .topbar-left { display: flex; gap: 1.5rem; align-items: center; }
+    .topbar-right { display: flex; gap: 1.5rem; align-items: center; }
+
+    /* ─── NAV ─── */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      padding: 0 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.05);
+    }
+    .nav-logo img {
+      height: 44px;
+    }
+    .nav-logo-text {
+      display: flex; flex-direction: column;
+    }
+    .nav-brand {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--green);
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .nav-sub {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+    .nav-links {
+      display: flex;
+      gap: 0.2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-mid);
+      text-decoration: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: 4px;
+      transition: all 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .nav-links a:hover { background: var(--bg-soft); color: var(--green); }
+    .nav-cta {
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.55rem 1.3rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.15s;
+      letter-spacing: 0.01em;
+    }
+    .nav-cta:hover { background: var(--orange-hover); }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 88vh;
+      min-height: 560px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1800&q=85');
+      background-size: cover;
+      background-position: center 40%;
+      filter: brightness(0.55);
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(26,74,46,0.7) 0%, rgba(26,74,46,0.1) 60%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 680px;
+      padding: 0 5rem;
+    }
+    .hero-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.7rem;
+    }
+    .hero-label span {
+      display: inline-block;
+      width: 28px; height: 2px;
+      background: var(--orange);
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 em {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: #fff;
+      display: block;
+      font-size: 0.85em;
+    }
+    .hero-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.82);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 2.2rem;
+      max-width: 480px;
+    }
+    .hero-btns {
+      display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 0.85rem 2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--orange-hover); }
+    .btn-outline-white {
+      background: transparent;
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 0.85rem 2rem;
+      border-radius: 6px;
+      border: 2px solid rgba(255,255,255,0.5);
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.15s;
+    }
+    .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+    .hero-stats {
+      position: absolute;
+      bottom: 2.5rem; right: 4rem;
+      z-index: 2;
+      display: flex;
+      gap: 2.5rem;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      padding: 1.2rem 2rem;
+    }
+    .hstat { text-align: center; }
+    .hstat-num {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+    .hstat-lbl {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-top: 0.25rem;
+    }
+
+    /* ─── SECTION HELPERS ─── */
+    .section-wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .section-tag {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--orange);
+      margin-bottom: 0.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .section-tag::before {
+      content: '';
+      display: inline-block;
+      width: 18px; height: 2px;
+      background: var(--orange);
+    }
+    h2.section-title {
+      font-size: clamp(1.7rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .section-desc {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      font-weight: 300;
+      line-height: 1.7;
+      max-width: 580px;
+    }
+    .divider {
+      display: flex; justify-content: center;
+      margin: 0.5rem 0 1.5rem;
+      color: var(--orange);
+      font-size: 1.2rem;
+      letter-spacing: 0.2em;
+      opacity: 0.6;
+    }
+
+    /* ─── INTRO STRIP ─── */
+    .intro-strip {
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 2.2rem 2rem;
+    }
+    .intro-strip-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .strip-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .strip-icon {
+      width: 40px; height: 40px;
+      background: var(--green);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .strip-icon svg { width: 20px; height: 20px; fill: none; stroke: #fff; stroke-width: 1.8; }
+    .strip-text strong { display: block; font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .strip-text span { font-size: 0.75rem; color: var(--text-mid); }
+
+    /* ─── PROGRAMAS ─── */
+    .programs-section {
+      padding: 5rem 2rem;
+      background: var(--bg-soft);
+    }
+    .programs-head {
+      max-width: 1160px; margin: 0 auto 2.5rem;
+      text-align: center;
+    }
+    .programs-head .section-tag { justify-content: center; }
+    .programs-head .section-tag::before { display: none; }
+    .programs-grid {
+      max-width: 1160px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .prog-card {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #fff;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .prog-card:hover {
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+      transform: translateY(-4px);
+    }
+    .prog-img {
+      width: 100%;
+      height: 200px;
+      flex-shrink: 0;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+    .prog-badge {
+      position: absolute;
+      top: 0.7rem; left: 0.7rem;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+    }
+    .badge-orange { background: var(--orange); color: #fff; }
+    .badge-green { background: var(--green); color: #fff; }
+    .badge-premium { background: #1c1c1c; color: #fff; }
+    .prog-body {
+      padding: 1.4rem 1.5rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .prog-tag {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.5rem;
+    }
+    .prog-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+      line-height: 1.3;
+    }
+    .prog-card .prog-sub {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+    .prog-checks {
+      list-style: none;
+      margin-bottom: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .prog-checks li {
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      line-height: 1.4;
+    }
+    .prog-checks li::before {
+      content: '✔';
+      color: var(--green);
+      font-size: 0.7rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .prog-diferencial {
+      background: #eef3ff;
+      border-radius: 6px;
+      padding: 0.7rem 0.9rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.76rem;
+      color: #2255cc;
+      line-height: 1.5;
+    }
+    .prog-diferencial strong {
+      display: block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .prog-meta {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      font-size: 0.68rem;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
+      padding-top: 0.7rem;
+      margin-top: auto;
+    }
+    .prog-meta span { display: flex; align-items: center; gap: 0.25rem; }
+
+    /* ─── NUMBERS BANNER ─── */
+    .numbers-banner {
+      background: var(--green);
+      padding: 3.5rem 2rem;
+    }
+    .numbers-banner-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      text-align: center;
+    }
+    .nb-item {}
+    .nb-num {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .nb-lbl {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+    .nb-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.15);
+      margin: 0 auto;
+    }
+
+    /* ─── CEO RETREATS ─── */
+    .ceo-section {
+      padding: 5rem 2rem;
+      background: var(--bg-soft);
+    }
+    .ceo-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .ceo-image {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+    .ceo-image img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      display: block;
+    }
+    .ceo-image-badge {
+      position: absolute;
+      bottom: 1.5rem; left: 1.5rem;
+      background: rgba(255,255,255,0.95);
+      border-radius: 10px;
+      padding: 1rem 1.3rem;
+      backdrop-filter: blur(8px);
+    }
+    .ceo-ib-title {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 0.3rem;
+    }
+    .ceo-ib-val {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .ceo-content {}
+    .ceo-content h2 { margin-bottom: 1rem; }
+    .ceo-tagline {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text-mid);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .ceo-desc {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .ceo-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    .ceo-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+      line-height: 1.5;
+    }
+    .ceo-features li:last-child { border-bottom: none; }
+    .ceo-features li::before {
+      content: '✓';
+      color: var(--green);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.05rem;
+    }
+    .price-badge {
+      background: var(--green-light);
+      border: 1px solid rgba(26,74,46,0.15);
+      border-radius: 8px;
+      padding: 1rem 1.3rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.82rem;
+      color: var(--green);
+    }
+    .price-badge strong { font-size: 1rem; }
+
+    /* ─── SAÚDE MENTAL ─── */
+    .saude-section {
+      padding: 5rem 2rem;
+    }
+    .saude-inner {
+      max-width: 1160px; margin: 0 auto;
+    }
+    .saude-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .saude-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .saude-card {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #fff;
+    }
+    .saude-card-img {
+      height: 180px;
+      background-size: cover;
+      background-position: center;
+    }
+    .saude-card-body {
+      padding: 1.3rem;
+    }
+    .saude-card-tag {
+      font-size: 0.62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--orange);
+      margin-bottom: 0.4rem;
+    }
+    .saude-card h3 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+    .saude-card p {
+      font-size: 0.8rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+    .bid-highlight {
+      margin-top: 2rem;
+      background: var(--green);
+      border-radius: 16px;
+      padding: 2.5rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      color: #fff;
+    }
+    .bid-highlight h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .bid-highlight em {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(255,255,255,0.75);
+      display: block;
+      margin-bottom: 1rem;
+    }
+    .bid-highlight p {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+    }
+    .bid-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .bid-stat {
+      background: rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+    .bid-stat-num {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .bid-stat-lbl {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.2rem;
+      line-height: 1.4;
+    }
+
+    /* ─── BID / INÊS GAYA ─── */
+    .bid-section {
+      background: var(--bg-soft);
+      padding: 5rem 2rem;
+    }
+    .bid-inner {
+      max-width: 1160px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .bid-photo-wrap {
+      position: relative;
+    }
+    .bid-photo-wrap img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: 16px;
+      display: block;
+    }
+    .bid-photo-tag {
+      position: absolute;
+      bottom: 1.5rem; left: 1.5rem;
+      background: #fff;
+      border-radius: 10px;
+      padding: 0.9rem 1.2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+    .bid-photo-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .bid-photo-role {
+      font-size: 0.72rem;
+      color: var(--text-mid);
+      margin-top: 0.1rem;
+    }
+    .bid-photo-ig {
+      font-size: 0.68rem;
+      color: var(--orange);
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+    .bid-content h2 { margin-bottom: 0.5rem; }
+    .bid-tagline {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text-mid);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .bid-desc {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .bid-numbers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.8rem;
+    }
+    .bid-num-item {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+    .bid-num-val {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .bid-num-lbl {
+      font-size: 0.68rem;
+      color: var(--text-light);
+      line-height: 1.3;
+    }
+    .bid-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.8rem;
+    }
+    .bid-pill {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.35rem 0.8rem;
+      border-radius: 20px;
+      background: var(--green-light);
+      color: var(--green);
+      border: 1px solid rgba(26,74,46,0.12);
+    }
+
+    /* ─── MODALS ─── */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      overflow-y: auto;
+      animation: fadeIn 0.3s ease-out;
+    }
+    .modal.active { display: flex; }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .modal-content {
+      background: #fff;
+      border-radius: 16px;
+      max-width: 700px;
+      width: 90%;
+      margin: 2rem auto;
+      display: flex;
+      flex-direction: column;
+      animation: slideIn 0.4s ease-out;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+    .modal-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      width: 40px; height: 40px;
+      background: rgba(26,74,46,0.1);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s;
+      z-index: 1001;
+    }
+    .modal-close:hover { background: rgba(26,74,46,0.2); }
+    .modal-hero {
+      width: 100%;
+      height: 300px;
+      background-size: cover;
+      background-position: center;
+      border-radius: 16px 16px 0 0;
+      position: relative;
+    }
+    .modal-badge {
+      position: absolute;
+      top: 1rem; left: 1rem;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 20px;
+      background: var(--orange);
+      color: #fff;
+      z-index: 10;
+    }
+    .modal-body {
+      padding: 2.5rem 2rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .modal-body h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .modal-body .modal-tagline {
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: var(--text-mid);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .modal-body .modal-desc {
+      font-size: 0.9rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 1.8rem;
+    }
+    .modal-features {
+      margin-bottom: 2rem;
+    }
+    .modal-features strong {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.02em;
+    }
+    .modal-features ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .modal-features li {
+      font-size: 0.85rem;
+      color: var(--text-mid);
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      line-height: 1.5;
+    }
+    .modal-features li::before {
+      content: '';
+      display: inline-block;
+      width: 16px; height: 16px;
+      flex-shrink: 0;
+      background: var(--green);
+      border-radius: 3px;
+      position: relative;
+    }
+    .modal-features li::after {
+      content: '✓';
+      position: absolute;
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      left: -12.5px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .modal-format {
+      background: var(--green-light);
+      border-radius: 10px;
+      padding: 1.2rem;
+      margin-bottom: 2rem;
+      border: 1px solid rgba(26,74,46,0.15);
+    }
+    .modal-format strong {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.8rem;
+    }
+    .modal-format-row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: 0.88rem;
+      color: var(--text);
+    }
+    .modal-format-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 600;
+    }
+    .modal-format-item svg {
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+    }
+    .modal-audience {
+      margin-bottom: 2rem;
+    }
+    .modal-audience strong {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.02em;
+    }
+    .modal-audience ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .modal-audience li {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+    }
+    .modal-cta {
+      background: var(--orange);
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.9rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.15s;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .modal-cta:hover { background: var(--orange-hover); }
+    .modal-expert {
+      background: #f7f5f0;
+      border-radius: 10px;
+      padding: 1.2rem;
+      margin-bottom: 2rem;
+      border-left: 4px solid var(--orange);
+    }
+    .modal-expert strong {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .modal-expert p {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+    @media (max-width: 768px) {
+      .modal-content { width: 95%; margin: 1rem auto; }
+      .modal-hero { height: 220px; }
+      .modal-body { padding: 1.5rem; }
+      .modal-body h2 { font-size: 1.4rem; }
+      .modal-format-row { flex-direction: column; gap: 0.8rem; }
+      .modal-close { top: 1rem; right: 1rem; width: 36px; height: 36px; font-size: 1.2rem; }
+    }
+
+    /* ─── COMO FUNCIONA ─── */
+    .how-section {
+      padding: 5rem 2rem;
+    }
+    .how-inner {
+      max-width: 1160px; margin: 0 auto;
+    }
+    .how-head {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .how-head .section-tag { justify-content: center; }
+    .how-head .section-tag::before { display: none; }
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      position: relative;
+    }
+    .how-steps::before {
+      content: '';
+      position: absolute;
+      top: 22px;
+      left: 12%;
+      right: 12%;
+      height: 1px;
+      background: var(--border);
+      z-index: 0;
+    }
+    .how-step {
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .step-circle {
+      width: 46px; height: 46px;
+      background: var(--orange);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .how-step h3 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .how-step p {
+      font-size: 0.78rem;
+      color: var(--text-mid);
+      line-height: 1.6;
+    }
+    .td-box {
+      max-width: 900px;
+      margin: 3rem auto 0;
+      background: var(--green-light);
+      border: 1px solid rgba(26,74,46,0.15);
+      border-radius: 12px;
+      padding: 1.8rem 2.5rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    .td-icon {
+      font-size: 1.8rem;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+    .td-text strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 0.4rem;
+    }
+    .td-text p {
+      font-size: 0.83rem;
+      color: #3a5c3e;
+      line-height: 1.6;
+    }
+
+    /* ─── CTA FINAL ─── */
+    .cta-section {
+      position: relative;
+      padding: 6rem 2rem;
+      overflow: hidden;
+    }
+    .cta-bg-img {
+      position: absolute; inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?w=1800&q=80');
+      background-size: cover;
+      background-position: center 30%;
+      filter: brightness(0.3);
+    }
+    .cta-inner {
+      position: relative; z-index: 2;
+      max-width: 1160px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .cta-text h2 {
+      color: #fff;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      margin-bottom: 1rem;
+    }
+    .cta-text p {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.72);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+    .cta-contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .cta-contact-row {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .cta-contact-row a { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .contact-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+    }
+    .contact-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .form-group {
+      margin-bottom: 0.9rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.9rem;
+    }
+    input, select, textarea {
+      width: 100%;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      padding: 0.7rem 0.9rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem;
+      color: var(--text);
+      background: #fff;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    input::placeholder, textarea::placeholder { color: var(--text-light); }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--green);
+    }
+    select option { color: var(--text); }
+    .submit-btn {
+      width: 100%;
+      background: var(--orange);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.85rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.15s;
+      margin-top: 0.5rem;
+    }
+    .submit-btn:hover { background: var(--orange-hover); }
+    .form-note {
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--text-light);
+      margin-top: 0.7rem;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--green);
+      padding: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-brand {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+    }
+    .footer-links {
+      display: flex; gap: 2rem; list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-right {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+    }
+  </style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-left">
+    <a href="tel:+351910910930">📞 +351 910 910 930</a>
+    <a href="mailto:corporate@borealis.travel">✉ corporate@borealis.travel</a>
+  </div>
+  <div class="topbar-right">
+    <a href="https://borealis.travel">← Voltar ao site principal</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo-text">
+    <span class="nav-brand">BOREALIS</span>
+    <span class="nav-sub">Corporate</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#programas">Programas</a></li>
+    <li><a href="#lideranca">Liderança</a></li>
+    <li><a href="#saude">Saúde Mental</a></li>
+    <li><a href="#clube">Clube</a></li>
+    <li><a href="#como-funciona">Como funciona</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Pedir Proposta →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-label"><span></span> Borealis Corporate — Programas para Empresas</div>
+    <h1>A natureza como<br><em>sala de reuniões.</em></h1>
+    <p class="hero-sub">Não é team building genérico. São programas desenhados para equipas que precisam de resultados reais — em terreno real, com desconforto calculado e impacto mensurável.</p>
+    <div class="hero-btns">
+      <a href="#contacto" class="btn-primary">Pedir Proposta Gratuita</a>
+      <a href="#programas" class="btn-outline-white">Ver Programas</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hstat">
+      <div class="hstat-num">+40K</div>
+      <div class="hstat-lbl">participantes</div>
+    </div>
+    <div class="nb-divider"></div>
+    <div class="hstat">
+      <div class="hstat-num">23</div>
+      <div class="hstat-lbl">países</div>
+    </div>
+    <div class="nb-divider"></div>
+    <div class="hstat">
+      <div class="hstat-num">25 anos</div>
+      <div class="hstat-lbl">de operação</div>
+    </div>
+    <div class="nb-divider"></div>
+    <div class="hstat">
+      <div class="hstat-num">100+</div>
+      <div class="hstat-lbl">guias Niners</div>
+    </div>
+  </div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="intro-strip-inner">
+    <div class="strip-item">
+      <div class="strip-icon">
+        <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+      </div>
+      <div class="strip-text">
+        <strong>Programas 100% à medida</strong>
+        <span>Adaptados à realidade de cada empresa</span>
+      </div>
+    </div>
+    <div class="strip-item">
+      <div class="strip-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <div class="strip-text">
+        <strong>25 anos de experiência</strong>
+        <span>Com as maiores empresas do país</span>
+      </div>
+    </div>
+    <div class="strip-item">
+      <div class="strip-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+      </div>
+      <div class="strip-text">
+        <strong>10 a 50 pessoas por programa</strong>
+        <span>Survival Camp 2026 com lista de espera</span>
+      </div>
+    </div>
+    <div class="strip-item">
+      <div class="strip-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="strip-text">
+        <strong>Logística 100% gerida</strong>
+        <span>A equipa foca-se na experiência</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRAMAS -->
+<section class="programs-section" id="programas">
+  <div class="programs-head">
+    <div class="section-tag">Programas Corporate</div>
+    <h2 class="section-title" style="margin-bottom:0.5rem">Três programas. Um objectivo.</h2>
+    <p class="section-desc" style="margin:0 auto">De um dia de activação à imersão executiva. Formato, duração e destino adaptados à sua organização.</p>
+  </div>
+  <div class="programs-grid">
+
+    <!-- Survival Camp -->
+    <div class="prog-card" onclick="openModal('modal-survival')" style="cursor:pointer;">
+      <div class="prog-img" style="background-image:url('https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=700&q=80')">
+        <div class="prog-badge badge-orange">Conceito Borealis</div>
+      </div>
+      <div class="prog-body">
+        <div class="prog-tag">Survival Camp</div>
+        <h3>Survival Camp</h3>
+        <p class="prog-sub">Um laboratório prático de liderança, decisão e colaboração em ambiente natural exigente.</p>
+        <ul class="prog-checks">
+          <li>Fogo por pederneira e atrito</li>
+          <li>Abrigos: Metodologia Borealis</li>
+          <li>Navegação sem GPS em terreno real</li>
+        </ul>
+        <div class="prog-meta">
+          <span><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 1–3 dias</span>
+          <span><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> até 50 pessoas</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mindful Camp -->
+    <div class="prog-card" onclick="openModal('modal-mindful')" style="cursor:pointer;">
+      <div class="prog-img" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80')">
+        <div class="prog-badge badge-green">Exclusivo Borealis</div>
+      </div>
+      <div class="prog-body">
+        <div class="prog-tag">Mindful Camp</div>
+        <h3>Mindful Camp</h3>
+        <p class="prog-sub">Metodologia proprietária de regeneração mental através do Shinrin-yoku e respiração avançada.</p>
+        <ul class="prog-checks">
+          <li>Banho de Floresta Guiado</li>
+          <li>Técnicas de respiração Borealis</li>
+          <li>Prevenção de burnout com base científica</li>
+        </ul>
+        <div class="prog-meta">
+          <span><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 2–3 dias</span>
+          <span><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> 10–30 pessoas</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Space Camp -->
+    <div class="prog-card" onclick="openModal('modal-space')" style="cursor:pointer;">
+      <div class="prog-img" style="background-image:url('https://images.unsplash.com/photo-1517976487492-5750f3195933?w=700&q=80')">
+        <div class="prog-badge" style="background:#2255cc;color:#fff">Especialistas Reais</div>
+      </div>
+      <div class="prog-body">
+        <div class="prog-tag">Space Camp</div>
+        <h3>Space Camp</h3>
+        <p class="prog-sub">Um desafio de engenharia colaborativa onde equipas resolvem problemas complexos com precisão e criatividade.</p>
+        <div class="prog-diferencial">
+          <strong>Diferencial único</strong>
+          Engenharia e ciência autêntica aplicada à dinâmica de equipa.
+        </div>
+        <ul class="prog-checks">
+          <li>Foguetes: Projeto de Autoria</li>
+          <li>Astronomia Borealis</li>
+        </ul>
+        <div class="prog-meta">
+          <span><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 1–2 dias</span>
+          <span><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> 10–40 pessoas</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- NUMBERS BANNER -->
+<div class="numbers-banner">
+  <div class="numbers-banner-inner">
+    <div class="nb-item">
+      <div class="nb-num">+40.000</div>
+      <div class="nb-lbl">participantes em 25 anos</div>
+    </div>
+    <div class="nb-item">
+      <div class="nb-num">23</div>
+      <div class="nb-lbl">países de operação</div>
+    </div>
+    <div class="nb-item">
+      <div class="nb-num">100+</div>
+      <div class="nb-lbl">guias Niners activos</div>
+    </div>
+    <div class="nb-item">
+      <div class="nb-num">Lista de espera</div>
+      <div class="nb-lbl">Survival Camp 2026</div>
+    </div>
+  </div>
+</div>
+
+<!-- CEO RETREATS -->
+<section class="ceo-section" id="lideranca">
+  <div class="ceo-inner">
+    <div class="ceo-image">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=85" alt="Corporate Wilderness">
+      <div class="ceo-image-badge">
+        <div class="ceo-ib-title">Programa</div>
+        <div class="ceo-ib-val">100% à medida</div>
+      </div>
+    </div>
+    <div class="ceo-content">
+      <div class="section-tag">Borealis Corporate Wilderness</div>
+      <h2 class="section-title">Não é team building.<br>É transformação no terreno.</h2>
+      <p class="ceo-tagline">Onde os CEOs vão pensar o que não conseguem pensar no escritório.</p>
+      <p class="ceo-desc">Retiros de liderança imersivos de 3 a 5 dias. Desenhados com psicólogos organizacionais e coaches executivos. Para líderes que precisam de perspectiva real — não de exercícios de sala. As empresas gastam fortunas em retiros genéricos em hotéis. A natureza como sala de reuniões é disruptiva e o impacto é mensurável.</p>
+      <ul class="ceo-features">
+        <li>Caminhadas com silêncios obrigatórios e reflexão estruturada</li>
+        <li>Tomada de decisão em contexto de incerteza real: tempo, terreno, recursos limitados</li>
+        <li>Facilitação por coaches executivos certificados integrados nos Niners</li>
+        <li>Manifesto de equipa produzido no campo como deliverable final</li>
+        <li>Índice Borealis — métrica proprietária de coesão medida antes e depois</li>
+      </ul>
+      <div class="price-badge">
+        Parceria com CHROs e consultoras de gestão. Proposta personalizada com programa, território e facilitadores.
+      </div>
+      <a href="javascript:void(0)" onclick="openModal('modal-wilderness')" class="btn-primary" style="margin-right:1rem;">Saber Mais</a>
+      <a href="#contacto" class="btn-primary">Pedir Proposta Executiva</a>
+    </div>
+  </div>
+</section>
+
+<!-- SAÚDE MENTAL -->
+<section class="saude-section" id="saude">
+  <div class="saude-inner">
+    <div class="saude-header">
+      <div>
+        <div class="section-tag">Borealis × Saúde Mental</div>
+        <h2 class="section-title">A natureza como prescrição.</h2>
+      </div>
+      <p class="section-desc">Antes que a psiquiatria mainstream chegue lá. Nature-based therapy tem evidência científica crescente — a Borealis é o primeiro operador português com um protocolo clínico estruturado.</p>
+    </div>
+    <div class="saude-grid">
+      <div class="saude-card">
+        <div class="saude-card-img" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80')"></div>
+        <div class="saude-card-body">
+          <div class="saude-card-tag">Mercado</div>
+          <h3>O mercado cresceu exponencialmente</h3>
+          <p>63% das empresas reportam burnout como top-3 risco operacional. O ticket médio de programas nature-based é 5–10x o de um retiro genérico em hotel.</p>
+        </div>
+      </div>
+      <div class="saude-card">
+        <div class="saude-card-img" style="background-image:url('https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80')"></div>
+        <div class="saude-card-body">
+          <div class="saude-card-tag">Evidência</div>
+          <h3>Científicamente comprovado</h3>
+          <p>Nature-based therapy tem evidência crescente em redução de cortisol, melhoria de foco e regulação emocional. A natureza não é o cenário — é o agente terapêutico.</p>
+        </div>
+      </div>
+      <div class="saude-card">
+        <div class="saude-card-img" style="background-image:url('https://images.unsplash.com/photo-1574267432553-4b4628081c31?w=600&q=80')"></div>
+        <div class="saude-card-body">
+          <div class="saude-card-tag">Parceria</div>
+          <h3>Parceria com Inês Gaya</h3>
+          <p>Parceria com a psicóloga Inês Gaya e a sua rede de instrutores e guias especializados em saúde mental. <a href="https://www.instagram.com/inesgaya/" target="_blank" style="color:var(--accent);text-decoration:underline;">Ver no Instagram →</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="bid-highlight">
+      <div>
+        <h3>Projecto BID</h3>
+        <em>Borealis Integrado — Natureza como Prescrição</em>
+        <p>Protocolo clínico estruturado em desenvolvimento com parceiros de psicologia. Retiros terapêuticos prescritos por profissionais de saúde mental. O primeiro operador português neste espaço — vantagem de décadas.</p>
+      </div>
+      <div class="bid-stats">
+        <div class="bid-stat">
+          <div class="bid-stat-num">63%</div>
+          <div class="bid-stat-lbl">das empresas com burnout como top-3 risco</div>
+        </div>
+        <div class="bid-stat">
+          <div class="bid-stat-num">5–10×</div>
+          <div class="bid-stat-lbl">ticket médio vs. retiro em hotel</div>
+        </div>
+        <div class="bid-stat">
+          <div class="bid-stat-num">BID</div>
+          <div class="bid-stat-lbl">parceria Borealis × Inês Gaya</div>
+        </div>
+        <div class="bid-stat">
+          <div class="bid-stat-num">100%</div>
+          <div class="bid-stat-lbl">protocolos nature-based de bem-estar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BID / INÊS GAYA -->
+<section class="bid-section" id="bid">
+  <div class="bid-inner">
+    <div class="bid-photo-wrap">
+      <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=900&q=85" alt="Inês Gaya">
+      <div class="bid-photo-tag">
+        <div class="bid-photo-name">Inês Gaya</div>
+        <div class="bid-photo-role">Psicóloga · Saúde Mental · Bem-estar</div>
+        <div class="bid-photo-ig"><a href="https://www.instagram.com/inesgaya/" target="_blank" style="color:inherit;text-decoration:none;">@ines_gaya</a></div>
+      </div>
+    </div>
+    <div class="bid-content">
+      <div class="section-tag">Parceria Estratégica · BID</div>
+      <h2 class="section-title">A natureza como<br>prescrição clínica.</h2>
+      <p class="bid-tagline">Borealis × Inês Gaya — o primeiro protocolo nature-based de saúde mental em Portugal.</p>
+      <p class="bid-desc">Inês Gaya é psicóloga especializada em saúde mental, autora de 2 bestsellers e referência nacional na área do bem-estar. A parceria com a Borealis cria o projecto BID — retiros terapêuticos prescritos por profissionais de saúde mental, integrando a metodologia Borealis com protocolos clínicos de bem-estar.</p>
+      <div class="bid-numbers">
+        <div class="bid-num-item">
+          <div class="bid-num-val">Psicóloga</div>
+          <div class="bid-num-lbl">especialista em saúde mental</div>
+        </div>
+        <div class="bid-num-item">
+          <div class="bid-num-val">2</div>
+          <div class="bid-num-lbl">bestsellers publicados</div>
+        </div>
+        <div class="bid-num-item">
+          <a href="https://www.instagram.com/inesgaya/" target="_blank" style="color:inherit;text-decoration:none;">
+            <div class="bid-num-val">IG</div>
+            <div class="bid-num-lbl">@ines_gaya</div>
+          </a>
+        </div>
+      </div>
+      <div class="bid-pills">
+        <span class="bid-pill">Shinrin-yoku</span>
+        <span class="bid-pill">Respiração avançada</span>
+        <span class="bid-pill">Prevenção de burnout</span>
+        <span class="bid-pill">Retiros terapêuticos</span>
+        <span class="bid-pill">Prescrição médica</span>
+      </div>
+      <a href="javascript:void(0)" onclick="openModal('modal-bid')" class="btn-primary">Saber mais sobre o BID</a>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="how-section" id="como-funciona">
+  <div class="how-inner">
+    <div class="how-head">
+      <div class="section-tag">Processo</div>
+      <h2 class="section-title">Como funciona</h2>
+    </div>
+    <div class="how-steps">
+      <div class="how-step">
+        <div class="step-circle">01</div>
+        <h3>Diagnóstico</h3>
+        <p>Call de 30 minutos para perceber objectivos, dimensão da equipa, timing e orçamento. Sem compromisso.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-circle">02</div>
+        <h3>Proposta à medida</h3>
+        <p>Apresentamos proposta personalizada com programa, território, facilitadores e orçamento em 5 dias úteis.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-circle">03</div>
+        <h3>Operação Niners</h3>
+        <p>Execução com guias de elite, logística completa, seguro e gestão de crise. A equipa foca-se na experiência.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-circle">04</div>
+        <h3>Impacto medido</h3>
+        <p>Relatório pós-programa com o Índice Borealis de coesão para justificar o investimento internamente.</p>
+      </div>
+    </div>
+    <div class="td-box">
+      <div class="td-icon">💡</div>
+      <div class="td-text">
+        <strong>Programas desenhados à medida da sua organização</strong>
+        <p>Formato, duração e destino adaptam-se ao momento e aos objectivos da equipa. Apresentamos proposta personalizada em 5 dias úteis.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta-section" id="contacto">
+  <div class="cta-bg-img"></div>
+  <div class="cta-inner">
+    <div class="cta-text">
+      <div class="section-tag" style="color:rgba(255,255,255,0.7)"><span style="background:rgba(255,255,255,0.4)"></span>Contacto</div>
+      <h2>Pronto para transformar equipas?</h2>
+      <p>Cada programa começa por perceber o que a equipa precisa de facto. Uma conversa de 30 minutos chega para ter uma proposta.</p>
+      <div class="cta-contact-info">
+        <div class="cta-contact-row">📞 <a href="tel:+351910910930">+351 910 910 930</a></div>
+        <div class="cta-contact-row">✉ <a href="mailto:corporate@borealis.travel">corporate@borealis.travel</a></div>
+        <div class="cta-contact-row">📍 Braga, Portugal</div>
+      </div>
+    </div>
+    <div class="contact-card">
+      <h3>Pedido de Proposta</h3>
+      <form>
+        <div class="form-row form-group">
+          <input type="text" placeholder="Nome">
+          <input type="text" placeholder="Empresa">
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Email corporativo">
+        </div>
+        <div class="form-row form-group">
+          <input type="number" placeholder="Nº de pessoas" min="10">
+          <select>
+            <option value="" disabled selected>Programa de interesse</option>
+            <option>Survival Camp</option>
+            <option>Mindful Camp</option>
+            <option>Space Camp</option>
+            <option>Retiro de Liderança</option>
+            <option>BID — Borealis × Inês Gaya</option>
+            <option>Ainda não sei — quero conversar</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <textarea rows="3" placeholder="Contexto breve: o que quer resolver com a equipa?"></textarea>
+        </div>
+        <button type="submit" class="submit-btn" onclick="this.textContent='Pedido enviado ✓'; this.style.background='#1a4a2e'; return false;">Enviar Pedido de Proposta →</button>
+        <div class="form-note">Resposta em 24–48h · Sem compromisso</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">BOREALIS ON TREKKING · Corporate</div>
+  <ul class="footer-links">
+    <li><a href="#programas">Programas</a></li>
+    <li><a href="#bid">Inês Gaya · BID</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="https://borealis.travel">borealis.travel</a></li>
+  </ul>
+  <div class="footer-right">© 2026 Borealis on Trekking</div>
+</footer>
+
+<!-- MODALS -->
+
+<!-- Survival Camp Modal -->
+<div class="modal" id="modal-survival">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('modal-survival')">&times;</button>
+    <div class="modal-hero" style="background-image:url('https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800&q=80')">
+      <div class="modal-badge">Conceito Borealis</div>
+    </div>
+    <div class="modal-body">
+      <h2>Survival Camp</h2>
+      <p class="modal-tagline">Laboratório prático de liderança em ambientes selvagens</p>
+      <p class="modal-desc">O Survival Camp é um laboratório prático onde as equipas enfrentam desafios reais na natureza selvagem. Os participantes aprendem a lidar com situações de incerteza, a colaborar sob pressão e a descobrir capacidades de liderança que não conheciam. Com 25 anos de experiência, a Borealis transforma equipas através de vivências autênticas na natureza.</p>
+      <div class="modal-features">
+        <strong>Metodologia & Features</strong>
+        <ul>
+          <li>Fogo por Pederneira (técnicas ancestrais)</li>
+          <li>Abrigos - Metodologia Borealis (construção colaborativa)</li>
+          <li>Navegação sem GPS (decisão e confiança)</li>
+        </ul>
+      </div>
+      <div class="modal-format">
+        <strong>Informações do Programa</strong>
+        <div class="modal-format-row">
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            1–3 dias
+          </div>
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Até 50 pessoas
+          </div>
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="23 6 13.46 15.89"></polyline><path d="M17.94 17.94a2.407 2.407 0 1 1 3.406-3.406l2.909-2.909a6 6 0 1 0-8.485 8.485l-2.83-2.83"></path></svg>
+            Intensidade Alta
+          </div>
+        </div>
+      </div>
+      <div class="modal-audience">
+        <strong>Público-alvo</strong>
+        <ul>
+          <li>Equipas que precisam de coesão</li>
+          <li>Líderes em desenvolvimento</li>
+          <li>Empresas de alta performance</li>
+        </ul>
+      </div>
+      <a href="mailto:ola@corporate.borealis.travel?subject=Interesse no Survival Camp" class="modal-cta">Solicitar Informações →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Mindful Camp Modal -->
+<div class="modal" id="modal-mindful">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('modal-mindful')">&times;</button>
+    <div class="modal-hero" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80')">
+      <div class="modal-badge" style="background:#1a4a2e;">Exclusivo Borealis</div>
+    </div>
+    <div class="modal-body">
+      <h2>Mindful Camp</h2>
+      <p class="modal-tagline">Regeneração mental para equipas através de imersão na natureza</p>
+      <p class="modal-desc">Mindful Camp é uma resposta inovadora ao burnout corporativo. Fundado em pesquisa científica e práticas ancestrais, combina meditação, respiração consciente e floresta imersiva. A Borealis trabalha com as maiores empresas de Portugal para restaurar equilíbrio mental e resgatar motivação.</p>
+      <div class="modal-features">
+        <strong>Metodologia & Features</strong>
+        <ul>
+          <li>Shinrin-yoku (reduz stress, reativa sistema nervoso)</li>
+          <li>Técnicas de Respiração Borealis (equilíbrio emocional e clareza)</li>
+          <li>Prevenção de Burnout (base científica, resultados comprovados)</li>
+        </ul>
+      </div>
+      <div class="modal-format">
+        <strong>Informações do Programa</strong>
+        <div class="modal-format-row">
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            2–3 dias
+          </div>
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            10–30 pessoas
+          </div>
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="23 6 13.46 15.89"></polyline><path d="M17.94 17.94a2.407 2.407 0 1 1 3.406-3.406l2.909-2.909a6 6 0 1 0-8.485 8.485l-2.83-2.83"></path></svg>
+            Intensidade Moderada
+          </div>
+        </div>
+      </div>
+      <div class="modal-audience">
+        <strong>Público-alvo</strong>
+        <ul>
+          <li>Equipas em risco de burnout</li>
+          <li>Profissionais de alta pressão</li>
+          <li>Organizações focadas em bem-estar</li>
+        </ul>
+      </div>
+      <a href="mailto:ola@corporate.borealis.travel?subject=Interesse no Mindful Camp" class="modal-cta">Solicitar Informações →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Space Camp Modal -->
+<div class="modal" id="modal-space">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('modal-space')">&times;</button>
+    <div class="modal-hero" style="background-image:url('https://images.unsplash.com/photo-1517976487492-5750f3195933?w=800&q=80')">
+      <div class="modal-badge" style="background:#2255cc;">Especialistas Reais</div>
+    </div>
+    <div class="modal-body">
+      <h2>Space Camp</h2>
+      <p class="modal-tagline">Engenharia colaborativa onde equipas constroem foguetes reais</p>
+      <p class="modal-desc">Space Camp é uma experiência transformadora onde o trabalho em equipa encontra a engenharia real. Com especialistas em aerodinâmica e astronomia, as equipas desenham, constroem e lançam foguetes funcionais. Inspira criatividade, resgata a capacidade de resolver problemas complexos e reconecta profissionais à paixão.</p>
+      <div class="modal-features">
+        <strong>Metodologia & Features</strong>
+        <ul>
+          <li>Foguetes de Projeto Autoria (design, construção, iteração)</li>
+          <li>Astronomia Borealis (observação do céu, sentido de escala)</li>
+          <li>Engenharia Prática (mentoria de especialistas reais)</li>
+        </ul>
+      </div>
+      <div class="modal-format">
+        <strong>Informações do Programa</strong>
+        <div class="modal-format-row">
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            1–2 dias
+          </div>
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            10–40 pessoas
+          </div>
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="23 6 13.46 15.89"></polyline><path d="M17.94 17.94a2.407 2.407 0 1 1 3.406-3.406l2.909-2.909a6 6 0 1 0-8.485 8.485l-2.83-2.83"></path></svg>
+            Alta (Criativa)
+          </div>
+        </div>
+      </div>
+      <div class="modal-audience">
+        <strong>Público-alvo</strong>
+        <ul>
+          <li>Equipas de inovação e tech</li>
+          <li>Líderes focados em criatividade</li>
+          <li>Equipas de produto e desenvolvimento</li>
+        </ul>
+      </div>
+      <a href="mailto:ola@corporate.borealis.travel?subject=Interesse no Space Camp" class="modal-cta">Solicitar Informações →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Corporate Wilderness Modal -->
+<div class="modal" id="modal-wilderness">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('modal-wilderness')">&times;</button>
+    <div class="modal-hero" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80')">
+      <div class="modal-badge">Borealis Corporate Wilderness</div>
+    </div>
+    <div class="modal-body">
+      <h2>Corporate Wilderness</h2>
+      <p class="modal-tagline">Retiro imersivo para executivos que buscam transformação profunda</p>
+      <p class="modal-desc">Corporate Wilderness é um retiro exclusivo desenhado para C-suite e líderes estratégicos. Imersão profunda em ambientes selvagens onde a natureza é sala de reuniões. Com suporte de psicólogos organizacionais, coaches executivos e especialistas Borealis, os participantes exploram liderança autêntica, decisão estratégica e resiliência.</p>
+      <div class="modal-features">
+        <strong>Metodologia & Features</strong>
+        <ul>
+          <li>Retiros Imersivos 3-5 dias</li>
+          <li>Psicólogos Organizacionais</li>
+          <li>Coaches Executivos 1:1</li>
+          <li>Natureza como Sala de Reuniões</li>
+        </ul>
+      </div>
+      <div class="modal-format">
+        <strong>Informações do Programa</strong>
+        <div class="modal-format-row">
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            3–5 dias
+          </div>
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            10–25 pessoas
+          </div>
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="23 6 13.46 15.89"></polyline><path d="M17.94 17.94a2.407 2.407 0 1 1 3.406-3.406l2.909-2.909a6 6 0 1 0-8.485 8.485l-2.83-2.83"></path></svg>
+            Profunda
+          </div>
+        </div>
+      </div>
+      <div class="modal-audience">
+        <strong>Público-alvo</strong>
+        <ul>
+          <li>Executivos C-suite</li>
+          <li>Boards de administração</li>
+          <li>Líderes em transição estratégica</li>
+        </ul>
+      </div>
+      <a href="mailto:ola@corporate.borealis.travel?subject=Interesse no Corporate Wilderness" class="modal-cta">Solicitar Informações →</a>
+    </div>
+  </div>
+</div>
+
+<!-- BID / Inês Gaya Modal -->
+<div class="modal" id="modal-bid">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal('modal-bid')">&times;</button>
+    <div class="modal-hero" style="background-image:url('https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=80')">
+      <div class="modal-badge" style="background:#ff651f;">Parceria Estratégica · BID</div>
+    </div>
+    <div class="modal-body">
+      <h2>BID — Borealis Integrado</h2>
+      <p class="modal-tagline">Terapia baseada na natureza com especialista reconhecida em saúde mental</p>
+      <p class="modal-desc">BID é uma parceria exclusiva entre Borealis e Inês Gaya, psicóloga clínica com 2 bestsellers publicados e pioneira em nature-based therapy em Portugal. Os programas combinam respiração avançada, shinrin-yoku, meditação guiada e retiros terapêuticos. Desenhados para equipas sob pressão extrema, oferecem intervenção clínica combinada com a transformação que apenas a natureza permite.</p>
+      <div class="modal-expert">
+        <strong>Especialista</strong>
+        <p>Inês Gaya — Psicóloga clínica, autora de 2 bestsellers, pioneira em nature-based therapy em Portugal. <a href="https://www.instagram.com/inesgaya/" target="_blank" style="color:var(--orange);text-decoration:none;font-weight:600;">@ines_gaya</a></p>
+      </div>
+      <div class="modal-features">
+        <strong>Metodologia & Features</strong>
+        <ul>
+          <li>Nature-Based Therapy</li>
+          <li>Shinrin-yoku</li>
+          <li>Respiração Avançada</li>
+          <li>Prevenção de Burnout (protocolos clínicos)</li>
+          <li>Retiros Terapêuticos</li>
+          <li>Mentoria de Inês Gaya</li>
+        </ul>
+      </div>
+      <div class="modal-format">
+        <strong>Informações do Programa</strong>
+        <div class="modal-format-row">
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            1–7 dias
+          </div>
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            8–30 pessoas
+          </div>
+          <div class="modal-format-item">
+            <svg viewBox="0 0 24 24" style="fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;"><polyline points="23 6 13.46 15.89"></polyline><path d="M17.94 17.94a2.407 2.407 0 1 1 3.406-3.406l2.909-2.909a6 6 0 1 0-8.485 8.485l-2.83-2.83"></path></svg>
+            Clínico + Imersivo
+          </div>
+        </div>
+      </div>
+      <div class="modal-audience">
+        <strong>Público-alvo</strong>
+        <ul>
+          <li>Equipas em risco de burnout agudo</li>
+          <li>Organizações focadas em saúde mental</li>
+          <li>Empresas com cultura preventiva</li>
+        </ul>
+      </div>
+      <a href="mailto:ola@corporate.borealis.travel?subject=Interesse no BID — Borealis Integrado" class="modal-cta">Solicitar Informações →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+      modal.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+  }
+
+  // Close modal when clicking on background
+  document.querySelectorAll('.modal').forEach(modal => {
+    modal.addEventListener('click', function(e) {
+      if (e.target === this) {
+        const modalId = this.id;
+        closeModal(modalId);
+      }
+    });
+  });
+
+  // Close modal with ESC key
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal.active').forEach(modal => {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

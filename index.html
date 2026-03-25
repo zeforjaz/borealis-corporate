@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Borealis Corporate — Programas de Team Building 100% exclusivos. Criados por guias de montanha desde 2002.">
+<title>Borealis Corporate — The Camps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ── RESET ───────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',system-ui,sans-serif;color:#1a1a18;background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;width:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input,select,textarea{font-family:inherit}
+
+/* ── TOKENS ──────────────────────────────────────────── */
+:root{
+  --g:    #265c2e;
+  --gd:   #193e1f;
+  --gl:   #edf4ee;
+  --or:   #d25800;
+  --ink:  #111110;
+  --i2:   #3a3a38;
+  --i3:   #6a6a66;
+  --i4:   #a8a8a4;
+  --bg:   #f8f6f1;
+  --ln:   #e4e2dd;
+  --wh:   #ffffff;
+  --r:    14px;
+  --t:    220ms ease;
+}
+
+/* ── SCROLLBAR ───────────────────────────────────────── */
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#f1f1f1}
+::-webkit-scrollbar-thumb{background:var(--ln);border-radius:3px}
+
+/* ─────────────────────────────────────────────────────
+   NAV
+───────────────────────────────────────────────────── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:400;
+  height:64px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:0 32px;
+  transition:background var(--t),box-shadow var(--t);
+}
+.nav.scrolled{
+  background:rgba(255,255,255,.97);
+  box-shadow:0 1px 0 var(--ln);
+  backdrop-filter:blur(12px);
+}
+.nav-left{display:flex;align-items:center;gap:6px}
+.nav-ham{
+  width:36px;height:36px;border-radius:8px;
+  display:flex;flex-direction:column;gap:5px;
+  align-items:center;justify-content:center;
+  transition:background var(--t);cursor:pointer;
+}
+.nav-ham:hover{background:rgba(255,255,255,.15)}
+.nav.scrolled .nav-ham:hover{background:var(--bg)}
+.nav-ham span{
+  display:block;width:20px;height:1.5px;
+  background:rgba(255,255,255,.9);border-radius:2px;
+  transition:background var(--t);
+}
+.nav.scrolled .nav-ham span{background:var(--ink)}
+.nav-links{display:flex;gap:2px}
+.nl{
+  padding:6px 12px;border-radius:8px;
+  font-size:13px;font-weight:500;
+  color:rgba(255,255,255,.85);
+  transition:all var(--t);
+}
+.nl:hover{background:rgba(255,255,255,.12);color:#fff}
+.nav.scrolled .nl{color:var(--i2)}
+.nav.scrolled .nl:hover{background:var(--bg);color:var(--ink)}
+
+/* Logo */
+.nav-logo{display:flex;flex-direction:column;align-items:center;gap:1px;cursor:pointer}
+.logo-mark{
+  font-size:22px;font-weight:900;color:#fff;letter-spacing:-.04em;
+  transition:color var(--t);line-height:1;
+}
+.nav.scrolled .logo-mark{color:var(--gd)}
+.logo-sub{
+  font-size:8px;font-weight:600;color:rgba(255,255,255,.5);
+  letter-spacing:.14em;text-transform:uppercase;
+  transition:color var(--t);
+}
+.nav.scrolled .logo-sub{color:var(--i3)}
+
+/* Right */
+.nav-right{display:flex;align-items:center;justify-content:flex-end;gap:8px}
+.nav-cta{
+  background:var(--g);color:#fff;
+  padding:8px 20px;border-radius:40px;
+  font-size:13px;font-weight:700;
+  transition:background var(--t),transform var(--t);
+  white-space:nowrap;
+}
+.nav-cta:hover{background:var(--gd);transform:translateY(-1px)}
+.nav.scrolled .nav-cta{background:var(--g)}
+
+/* ─────────────────────────────────────────────────────
+   HERO
+───────────────────────────────────────────────────── */
+.hero{
+  position:relative;min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background-image:url('https://images.unsplash.com/photo-1551632811-561732d1e306?w=1800&auto=format&fit=crop&q=85');
+  background-size:cover;background-position:center 35%;
+  transform:scale(1.04);
+  transition:transform 8s ease;
+}
+.hero-bg.loaded{transform:scale(1)}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(10,22,12,.35) 0%,
+    rgba(10,22,12,.55) 50%,
+    rgba(10,22,12,.78) 100%
+  );
+}
+.hero-content{
+  position:relative;z-index:1;
+  padding:120px 24px 100px;
+  max-width:860px;
+  display:flex;flex-direction:column;
+  align-items:center;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:7px;
+  font-size:11px;font-weight:600;color:rgba(255,255,255,.75);
+  letter-spacing:.14em;text-transform:uppercase;
+  margin-bottom:24px;
+}
+.hero-eyebrow::before{
+  content:'';width:20px;height:1px;
+  background:rgba(255,255,255,.4);
+}
+.hero-eyebrow::after{
+  content:'';width:20px;height:1px;
+  background:rgba(255,255,255,.4);
+}
+.hero-h{
+  font-size:clamp(38px,6.5vw,72px);
+  font-weight:900;color:#fff;
+  line-height:1.02;letter-spacing:-.04em;
+  margin-bottom:20px;
+}
+.hero-h em{
+  font-style:italic;font-weight:300;
+  color:rgba(255,255,255,.75);
+}
+.hero-sub{
+  font-size:clamp(15px,2vw,18px);
+  color:rgba(255,255,255,.65);
+  font-weight:300;line-height:1.7;
+  max-width:520px;margin-bottom:40px;
+}
+
+/* Camp selector */
+.camp-selector{
+  background:rgba(255,255,255,.1);
+  border:1px solid rgba(255,255,255,.2);
+  backdrop-filter:blur(16px);
+  border-radius:16px;
+  padding:8px 8px 8px 20px;
+  display:flex;align-items:center;gap:8px;
+  width:100%;max-width:560px;
+  margin-bottom:28px;
+}
+.cs-label{
+  font-size:11.5px;font-weight:600;
+  color:rgba(255,255,255,.5);letter-spacing:.06em;text-transform:uppercase;
+  white-space:nowrap;
+}
+.cs-select{
+  flex:1;background:transparent;border:none;outline:none;
+  font-size:14px;font-weight:500;color:#fff;
+  cursor:pointer;
+  -webkit-appearance:none;appearance:none;
+}
+.cs-select option{background:#1a3d21;color:#fff}
+.cs-btn{
+  background:var(--g);color:#fff;
+  padding:10px 22px;border-radius:10px;
+  font-size:14px;font-weight:700;
+  transition:background var(--t);white-space:nowrap;
+}
+.cs-btn:hover{background:var(--gd)}
+
+/* ─────────────────────────────────────────────────────
+   CAMP CARDS
+───────────────────────────────────────────────────── */
+.camp-card{
+  position:relative;overflow:hidden;
+  border-radius:var(--r);
+  cursor:pointer;
+  transition:transform var(--t);
+  aspect-ratio:3/4;
+  background:#f0f0f0;
+}
+.camp-card:hover{transform:translateY(-4px)}
+.camp-card.tall{aspect-ratio:3/4}
+.camp-card img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  transition:transform var(--t);
+}
+.camp-card:hover img{transform:scale(1.06)}
+.camp-card-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.7),rgba(0,0,0,.15) 50%);
+  z-index:1;
+}
+.camp-card-body{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  justify-content:flex-end;
+  padding:24px;
+  z-index:2;
+  color:#fff;
+}
+.camp-badge{
+  display:inline-block;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.25);
+  backdrop-filter:blur(12px);
+  color:#fff;
+  padding:6px 12px;
+  border-radius:6px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  margin-bottom:12px;
+  width:fit-content;
+  margin-top:auto;
+}
+.camp-name{
+  font-size:24px;font-weight:700;
+  line-height:1.2;margin-bottom:8px;
+}
+.camp-tagline{
+  font-size:13px;
+  color:rgba(255,255,255,.8);
+  line-height:1.5;
+  margin-bottom:16px;
+}
+.camp-meta{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:12px;
+}
+.camp-format{
+  display:flex;align-items:center;gap:6px;
+  font-size:12px;color:rgba(255,255,255,.75);
+}
+.camp-format svg{width:13px;height:13px}
+.camp-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--g);color:#fff;
+  padding:8px 14px;border-radius:6px;
+  font-size:12px;font-weight:600;
+  border:none;cursor:pointer;
+  transition:background var(--t),transform var(--t);
+  white-space:nowrap;
+}
+.camp-cta:hover{background:var(--gd);transform:translateX(2px)}
+.camp-cta svg{width:12px;height:12px}
+
+.camps-grid-top{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;
+}
+.camps-grid-bottom{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;
+}
+.camp-card-sm{aspect-ratio:16/9;min-height:0;}
+.camp-card-sm .camp-name{font-size:16px}
+.camp-card-sm .camp-tagline{font-size:11px;margin-bottom:10px}
+.camp-card-sm .camp-badge{font-size:9px;padding:4px 8px;margin-bottom:8px}
+.camp-card-sm .camp-meta{gap:8px}
+.camp-card-sm .camp-format{font-size:11px}
+
+@media(max-width:900px){
+  .camps-grid-top{grid-template-columns:1fr}
+  .camps-grid-bottom{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .camps-grid-3{grid-template-columns:1fr}
+}
+
+/* ─────────────────────────────────────────────────────
+   SECTIONS
+───────────────────────────────────────────────────── */
+.sec{padding:80px 32px}
+.sec-inner{max-width:1200px;margin:0 auto}
+.sec-head{text-align:center;margin-bottom:60px}
+.sec-title{
+  font-size:clamp(32px,5vw,48px);
+  font-weight:900;color:var(--ink);
+  line-height:1.1;letter-spacing:-.02em;
+  margin-bottom:16px;
+}
+.sec-desc{
+  font-size:clamp(15px,2vw,17px);
+  color:var(--i3);line-height:1.6;
+  max-width:640px;margin:0 auto;
+}
+
+/* About section */
+.sobre-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;
+}
+.sobre-kicker{
+  display:inline-block;
+  font-size:11px;font-weight:700;
+  color:var(--g);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:12px;
+}
+.sobre-h{
+  font-size:clamp(28px,4vw,42px);
+  font-weight:900;color:var(--ink);
+  line-height:1.15;letter-spacing:-.02em;
+  margin-bottom:24px;
+}
+.sobre-p{
+  font-size:15px;color:var(--i3);
+  line-height:1.8;margin-bottom:24px;
+}
+.sobre-quote{
+  font-size:16px;font-style:italic;
+  color:var(--g);line-height:1.8;
+  padding:24px;background:var(--gl);
+  border-left:3px solid var(--g);
+  border-radius:4px;margin:32px 0;
+}
+.stats-row{
+  display:flex;gap:40px;margin-top:40px}
+.stat-item{
+  display:flex;flex-direction:column;gap:8px;
+}
+.stat-num{
+  font-size:clamp(24px,4vw,32px);
+  font-weight:900;color:var(--ink);
+}
+.stat-lbl{
+  font-size:12px;color:var(--i3);
+  font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+}
+.sobre-imgs{
+  position:relative;overflow:hidden;
+  border-radius:var(--r);
+  min-height:480px;
+}
+.sobre-imgs img{
+  width:100%;height:100%;object-fit:cover;
+  position:absolute;top:0;left:0;
+  transition:transform var(--t);
+}
+.sobre-imgs:hover img{transform:scale(1.04)}
+
+/* Guides section */
+.guias{background:var(--bg)}
+.guias-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
+}
+.guia-card{
+  background:#fff;border-radius:var(--r);overflow:hidden;
+  transition:transform var(--t),box-shadow var(--t);
+}
+.guia-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.guia-photo{
+  position:relative;overflow:hidden;aspect-ratio:1;
+}
+.guia-photo img{
+  transition:transform var(--t);width:100%;height:100%;
+}
+.guia-card:hover .guia-photo img{transform:scale(1.05)}
+.guia-tag{
+  position:absolute;top:12px;right:12px;
+  background:var(--g);color:#fff;
+  padding:6px 12px;border-radius:6px;
+  font-size:10px;font-weight:700;
+  text-transform:uppercase;letter-spacing:.08em;
+}
+.guia-body{padding:24px}
+.guia-name{
+  font-size:18px;font-weight:700;color:var(--ink);margin-bottom:4px;
+}
+.guia-role{
+  font-size:12px;color:var(--i3);
+  font-weight:600;text-transform:uppercase;letter-spacing:.06em;
+  margin-bottom:12px;
+}
+.guia-bio{
+  font-size:13px;color:var(--i3);line-height:1.6;margin-bottom:16px;
+}
+.guia-camps{
+  display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;
+}
+.guia-camp-tag{
+  background:var(--bg);color:var(--ink);
+  padding:4px 10px;border-radius:4px;
+  font-size:11px;font-weight:600;
+}
+.guia-ig{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;background:var(--bg);
+  border-radius:6px;color:var(--ink);
+  transition:background var(--t),color var(--t);
+}
+.guia-ig:hover{background:var(--g);color:#fff}
+
+/* Logos section */
+.logos-sec{
+  padding:60px 32px;background:#fff;
+  border-top:1px solid var(--ln);border-bottom:1px solid var(--ln);
+}
+.logos-inner{
+  max-width:1200px;margin:0 auto;
+  text-align:center;
+}
+.logos-label{
+  font-size:11px;font-weight:700;
+  color:var(--i3);letter-spacing:.1em;text-transform:uppercase;
+  margin-bottom:32px;
+}
+.logos-row{
+  display:flex;justify-content:center;flex-wrap:wrap;gap:40px;
+  align-items:center;
+}
+.logo-company{
+  font-size:16px;font-weight:700;
+  color:var(--i2);letter-spacing:.02em;
+}
+
+/* Contact section */
+.contact-sec{
+  padding:80px 32px;background:var(--bg);
+}
+.contact-inner{
+  max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;
+  align-items:start;
+}
+.ct-left h2{margin-bottom:16px}
+.sec-desc{font-size:16px;color:var(--i3);margin-bottom:40px}
+.ct-contact-items{display:flex;flex-direction:column;gap:20px}
+.ci{display:flex;gap:16px}
+.ci-dot{
+  width:32px;height:32px;
+  background:var(--g);color:#fff;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.ci-dot svg{width:16px;height:16px}
+.ci-label{
+  font-size:11px;font-weight:700;
+  color:var(--i3);letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:2px;
+}
+.ci-val{
+  font-size:15px;font-weight:500;color:var(--ink);
+}
+
+/* Form */
+.ct-form{
+  background:#fff;padding:40px;
+  border-radius:var(--r);
+}
+.ct-form-title{
+  font-size:20px;font-weight:700;
+  color:var(--ink);margin-bottom:6px;
+}
+.ct-form-sub{
+  font-size:13px;color:var(--i3);margin-bottom:24px;
+}
+.fg{margin-bottom:20px}
+.fg.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.fg label{
+  display:block;font-size:12px;
+  font-weight:600;color:var(--i2);
+  letter-spacing:.04em;text-transform:uppercase;
+  margin-bottom:6px;
+}
+.fg input,.fg select,.fg textarea{
+  width:100%;padding:12px;
+  border:1px solid var(--ln);
+  border-radius:6px;
+  font-size:14px;color:var(--ink);
+  background:#fff;
+  transition:border-color var(--t);
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  outline:none;border-color:var(--g);
+}
+.fg textarea{min-height:120px;resize:vertical}
+.btn-submit{
+  width:100%;display:flex;align-items:center;justify-content:center;
+  gap:8px;padding:14px;background:var(--g);color:#fff;
+  border-radius:6px;font-size:14px;font-weight:700;
+  transition:background var(--t),transform var(--t);
+  cursor:pointer;
+}
+.btn-submit:hover{background:var(--gd);transform:translateY(-1px)}
+.btn-note{
+  font-size:11px;color:var(--i3);
+  margin-top:12px;text-align:center;
+  font-style:italic;
+}
+
+/* Buttons */
+.btn-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 28px;border:1.5px solid var(--g);
+  color:var(--g);border-radius:8px;
+  font-size:14px;font-weight:700;
+  transition:all var(--t);
+}
+.btn-outline:hover{
+  background:var(--g);color:#fff;
+}
+
+.sec-see-all{
+  display:flex;justify-content:center;margin-top:40px;
+}
+
+/* Footer */
+.footer{
+  padding:40px 32px;background:var(--ink);color:#fff;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:20px;
+  border-top:1px solid rgba(255,255,255,.1);
+}
+.footer-brand{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.footer-copy{font-size:12px;color:rgba(255,255,255,.6)}
+.footer-links{display:flex;gap:20px}
+.footer-links a{
+  font-size:12px;color:rgba(255,255,255,.6);
+  transition:color var(--t);
+}
+.footer-links a:hover{color:#fff}
+
+/* ─────────────────────────────────────────────────────
+   MODAL OVERLAY STYLES
+───────────────────────────────────────────────────── */
+.modal-overlay{
+  position:fixed;inset:0;
+  background:rgba(10,22,12,.75);
+  backdrop-filter:blur(4px);
+  z-index:900;
+  opacity:0;pointer-events:none;
+  transition:opacity var(--t);
+  display:flex;align-items:flex-start;justify-content:center;
+  overflow-y:auto;padding-top:60px;padding-bottom:40px;
+}
+.modal-overlay.active{
+  opacity:1;pointer-events:auto;
+}
+.modal-content{
+  background:#fff;border-radius:var(--r);
+  width:100%;max-width:720px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(10,22,12,.35);
+  animation:slideInUp var(--t) ease-out;
+}
+@keyframes slideInUp{
+  from{transform:translateY(40px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+.modal-header{
+  position:relative;width:100%;height:300px;overflow:hidden;
+}
+.modal-header img{width:100%;height:100%;object-fit:cover}
+.modal-close{
+  position:absolute;top:20px;right:20px;
+  width:40px;height:40px;
+  background:rgba(255,255,255,.95);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:10;
+  transition:background var(--t),transform var(--t);
+  border:none;outline:none;padding:0;
+}
+.modal-close:hover{
+  background:#fff;transform:scale(1.1);
+}
+.modal-close svg{width:24px;height:24px;stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+.modal-body{padding:40px}
+.modal-badge{
+  display:inline-block;
+  background:var(--gl);color:var(--g);
+  padding:6px 12px;border-radius:6px;
+  font-size:10px;font-weight:700;
+  letter-spacing:.08em;text-transform:uppercase;
+  margin-bottom:16px;
+}
+.modal-title{
+  font-size:32px;font-weight:900;
+  color:var(--ink);line-height:1.2;
+  margin-bottom:8px;
+}
+.modal-tagline{
+  font-size:16px;color:var(--i3);
+  line-height:1.6;margin-bottom:24px;
+}
+.modal-desc{
+  font-size:15px;color:var(--i3);
+  line-height:1.8;margin-bottom:32px;
+}
+
+.modal-section-title{
+  font-size:13px;font-weight:700;
+  color:var(--g);letter-spacing:.08em;
+  text-transform:uppercase;margin:24px 0 16px 0;
+}
+.modal-features{
+  display:flex;flex-direction:column;gap:12px;margin-bottom:28px;
+}
+.modal-feature{
+  display:flex;gap:12px;align-items:flex-start;
+}
+.modal-feature-icon{
+  width:20px;height:20px;
+  flex-shrink:0;margin-top:2px;
+  color:var(--g);
+}
+.modal-feature-icon svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.modal-feature-text{
+  font-size:14px;color:var(--i3);line-height:1.6;
+}
+
+.modal-info-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  background:var(--bg);padding:20px;border-radius:8px;
+  margin-bottom:28px;
+}
+.modal-info-item{
+  display:flex;gap:12px;align-items:flex-start;
+}
+.modal-info-icon{
+  width:20px;height:20px;
+  flex-shrink:0;margin-top:2px;
+  color:var(--or);
+}
+.modal-info-icon svg{width:20px;height:20px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.modal-info-label{
+  font-size:11px;
+  font-weight:700;color:var(--i3);
+  letter-spacing:.06em;text-transform:uppercase;
+  margin-bottom:4px;
+}
+.modal-info-value{
+  font-size:14px;font-weight:600;color:var(--ink);
+}
+
+.modal-audience{
+  background:var(--gl);padding:20px;border-radius:8px;
+  border-left:3px solid var(--g);margin-bottom:28px;
+}
+.modal-audience-label{
+  font-size:11px;font-weight:700;
+  color:var(--g);letter-spacing:.08em;
+  text-transform:uppercase;margin-bottom:8px;
+}
+.modal-audience-text{
+  font-size:14px;color:var(--i3);line-height:1.6;
+}
+
+.modal-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:100%;padding:16px;
+  background:var(--g);color:#fff;
+  border-radius:8px;font-size:15px;font-weight:700;
+  transition:background var(--t),transform var(--t);
+  text-decoration:none;cursor:pointer;
+}
+.modal-cta:hover{
+  background:var(--gd);transform:translateY(-2px);
+}
+
+@media(max-width:768px){
+  .modal-overlay{padding-top:40px;padding-bottom:20px}
+  .modal-content{margin:0 16px}
+  .modal-header{height:200px}
+  .modal-body{padding:24px}
+  .modal-title{font-size:24px}
+  .modal-info-grid{grid-template-columns:1fr}
+}
+
+</style>
+</head>
+<body>
+
+<!-- ── NAV ────────────────────────────────────────────── -->
+<nav class="nav" id="nav">
+  <div class="nav-left">
+    <button class="nav-ham">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="nav-logo">
+    <div class="logo-mark">BOREALIS</div>
+    <div class="logo-sub">Corporate</div>
+  </div>
+
+  <div class="nav-right">
+    <a class="nav-cta" onclick="scrollToContact()">Solicitar</a>
+  </div>
+</nav>
+
+<!-- ── HERO ───────────────────────────────────────────── -->
+<section class="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Desde 2002</div>
+    <h1 class="hero-h">Six Camps That Don't Exist <em>Anywhere Else</em></h1>
+    <p class="hero-sub">Metodologias proprietárias, desenvolvidas internamente. Cada programa é uma experiência única, impossível de copiar.</p>
+  </div>
+</section>
+
+<!-- ── CAMPS ──────────────────────────────────────────── -->
+<section class="sec camps" id="camps">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <h2 class="sec-title">Os Camps que não existem em mais lado nenhum</h2>
+      <p class="sec-desc">Seis metodologias proprietárias, desenvolvidas internamente desde 2002. Cada programa é único — e continua a sê-lo.</p>
+    </div>
+
+    <!-- Top row: 3 highlight cards -->
+    <div class="camps-grid-top">
+
+      <div class="camp-card" onclick="openModal('modal-mindful')" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&auto=format&fit=crop&q=82" alt="Mindful Camp" loading="lazy">
+        <div class="camp-card-overlay"></div>
+        <div class="camp-card-body">
+          <div class="camp-badge">Exclusivo Borealis</div>
+          <div class="camp-name">Mindful Camp</div>
+          <div class="camp-tagline">Banhos de Floresta · Técnicas de Respiração Borealis</div>
+          <div class="camp-meta">
+            <div class="camp-format">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              Meio-dia ou Dia Completo
+            </div>
+            <button class="camp-cta" onclick="event.stopPropagation(); openModal('modal-mindful')">
+              Ver Programa
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="camp-card" onclick="openModal('modal-space')" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=900&auto=format&fit=crop&q=82" alt="Space Camp" loading="lazy">
+        <div class="camp-card-overlay"></div>
+        <div class="camp-card-body">
+          <div class="camp-badge">Design Original</div>
+          <div class="camp-name">Space Camp</div>
+          <div class="camp-tagline">Engenharia Aeroespacial · Foguetes Reais · Astronomia Borealis</div>
+          <div class="camp-meta">
+            <div class="camp-format">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              Dia Completo ou Retiro
+            </div>
+            <button class="camp-cta" onclick="event.stopPropagation(); openModal('modal-space')">
+              Ver Programa
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="camp-card" onclick="openModal('modal-survival')" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=700&auto=format&fit=crop&q=80" alt="Survival Camp" loading="lazy">
+        <div class="camp-card-overlay"></div>
+        <div class="camp-card-body">
+          <div class="camp-badge">Outdoor Extremo</div>
+          <div class="camp-name">Survival Camp</div>
+          <div class="camp-tagline">Fogo · Abrigos · Resiliência</div>
+          <div class="camp-meta">
+            <div class="camp-format">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              Dia Completo
+            </div>
+            <button class="camp-cta" onclick="event.stopPropagation(); openModal('modal-survival')">
+              Ver Programa
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom row: 3 smaller cards -->
+    <div class="camps-grid-bottom">
+
+      <div class="camp-card camp-card-sm" onclick="openModal('modal-heritage')" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=700&auto=format&fit=crop&q=80" alt="Heritage Camp" loading="lazy">
+        <div class="camp-card-overlay"></div>
+        <div class="camp-card-body">
+          <div class="camp-badge">Curadoria Borealis</div>
+          <div class="camp-name">Heritage Camp</div>
+          <div class="camp-tagline">Pão Ancestral · Azeite · Memória</div>
+          <div class="camp-meta">
+            <div class="camp-format">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              Meio-dia ou Dia Completo
+            </div>
+            <button class="camp-cta" onclick="event.stopPropagation(); openModal('modal-heritage')">Ver →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="camp-card camp-card-sm" onclick="openModal('modal-shepherd')" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1527153818091-1a9638521e2a?w=700&auto=format&fit=crop&q=80" alt="Shepherd Camp" loading="lazy">
+        <div class="camp-card-overlay"></div>
+        <div class="camp-card-body">
+          <div class="camp-badge">Conceito Original</div>
+          <div class="camp-name">Shepherd Camp</div>
+          <div class="camp-tagline">Pastoreio · Apadrinhamento · Impacto Social</div>
+          <div class="camp-meta">
+            <div class="camp-format">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              Dia Completo ou Retiro
+            </div>
+            <button class="camp-cta" onclick="event.stopPropagation(); openModal('modal-shepherd')">Ver →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="camp-card camp-card-sm" onclick="openModal('modal-nature')" style="cursor:pointer;">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=700&auto=format&fit=crop&q=80" alt="Nature Camp ESG" loading="lazy">
+        <div class="camp-card-overlay"></div>
+        <div class="camp-card-body">
+          <div class="camp-badge">Exclusivo ESG</div>
+          <div class="camp-name">Nature Camp ESG</div>
+          <div class="camp-tagline">Reflorestação · Pegada · Regeneração</div>
+          <div class="camp-meta">
+            <div class="camp-format">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              3–4 dias
+            </div>
+            <button class="camp-cta" onclick="event.stopPropagation(); openModal('modal-nature')">Ver →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="sec-see-all">
+      <a href="#contactos" class="btn-outline">
+        Pedir Proposta para um Camp
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── SOBRE ──────────────────────────────────────────── -->
+<section class="sec" id="sobre">
+  <div class="sec-inner">
+    <div class="sobre-grid">
+      <div>
+        <div class="sobre-kicker">Desde 2002</div>
+        <h2 class="sobre-h">25 Anos a Criar Experiências que Não Existem em Mais Lado Nenhum</h2>
+        <p class="sobre-p">
+          A borealis.travel não se limita a organizar eventos — cria conceitos originais. Cada programa é uma metodologia desenvolvida internamente pelos nossos guias, testada no terreno ao longo de anos, e impossível de copiar.
+        </p>
+        <div class="sobre-quote">
+          "Cada um dos nossos programas é uma metodologia proprietária, desenvolvida por guias que palmilharam o mundo, para garantir que a sua equipa vive uma experiência que não existe em mais lado nenhum."
+        </div>
+        <p class="sobre-p">
+          A exclusividade Borealis garante que o seu evento é único, autêntico e focado em resultados reais de coesão e resiliência de equipa.
+        </p>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-num">25+</div>
+            <div class="stat-lbl">Anos de Experiência</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">200+</div>
+            <div class="stat-lbl">Empresas</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">5k+</div>
+            <div class="stat-lbl">Participantes</div>
+          </div>
+        </div>
+      </div>
+      <div class="sobre-imgs">
+        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=900&auto=format&fit=crop&q=82" alt="Equipa Borealis em montanha" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── OS GUIAS ───────────────────────────────────────── -->
+<section class="sec guias" id="guias">
+  <div class="sec-inner">
+    <div class="sec-head">
+      <h2 class="sec-title">Os nossos guias</h2>
+      <p class="sec-desc">Uma equipa de viajantes profissionais que vivem aquilo que ensinam.</p>
+    </div>
+    <div class="guias-grid">
+      <div class="guia-card">
+        <div class="guia-photo">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&auto=format&fit=crop&q=80&facepad=2&face=1" alt="Guia" loading="lazy">
+          <div class="guia-tag">Lead Guide</div>
+        </div>
+        <div class="guia-body">
+          <div class="guia-name">Vítor Magalhães</div>
+          <div class="guia-role">Director de Experiência · Borealis desde 2002</div>
+          <div class="guia-bio">Guia de alta montanha certificado pelo IFMGA. Percorreu mais de 40 países a pé. Criador das metodologias Survival Camp e Space Camp.</div>
+          <div class="guia-camps">
+            <span class="guia-camp-tag">Survival Camp</span>
+            <span class="guia-camp-tag">Space Camp</span>
+            <span class="guia-camp-tag">Heritage Camp</span>
+          </div>
+          <a href="https://www.instagram.com/borealis.travel/" target="_blank" class="guia-ig" title="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="guia-card">
+        <div class="guia-photo">
+          <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500&auto=format&fit=crop&q=80&facepad=2&face=1" alt="Guia" loading="lazy">
+          <div class="guia-tag">Mindfulness Guide</div>
+        </div>
+        <div class="guia-body">
+          <div class="guia-name">Inês Gaya</div>
+          <div class="guia-role">Guia de Shinrin-yoku · Especialista em Respiração</div>
+          <div class="guia-bio">Formada em psicologia e certificada em Shinrin-yoku no Japão. Criadora do protocolo de Banhos de Floresta exclusivo da Borealis.</div>
+          <div class="guia-camps">
+            <span class="guia-camp-tag">Mindful Camp</span>
+            <span class="guia-camp-tag">Nature Camp</span>
+          </div>
+          <a href="https://www.instagram.com/inesgaya/" target="_blank" class="guia-ig" title="Instagram de Inês Gaya">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="guia-card">
+        <div class="guia-photo">
+          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=500&auto=format&fit=crop&q=80&facepad=2&face=1" alt="Guia" loading="lazy">
+          <div class="guia-tag">Rural Heritage Guide</div>
+        </div>
+        <div class="guia-body">
+          <div class="guia-name">Francisco Saraiva</div>
+          <div class="guia-role">Guia de Pastoreio · Especialista em Patrimônio Rural</div>
+          <div class="guia-bio">Agricultor por opção, guia por vocação. Criou o Shepherd Camp a partir da sua própria quinta no Vale do Minho. Autentico.</div>
+          <div class="guia-camps">
+            <span class="guia-camp-tag">Shepherd Camp</span>
+            <span class="guia-camp-tag">Heritage Camp</span>
+          </div>
+          <a href="https://www.instagram.com/borealis.travel/" target="_blank" class="guia-ig" title="Instagram">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EMPRESAS ───────────────────────────────────────── -->
+<div class="logos-sec">
+  <div class="logos-inner">
+    <div class="logos-label">Empresas que Confiam no Nosso ADN</div>
+    <div class="logos-row">
+      <span class="logo-company">IKEA</span>
+      <span class="logo-company">SONAE</span>
+      <span class="logo-company">RENOVA</span>
+      <span class="logo-company">SHAMIR</span>
+      <span class="logo-company">FARFETCH</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── SOLICITAR PROPOSTA ─────────────────────────────── -->
+<section class="contact-sec" id="contactos">
+  <div class="contact-inner">
+    <div class="ct-left">
+      <h2 class="sec-title">Prontos para algo que não encontra noutra agência?</h2>
+      <p class="sec-desc">Desenvolvemos programas à medida. 100% de autoria Borealis, 100% exclusivos para a vossa empresa.</p>
+      <div class="ct-contact-items">
+        <div class="ci">
+          <div class="ci-dot">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Email</div>
+            <div class="ci-val">ola@borealis.travel</div>
+          </div>
+        </div>
+        <div class="ci">
+          <div class="ci-dot">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 1.29h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.93a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Linha Corporativa</div>
+            <div class="ci-val">(+351) 910 910 930</div>
+          </div>
+        </div>
+        <div class="ci">
+          <div class="ci-dot">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Sede</div>
+            <div class="ci-val">Ponte de Lima, Portugal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ct-form">
+      <div class="ct-form-title">Solicitar Proposta Exclusiva</div>
+      <div class="ct-form-sub">Resposta em menos de 24 horas úteis.</div>
+      <form id="propForm" onsubmit="handleProp(event)">
+        <div class="fg row">
+          <div>
+            <label>Empresa</label>
+            <input type="text" id="company" placeholder="Nome da empresa" required>
+          </div>
+          <div>
+            <label>Nº Pessoas</label>
+            <input type="number" id="people" placeholder="Estimativa" min="1">
+          </div>
+        </div>
+        <div class="fg">
+          <label>Email Corporativo</label>
+          <input type="email" id="email" placeholder="email@empresa.com" required>
+        </div>
+        <div class="fg">
+          <label>Camp de Interesse</label>
+          <select id="interest">
+            <option value="Mindful Camp">Mindful Camp (Banhos de Floresta)</option>
+            <option value="Space Camp">Space Camp (Engenharia Aeroespacial)</option>
+            <option value="Survival Camp">Survival Camp (Outdoor Extremo)</option>
+            <option value="Nature Camp">Nature Camp (ESG + Bosque)</option>
+            <option value="Heritage Camp">Heritage Camp (Memória e Saberes)</option>
+            <option value="Shepherd Camp">Shepherd Camp (Pastoreio Real)</option>
+            <option value="Vários">Vários / A definir</option>
+          </select>
+        </div>
+        <div class="fg">
+          <label>Notas para Personalização</label>
+          <textarea id="message" placeholder="Objetivos da equipa, data, localização preferida…"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Enviar Pedido de Proposta
+        </button>
+        <p class="btn-note">O email do vosso cliente de e-mail abrirá com a proposta já redigida para a equipa Borealis.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="footer-brand">BOREALIS</div>
+  <div class="footer-copy">© 2002–2024 Borealis.travel · Design Original de Experiências de Natureza</div>
+  <div class="footer-links">
+    <a href="#">corporate.borealis.travel</a>
+    <a href="#">Privacidade</a>
+  </div>
+</footer>
+
+<!-- ── MODALS ─────────────────────────────────────────── -->
+
+<!-- Mindful Camp Modal -->
+<div class="modal-overlay" id="modal-mindful" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&auto=format&fit=crop&q=82" alt="Mindful Camp">
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-badge">Exclusivo Borealis</div>
+      <h2 class="modal-title">Mindful Camp</h2>
+      <p class="modal-tagline">Imersão em técnicas de respiração Borealis e banhos de floresta para reequilíbrio corporativo</p>
+      <p class="modal-desc">
+        O Mindful Camp é a nossa resposta corporativa ao stress e desconexão do mundo profissional moderno. Combinamos as melhores técnicas de Shinrin-yoku (banhos de floresta japoneses) com o protocolo exclusivo Borealis de Respiração Consciente, desenvolvido ao longo de 25 anos de imersão em ambientes selvagens. Cada sessão é uma jornada guiada através de florestas intocadas, com pausas estratégicas para respiração profunda, meditação caminhada e observação sensorial.
+      </p>
+      
+      <div class="modal-section-title">Destaques do Programa</div>
+      <div class="modal-features">
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Protocolo Borealis de Respiração</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Banhos de Floresta Guiados</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Meditação Caminhada</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Relatório de Impacto</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Coesão de Equipa</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Toolkit pós-programa</div>
+        </div>
+      </div>
+
+      <div class="modal-info-grid">
+        <div class="modal-info-item">
+          <div class="modal-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <div class="modal-info-label">Duração</div>
+            <div class="modal-info-value">3–5 dias</div>
+          </div>
+        </div>
+        <div class="modal-info-item">
+          <div class="modal-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div>
+            <div class="modal-info-label">Tamanho do Grupo</div>
+            <div class="modal-info-value">12–40 pessoas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-audience">
+        <div class="modal-audience-label">Público-Alvo</div>
+        <div class="modal-audience-text">Equipas de Liderança, Departamentos Criativos, Empresas com Foco ESG</div>
+      </div>
+
+      <a href="mailto:ola@corporate.borealis.travel?subject=Interesse:%20Mindful%20Camp&body=Olá,%0A%0AGostaria%20de%20saber%20mais%20sobre%20o%20Mindful%20Camp.%0A%0AObrigado." class="modal-cta">Solicitar Informações →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Space Camp Modal -->
+<div class="modal-overlay" id="modal-space" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <img src="https://images.unsplash.com/photo-1516849841032-87cbac4d88f7?w=900&auto=format&fit=crop&q=82" alt="Space Camp">
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-badge">Design Original</div>
+      <h2 class="modal-title">Space Camp</h2>
+      <p class="modal-tagline">Engenharia aeroespacial, astronomia e lançamento de foguetes reais em ambiente selvagem</p>
+      <p class="modal-desc">
+        O Space Camp é o único programa corporativo que combina educação aeroespacial profissional com imersão em natureza selvagem. As equipas recebem treinamento, projetam e constroem foguetes reais e os lançam em locações remotas de montanha. Participantes trabalham em sub-equipas de engenharia, resolvendo problemas reais de design, aerodinâmica e análise de dados.
+      </p>
+      
+      <div class="modal-section-title">Destaques do Programa</div>
+      <div class="modal-features">
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Construção de Foguetes Reais</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Educação Aeroespacial</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Observatório Astronómico</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Análise de Dados Ao Vivo</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Colaboração Extrema</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Certificado Oficial</div>
+        </div>
+      </div>
+
+      <div class="modal-info-grid">
+        <div class="modal-info-item">
+          <div class="modal-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <div class="modal-info-label">Duração</div>
+            <div class="modal-info-value">4–5 dias</div>
+          </div>
+        </div>
+        <div class="modal-info-item">
+          <div class="modal-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div>
+            <div class="modal-info-label">Tamanho do Grupo</div>
+            <div class="modal-info-value">20–50 pessoas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-audience">
+        <div class="modal-audience-label">Público-Alvo</div>
+        <div class="modal-audience-text">Equipas de Inovação e R&D, Departamentos de Engenharia, Programas de Development STEM</div>
+      </div>
+
+      <a href="mailto:ola@corporate.borealis.travel?subject=Interesse:%20Space%20Camp&body=Olá,%0A%0AGostaria%20de%20saber%20mais%20sobre%20o%20Space%20Camp.%0A%0AObrigado." class="modal-cta">Solicitar Informações →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Survival Camp Modal -->
+<div class="modal-overlay" id="modal-survival" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=700&auto=format&fit=crop&q=80" alt="Survival Camp">
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-badge">Outdoor Extremo</div>
+      <h2 class="modal-title">Survival Camp</h2>
+      <p class="modal-tagline">Fogo, abrigos e resiliência em ambientes selvagens. O teste final de liderança corporativa.</p>
+      <p class="modal-desc">
+        O Survival Camp é a nossa experiência mais desafiadora. Equipas são inseridas em ecossistemas selvagens com mínimos recursos e devem, através de colaboração extrema, dominar as três necessidades de sobrevivência: fogo, abrigo e água. Aprendem a trabalhar sob pressão real, a resolver problemas sem manuais, a liderar quando não há certezas.
+      </p>
+      
+      <div class="modal-section-title">Destaques do Programa</div>
+      <div class="modal-features">
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Domínio do Fogo</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Construção de Abrigos</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Purificação de Água</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Navegação Extrema</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Decisão Sob Pressão</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Resiliência Corporativa</div>
+        </div>
+      </div>
+
+      <div class="modal-info-grid">
+        <div class="modal-info-item">
+          <div class="modal-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <div class="modal-info-label">Duração</div>
+            <div class="modal-info-value">5 dias</div>
+          </div>
+        </div>
+        <div class="modal-info-item">
+          <div class="modal-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div>
+            <div class="modal-info-label">Tamanho do Grupo</div>
+            <div class="modal-info-value">15–35 pessoas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-audience">
+        <div class="modal-audience-label">Público-Alvo</div>
+        <div class="modal-audience-text">Líderes Estratégicos, Equipas de Crise, Organizações Ágeis</div>
+      </div>
+
+      <a href="mailto:ola@corporate.borealis.travel?subject=Interesse:%20Survival%20Camp&body=Olá,%0A%0AGostaria%20de%20saber%20mais%20sobre%20o%20Survival%20Camp.%0A%0AObrigado." class="modal-cta">Solicitar Informações →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Heritage Camp Modal -->
+<div class="modal-overlay" id="modal-heritage" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=700&auto=format&fit=crop&q=80" alt="Heritage Camp">
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-badge">Curadoria Borealis</div>
+      <h2 class="modal-title">Heritage Camp</h2>
+      <p class="modal-tagline">Pão ancestral, azeite artesanal e conexão com a memória rural portuguesa</p>
+      <p class="modal-desc">
+        O Heritage Camp é um retorno intencional aos saberes que duraram séculos. Trabalhe com mestres rurais em fermentação ancestral de pão, em produção artesanal de azeite e em técnicas de conservação que precedem a indústria moderna. As equipas absorvem uma lição corporativa profunda: que valor duradouro requer consistência, paciência e mestre-ría cuidada.
+      </p>
+      
+      <div class="modal-section-title">Destaques do Programa</div>
+      <div class="modal-features">
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Fermentação Ancestral de Pão</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Produção Artesanal de Azeite</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Ciclos de Colheita</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Mestre-ría Rural</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Refeições Sacramentais</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Legado Corporativo</div>
+        </div>
+      </div>
+
+      <div class="modal-info-grid">
+        <div class="modal-info-item">
+          <div class="modal-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <div class="modal-info-label">Duração</div>
+            <div class="modal-info-value">3–4 dias</div>
+          </div>
+        </div>
+        <div class="modal-info-item">
+          <div class="modal-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div>
+            <div class="modal-info-label">Tamanho do Grupo</div>
+            <div class="modal-info-value">12–32 pessoas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-audience">
+        <div class="modal-audience-label">Público-Alvo</div>
+        <div class="modal-audience-text">Equipas de Sustentabilidade, Empresas Familiares, Equipas Criativas e Marketing</div>
+      </div>
+
+      <a href="mailto:ola@corporate.borealis.travel?subject=Interesse:%20Heritage%20Camp&body=Olá,%0A%0AGostaria%20de%20saber%20mais%20sobre%20o%20Heritage%20Camp.%0A%0AObrigado." class="modal-cta">Solicitar Informações →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Shepherd Camp Modal -->
+<div class="modal-overlay" id="modal-shepherd" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <img src="https://images.unsplash.com/photo-1527153818091-1a9638521e2a?w=700&auto=format&fit=crop&q=80" alt="Shepherd Camp">
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-badge">Conceito Original</div>
+      <h2 class="modal-title">Shepherd Camp</h2>
+      <p class="modal-tagline">Pastoreio real, apadrinhamento comunitário e impacto social tangível</p>
+      <p class="modal-desc">
+        O Shepherd Camp reimagina a liderança corporativa através de uma metáfora ancestral: o pastor. As equipas trabalham em quinta real, aprendendo os desafios diários de guiar rebanhos, tomar decisões sob incerteza e cuidar de seres que dependem delas. Cada participante apadrinha localmente crianças ou famílias de comunidades rurais.
+      </p>
+      
+      <div class="modal-section-title">Destaques do Programa</div>
+      <div class="modal-features">
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Pastoreio Real</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Apadrinhamento Comunitário</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Agricultura Biológica</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Imersão em Vida Rural</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Liderança Servicial</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Engajamento ESG Tangível</div>
+        </div>
+      </div>
+
+      <div class="modal-info-grid">
+        <div class="modal-info-item">
+          <div class="modal-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <div class="modal-info-label">Duração</div>
+            <div class="modal-info-value">4–5 dias</div>
+          </div>
+        </div>
+        <div class="modal-info-item">
+          <div class="modal-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div>
+            <div class="modal-info-label">Tamanho do Grupo</div>
+            <div class="modal-info-value">12–30 pessoas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-audience">
+        <div class="modal-audience-label">Público-Alvo</div>
+        <div class="modal-audience-text">Líderes Seniores, Empresas B-Corp, Programas de Liderança transformacional</div>
+      </div>
+
+      <a href="mailto:ola@corporate.borealis.travel?subject=Interesse:%20Shepherd%20Camp&body=Olá,%0A%0AGostaria%20de%20saber%20mais%20sobre%20o%20Shepherd%20Camp.%0A%0AObrigado." class="modal-cta">Solicitar Informações →</a>
+    </div>
+  </div>
+</div>
+
+<!-- Nature Camp ESG Modal -->
+<div class="modal-overlay" id="modal-nature" onclick="closeModal(event)">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=700&auto=format&fit=crop&q=80" alt="Nature Camp ESG">
+      <button class="modal-close" onclick="closeModal()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-badge">Exclusivo ESG</div>
+      <h2 class="modal-title">Nature Camp ESG</h2>
+      <p class="modal-tagline">Reflorestação, pegada ecológica e regeneração ambiental mensurável</p>
+      <p class="modal-desc">
+        O Nature Camp ESG transforma compromissos ambientais corporativos em ação mensurável. As equipas trabalham em projetos reais de reflorestação, limpeza de ecossistemas e regeneração de habitat. Cada pessoa planta árvores cuja vida útil é rastreada. Medem pegadas de carbono e desenham planos concretos de redução.
+      </p>
+      
+      <div class="modal-section-title">Destaques do Programa</div>
+      <div class="modal-features">
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Reflorestação Certificada</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Análise de Pegada Carbónica</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Ciência Ambiental Aplicada</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Restauração de Ecossistema</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Relatório ESG Oficial</div>
+        </div>
+        <div class="modal-feature">
+          <div class="modal-feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="modal-feature-text">Legado Verde Duradouro</div>
+        </div>
+      </div>
+
+      <div class="modal-info-grid">
+        <div class="modal-info-item">
+          <div class="modal-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div>
+            <div class="modal-info-label">Duração</div>
+            <div class="modal-info-value">3–4 dias</div>
+          </div>
+        </div>
+        <div class="modal-info-item">
+          <div class="modal-info-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div>
+            <div class="modal-info-label">Tamanho do Grupo</div>
+            <div class="modal-info-value">20–100 pessoas</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-audience">
+        <div class="modal-audience-label">Público-Alvo</div>
+        <div class="modal-audience-text">Líderes de Sustentabilidade, Empresas Multinacionais, Organizações B-Corp</div>
+      </div>
+
+      <a href="mailto:ola@corporate.borealis.travel?subject=Interesse:%20Nature%20Camp%20ESG&body=Olá,%0A%0AGostaria%20de%20saber%20mais%20sobre%20o%20Nature%20Camp%20ESG.%0A%0AObrigado." class="modal-cta">Solicitar Informações →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Nav scroll */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40)
+}, { passive: true })
+
+/* Hero bg parallax + load */
+const heroBg = document.getElementById('heroBg')
+heroBg.classList.add('loaded')
+
+/* Smooth anchor scrolls */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'))
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }) }
+  })
+})
+
+function scrollToContact() {
+  document.getElementById('contactos').scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+/* Modal functions */
+function openModal(modalId) {
+  const modal = document.getElementById(modalId)
+  if (modal) {
+    modal.classList.add('active')
+    document.body.style.overflow = 'hidden'
+  }
+}
+
+function closeModal(event) {
+  if (event && event.target !== event.currentTarget) return
+  const modals = document.querySelectorAll('.modal-overlay.active')
+  modals.forEach(modal => {
+    modal.classList.remove('active')
+  })
+  document.body.style.overflow = 'auto'
+}
+
+/* Close modal on ESC key */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeModal()
+})
+
+/* Form handler */
+function handleProp(e) {
+  e.preventDefault()
+  const company  = document.getElementById('company').value
+  const people   = document.getElementById('people').value || 'A definir'
+  const email    = document.getElementById('email').value
+  const interest = document.getElementById('interest').value
+  const message  = document.getElementById('message').value || 'Desejamos uma proposta personalizada.'
+
+  const subj = `PROPOSTA EXCLUSIVA: ${company} — ${interest}`
+  let body = `Olá equipa Borealis.travel,\n\n`
+  body += `Pedido de proposta para o vosso programa exclusivo de Team Building.\n\n`
+  body += `EMPRESA: ${company}\nEMAIL: ${email}\nPARTICIPANTES: ${people}\nPROGRAMA: ${interest}\n\n`
+  body += `NOTAS:\n${message}\n\nMelhores cumprimentos,\n${company}`
+
+  window.location.href = `mailto:ola@borealis.travel?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`
+}
+</script>
+</body>
+</html>
