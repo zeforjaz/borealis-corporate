@@ -1,2139 +1,1596 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Borealis Corporate — Programas de Team Building 100% à medida para equipas. Retiros de liderança e saúde mental. 25 anos de operação em terreno real.">
-  <title>Borealis Corporate — Programas para Equipas</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-
-  <style>
-    /* ── RESET ───────────────────────────────────────────── */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
-    body {
-      font-family: 'Inter', system-ui, sans-serif;
-      color: #111110;
-      background: #fff;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-      line-height: 1.6;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-      object-fit: cover;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      font-family: inherit;
-      cursor: pointer;
-      border: none;
-      background: none;
-    }
-
-    input, select, textarea {
-      font-family: inherit;
-    }
-
-    /* ── TOKENS ──────────────────────────────────────────── */
-    :root {
-      --g: #265c2e;
-      --gd: #193e1f;
-      --gl: #edf4ee;
-      --or: #d25800;
-      --ink: #111110;
-      --i2: #3a3a38;
-      --i3: #6a6a66;
-      --i4: #a8a8a4;
-      --bg: #f8f6f1;
-      --ln: #e4e2dd;
-      --wh: #ffffff;
-      --r: 14px;
-      --t: 220ms ease;
-    }
-
-    /* ── SCROLLBAR ───────────────────────────────────────── */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--ln);
-      border-radius: 3px;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       NAV
-    ───────────────────────────────────────────────────── */
-    .nav {
-      position: fixed;
-      top: 38px;
-      left: 0;
-      right: 0;
-      z-index: 400;
-      height: 64px;
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      padding: 0 32px;
-      transition: background var(--t), box-shadow var(--t);
-      background: transparent;
-    }
-
-    .nav.scrolled {
-      background: rgba(255, 255, 255, 0.97);
-      box-shadow: 0 1px 0 var(--ln);
-      backdrop-filter: blur(12px);
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .nav-ham {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-      align-items: center;
-      justify-content: center;
-      transition: background var(--t);
-      cursor: pointer;
-    }
-
-    .nav-ham:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    .nav.scrolled .nav-ham:hover {
-      background: var(--bg);
-    }
-
-    .nav-ham span {
-      display: block;
-      width: 20px;
-      height: 1.5px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 2px;
-      transition: background var(--t);
-    }
-
-    .nav.scrolled .nav-ham span {
-      background: var(--ink);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2px;
-    }
-
-    .nl {
-      padding: 6px 12px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.85);
-      transition: all var(--t);
-    }
-
-    .nl:hover {
-      background: rgba(255, 255, 255, 0.12);
-      color: #fff;
-    }
-
-    .nav.scrolled .nl {
-      color: var(--i2);
-    }
-
-    .nav.scrolled .nl:hover {
-      background: var(--bg);
-      color: var(--ink);
-    }
-
-    /* Logo */
-    .nav-logo {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1px;
-      cursor: pointer;
-    }
-
-    .logo-mark {
-      font-size: 20px;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -0.04em;
-      transition: color var(--t);
-      line-height: 1;
-    }
-
-    .nav.scrolled .logo-mark {
-      color: var(--gd);
-    }
-
-    .logo-sub {
-      font-size: 8px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.5);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      transition: color var(--t);
-    }
-
-    .nav.scrolled .logo-sub {
-      color: var(--i3);
-    }
-
-    /* Right */
-    .nav-right {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 8px;
-    }
-
-    .nav-cta {
-      background: var(--g);
-      color: #fff;
-      padding: 8px 20px;
-      border-radius: 40px;
-      font-size: 13px;
-      font-weight: 700;
-      transition: background var(--t), transform var(--t);
-      white-space: nowrap;
-    }
-
-    .nav-cta:hover {
-      background: var(--gd);
-      transform: translateY(-1px);
-    }
-
-    /* ─────────────────────────────────────────────────────
-       HERO
-    ───────────────────────────────────────────────────── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      overflow: hidden;
-      padding-top: 64px;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background-image: url('https://images.unsplash.com/photo-1551632811-561732d1e306?w=1800&auto=format&fit=crop&q=85');
-      background-size: cover;
-      background-position: center 35%;
-      transform: scale(1.04);
-      transition: transform 8s ease;
-    }
-
-    .hero-bg.loaded {
-      transform: scale(1);
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(10, 22, 12, 0.35) 0%,
-        rgba(10, 22, 12, 0.55) 50%,
-        rgba(10, 22, 12, 0.78) 100%
-      );
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      padding: 100px 24px;
-      max-width: 860px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 11px;
-      font-weight: 600;
-      color: rgba(255, 255, 255, 0.75);
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-
-    .hero-eyebrow::before, .hero-eyebrow::after {
-      content: '';
-      width: 20px;
-      height: 1px;
-      background: rgba(255, 255, 255, 0.4);
-    }
-
-    .hero h1 {
-      font-size: clamp(38px, 6.5vw, 72px);
-      font-weight: 900;
-      color: #fff;
-      line-height: 1.02;
-      letter-spacing: -0.04em;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      font-weight: 300;
-      color: rgba(255, 255, 255, 0.75);
-    }
-
-    .hero-sub {
-      font-size: clamp(15px, 2vw, 18px);
-      color: rgba(255, 255, 255, 0.65);
-      font-weight: 300;
-      line-height: 1.7;
-      max-width: 520px;
-      margin-bottom: 40px;
-    }
-
-    .hero-btns {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 40px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn-primary {
-      background: var(--or);
-      color: #fff;
-      padding: 12px 28px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      transition: background var(--t);
-      display: inline-block;
-      white-space: nowrap;
-    }
-
-    .btn-primary:hover {
-      background: #b84700;
-    }
-
-    .btn-outline-white {
-      background: transparent;
-      color: #fff;
-      border: 2px solid rgba(255, 255, 255, 0.5);
-      padding: 10px 26px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      transition: all var(--t);
-      display: inline-block;
-      white-space: nowrap;
-    }
-
-    .btn-outline-white:hover {
-      border-color: #fff;
-      background: rgba(255, 255, 255, 0.1);
-    }
-
-    .hero-stats {
-      position: absolute;
-      bottom: 40px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 40px;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
-      padding: 20px 40px;
-      width: 100%;
-      max-width: 800px;
-      margin: 0 24px;
-    }
-
-    .hstat {
-      text-align: center;
-    }
-
-    .hstat-num {
-      font-size: 24px;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .hstat-lbl {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    /* ── INTRO STRIP ─── */
-    .intro-strip {
-      background: var(--bg);
-      border-top: 1px solid var(--ln);
-      border-bottom: 1px solid var(--ln);
-      padding: 32px 24px;
-    }
-
-    .intro-strip-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 32px;
-      text-align: center;
-    }
-
-    .strip-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .strip-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--g);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .strip-icon svg {
-      width: 24px;
-      height: 24px;
-      fill: none;
-      stroke: #fff;
-      stroke-width: 1.8;
-    }
-
-    .strip-text strong {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    .strip-text span {
-      font-size: 13px;
-      color: var(--i3);
-    }
-
-    /* ── PROGRAMS SECTION ─── */
-    .programs-section {
-      padding: 80px 24px;
-      background: var(--bg);
-    }
-
-    .sec-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .sec-head {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .sec-head h2 {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 900;
-      color: var(--ink);
-      margin-bottom: 16px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
-    .sec-head p {
-      font-size: 16px;
-      color: var(--i3);
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    .programs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 24px;
-    }
-
-    .prog-card {
-      border-radius: var(--r);
-      overflow: hidden;
-      border: 1px solid var(--ln);
-      background: #fff;
-      display: flex;
-      flex-direction: column;
-      transition: box-shadow var(--t), transform var(--t);
-      cursor: pointer;
-    }
-
-    .prog-card:hover {
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
-      transform: translateY(-4px);
-    }
-
-    .prog-card:hover .prog-img {
-      transform: scale(1.06);
-    }
-
-    .prog-img {
-      width: 100%;
-      height: 240px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      overflow: hidden;
-      transition: transform var(--t);
-    }
-
-    .prog-badge {
-      position: absolute;
-      top: 12px;
-      left: 12px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 6px 12px;
-      border-radius: 20px;
-      background: var(--or);
-      color: #fff;
-      z-index: 1;
-    }
-
-    .prog-body {
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .prog-card h3 {
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 8px;
-      line-height: 1.3;
-    }
-
-    .prog-card p {
-      font-size: 14px;
-      color: var(--i3);
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-
-    .prog-checks {
-      list-style: none;
-      margin-bottom: 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .prog-checks li {
-      font-size: 13px;
-      color: var(--i3);
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      line-height: 1.5;
-    }
-
-    .prog-checks li::before {
-      content: '✓';
-      color: var(--g);
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .prog-meta {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      font-size: 12px;
-      color: var(--i3);
-      border-top: 1px solid var(--ln);
-      padding-top: 12px;
-      margin-top: auto;
-    }
-
-    .prog-meta span {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .prog-meta svg {
-      width: 16px;
-      height: 16px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.8;
-    }
-
-    /* ── NUMBERS BANNER ─── */
-    .numbers-banner {
-      background: var(--g);
-      padding: 60px 24px;
-    }
-
-    .numbers-banner-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 40px;
-      text-align: center;
-    }
-
-    .nb-num {
-      font-size: 36px;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 8px;
-    }
-
-    .nb-lbl {
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6);
-      line-height: 1.4;
-    }
-
-    /* ── CEO RETREATS / CORPORATE WILDERNESS ─── */
-    .wilderness-section {
-      padding: 80px 24px;
-      background: #fff;
-    }
-
-    .wilderness-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .wilderness-image {
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .wilderness-image img {
-      width: 100%;
-      height: 520px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .wilderness-badge {
-      position: absolute;
-      bottom: 24px;
-      left: 24px;
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 12px;
-      padding: 16px 20px;
-      backdrop-filter: blur(8px);
-    }
-
-    .wilderness-badge-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--i3);
-      margin-bottom: 4px;
-    }
-
-    .wilderness-badge-value {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .wilderness-content h2 {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 900;
-      color: var(--ink);
-      margin-bottom: 12px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
-    .wilderness-tagline {
-      font-size: 16px;
-      color: var(--i3);
-      line-height: 1.6;
-      margin-bottom: 20px;
-      font-weight: 300;
-    }
-
-    .wilderness-desc {
-      font-size: 15px;
-      color: var(--i3);
-      line-height: 1.75;
-      margin-bottom: 24px;
-    }
-
-    .wilderness-features {
-      list-style: none;
-      margin-bottom: 32px;
-    }
-
-    .wilderness-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 14px;
-      color: var(--i3);
-      padding: 12px 0;
-      border-bottom: 1px solid var(--ln);
-      line-height: 1.5;
-    }
-
-    .wilderness-features li:last-child {
-      border-bottom: none;
-    }
-
-    .wilderness-features li::before {
-      content: '✓';
-      color: var(--g);
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 3px;
-    }
-
-    .wilderness-info {
-      background: var(--gl);
-      border-radius: 12px;
-      border: 1px solid rgba(38, 92, 46, 0.1);
-      padding: 20px 24px;
-      margin-bottom: 32px;
-      font-size: 14px;
-      color: var(--g);
-      line-height: 1.6;
-    }
-
-    /* ── SAÚDE MENTAL ─── */
-    .health-section {
-      padding: 80px 24px;
-      background: var(--bg);
-    }
-
-    .health-header {
-      max-width: 1200px;
-      margin: 0 auto 60px;
-    }
-
-    .health-header h2 {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 900;
-      color: var(--ink);
-      margin-bottom: 12px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
-    .health-header p {
-      font-size: 15px;
-      color: var(--i3);
-      max-width: 680px;
-      line-height: 1.7;
-    }
-
-    .health-grid {
-      max-width: 1200px;
-      margin: 0 auto 60px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 24px;
-    }
-
-    .health-card {
-      border-radius: var(--r);
-      overflow: hidden;
-      border: 1px solid var(--ln);
-      background: #fff;
-      transition: box-shadow var(--t);
-    }
-
-    .health-card:hover {
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-    }
-
-    .health-card-img {
-      height: 200px;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .health-card-body {
-      padding: 24px;
-    }
-
-    .health-card-tag {
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--or);
-      margin-bottom: 8px;
-    }
-
-    .health-card h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 8px;
-      line-height: 1.3;
-    }
-
-    .health-card p {
-      font-size: 14px;
-      color: var(--i3);
-      line-height: 1.6;
-    }
-
-    .health-card p a {
-      color: var(--or);
-      font-weight: 600;
-    }
-
-    .bid-highlight {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: var(--g);
-      border-radius: 16px;
-      padding: 48px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      color: #fff;
-    }
-
-    .bid-highlight h3 {
-      font-size: 28px;
-      font-weight: 900;
-      margin-bottom: 12px;
-      line-height: 1.1;
-    }
-
-    .bid-highlight p {
-      font-size: 15px;
-      color: rgba(255, 255, 255, 0.8);
-      line-height: 1.7;
-      margin-bottom: 12px;
-    }
-
-    .bid-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .bid-stat {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .bid-stat-num {
-      font-size: 24px;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .bid-stat-lbl {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.7);
-      line-height: 1.4;
-    }
-
-    /* ── BID / INÊS GAYA ─── */
-    .bid-section {
-      padding: 80px 24px;
-      background: var(--bg);
-    }
-
-    .bid-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .bid-photo {
-      position: relative;
-    }
-
-    .bid-photo img {
-      width: 100%;
-      height: 520px;
-      object-fit: cover;
-      border-radius: 16px;
-      display: block;
-    }
-
-    .bid-photo-tag {
-      position: absolute;
-      bottom: 24px;
-      left: 24px;
-      background: #fff;
-      border-radius: 12px;
-      padding: 16px 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    }
-
-    .bid-photo-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .bid-photo-role {
-      font-size: 12px;
-      color: var(--i3);
-      margin-top: 2px;
-    }
-
-    .bid-photo-ig {
-      font-size: 11px;
-      color: var(--or);
-      font-weight: 600;
-      margin-top: 6px;
-    }
-
-    .bid-content h2 {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 900;
-      color: var(--ink);
-      margin-bottom: 12px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
-    .bid-tagline {
-      font-size: 16px;
-      color: var(--i3);
-      line-height: 1.6;
-      margin-bottom: 20px;
-      font-weight: 300;
-    }
-
-    .bid-desc {
-      font-size: 15px;
-      color: var(--i3);
-      line-height: 1.75;
-      margin-bottom: 24px;
-    }
-
-    .bid-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .bid-pill {
-      font-size: 12px;
-      font-weight: 600;
-      padding: 8px 16px;
-      border-radius: 20px;
-      background: var(--gl);
-      color: var(--g);
-      border: 1px solid rgba(38, 92, 46, 0.15);
-    }
-
-    /* ── COMO FUNCIONA ─── */
-    .process-section {
-      padding: 80px 24px;
-      background: #fff;
-    }
-
-    .process-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .process-head {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .process-head h2 {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 900;
-      color: var(--ink);
-      margin-bottom: 16px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
-    .process-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 32px;
-    }
-
-    .process-step {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .process-step-num {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--g);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      font-weight: 900;
-      margin-bottom: 16px;
-      flex-shrink: 0;
-    }
-
-    .process-step h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 12px;
-    }
-
-    .process-step p {
-      font-size: 14px;
-      color: var(--i3);
-      line-height: 1.6;
-    }
-
-    /* ── CONTACT SECTION ─── */
-    .contact-section {
-      padding: 80px 24px;
-      background: var(--bg);
-    }
-
-    .contact-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .contact-head {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    .contact-head h2 {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 900;
-      color: var(--ink);
-      margin-bottom: 16px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
-    }
-
-    .contact-info h3 {
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 16px;
-    }
-
-    .contact-info p {
-      font-size: 14px;
-      color: var(--i3);
-      line-height: 1.7;
-      margin-bottom: 12px;
-    }
-
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .form-group label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      padding: 12px 16px;
-      border: 1px solid var(--ln);
-      border-radius: 8px;
-      font-size: 14px;
-      background: #fff;
-      color: var(--ink);
-      transition: border-color var(--t);
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--g);
-      box-shadow: 0 0 0 3px rgba(38, 92, 46, 0.1);
-    }
-
-    .form-group textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    .form-submit {
-      background: var(--or);
-      color: #fff;
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background var(--t);
-      margin-top: 8px;
-    }
-
-    .form-submit:hover {
-      background: #b84700;
-    }
-
-    /* ── B2C TOP BANNER ─── */
-    .b2c-banner {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 999;
-      background: var(--g);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      padding: 10px 24px;
-      text-decoration: none;
-      transition: background 0.3s ease;
-    }
-    .b2c-banner:hover {
-      background: var(--gd);
-    }
-    .b2c-banner-text {
-      color: rgba(255,255,255,0.85);
-      font-size: 13px;
-      font-weight: 400;
-      letter-spacing: 0.01em;
-    }
-    .b2c-banner-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255,255,255,0.15);
-      color: #fff;
-      padding: 5px 16px;
-      border-radius: 50px;
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-      transition: background 0.2s ease;
-    }
-    .b2c-banner:hover .b2c-banner-cta {
-      background: rgba(255,255,255,0.25);
-    }
-    .b2c-banner-cta svg {
-      width: 14px;
-      height: 14px;
-    }
-
-    /* ── FOOTER ─── */
-    .footer {
-      background: var(--ink);
-      color: #fff;
-      padding: 48px 24px;
-    }
-
-    .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .footer-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-
-    .footer-brand {
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      font-size: 13px;
-      color: rgba(255, 255, 255, 0.7);
-      transition: color var(--t);
-    }
-
-    .footer-links a:hover {
-      color: #fff;
-    }
-
-    .footer-copy {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.5);
-    }
-
-    /* ── MODALS ─── */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(4px);
-      z-index: 1000;
-      overflow-y: auto;
-      padding: 20px 24px;
-    }
-
-    .modal.active {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .modal-content {
-      background: #fff;
-      border-radius: 16px;
-      max-width: 700px;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      animation: slideIn 0.3s ease-out;
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-
-    @keyframes slideIn {
-      from {
-        transform: translateY(20px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
-    }
-
-    .modal-close {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 40px;
-      height: 40px;
-      background: rgba(38, 92, 46, 0.1);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 20px;
-      color: var(--g);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background var(--t);
-      z-index: 1001;
-      font-weight: 300;
-    }
-
-    .modal-close:hover {
-      background: rgba(38, 92, 46, 0.2);
-    }
-
-    .modal-hero {
-      width: 100%;
-      height: 280px;
-      background-size: cover;
-      background-position: center;
-      border-radius: 16px 16px 0 0;
-      position: relative;
-    }
-
-    .modal-badge {
-      position: absolute;
-      top: 16px;
-      left: 16px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 6px 12px;
-      border-radius: 20px;
-      background: var(--or);
-      color: #fff;
-      z-index: 10;
-    }
-
-    .modal-body {
-      padding: 40px;
-      overflow-y: auto;
-      flex: 1;
-    }
-
-    .modal-body h2 {
-      font-size: 28px;
-      font-weight: 900;
-      color: var(--ink);
-      margin-bottom: 8px;
-      line-height: 1.2;
-    }
-
-    .modal-body p {
-      font-size: 14px;
-      color: var(--i3);
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-
-    .modal-features {
-      margin-bottom: 24px;
-    }
-
-    .modal-features strong {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 12px;
-      letter-spacing: 0.04em;
-    }
-
-    .modal-features ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .modal-features li {
-      font-size: 14px;
-      color: var(--i3);
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      line-height: 1.5;
-    }
-
-    .modal-features li::before {
-      content: '✓';
-      color: var(--g);
-      font-weight: 700;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-
-    .modal-cta {
-      background: var(--or);
-      color: #fff;
-      font-size: 14px;
-      font-weight: 700;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      display: inline-block;
-      transition: background var(--t);
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      margin-top: 24px;
-    }
-
-    .modal-cta:hover {
-      background: #b84700;
-    }
-
-    /* ─────────────────────────────────────────────────────
-       RESPONSIVE
-    ───────────────────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .nav {
-        padding: 0 24px;
-      }
-
-      .hero-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        padding: 16px 24px;
-        max-width: calc(100% - 48px);
-      }
-
-      .wilderness-inner,
-      .bid-inner {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .bid-highlight {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
-      .contact-wrapper {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .nav {
-        padding: 0 16px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero-content {
-        padding: 80px 16px;
-      }
-
-      .hero-stats {
-        display: none;
-      }
-
-      .hero-btns {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .btn-primary,
-      .btn-outline-white {
-        width: 100%;
-        text-align: center;
-      }
-
-      .intro-strip-inner {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .programs-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .process-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .modal-body {
-        padding: 24px;
-      }
-
-      .modal-hero {
-        height: 200px;
-      }
-
-      .sec-head h2,
-      .contact-head h2,
-      .process-head h2,
-      .health-header h2,
-      .wilderness-content h2,
-      .bid-content h2 {
-        font-size: 28px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Área Pessoal — Borealis on Trekking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─── */
+:root{
+  --g900:#0f2a1a;--g700:#1a4a2e;--g500:#2d6a4f;--g300:#52b788;--g100:#d8f3dc;--g50:#f0f7f3;
+  --sand:#f7f5f0;--ink:#181815;--ink2:#3d3d3a;--ink3:#6b6b67;--ink4:#a8a8a4;--line:#e8e6e1;
+  --orange:#e85d04;--warn:#92400e;--warnbg:#fef3c7;
+  --r:8px;--r2:4px;--t:180ms ease;
+  --f-head:'DM Sans',sans-serif;--f-body:'DM Sans',sans-serif;--f-serif:'Lora',serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--f-body);font-size:14px;line-height:1.6;color:var(--ink);background:var(--sand);-webkit-font-smoothing:antialiased;min-height:100vh}
+h1,h2,h3,h4{font-family:var(--f-head);line-height:1.2;letter-spacing:-0.02em;font-weight:600}
+button{font-family:inherit;cursor:pointer;border:none;background:none;transition:all var(--t)}
+input,textarea,select{font-family:inherit}
+a{color:inherit;text-decoration:none}
+svg{display:block;flex-shrink:0}
+
+/* ─── TOPBAR ─── */
+.topbar{background:var(--g900);height:34px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;font-size:11px;letter-spacing:.04em;color:rgba(255,255,255,.5)}
+.tb-r{display:flex;gap:18px}.tb-r a{color:rgba(255,255,255,.5);transition:color var(--t)}.tb-r a:hover{color:#fff}
+.tb-tag{background:var(--orange);color:#fff;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:2px 7px;border-radius:2px}
+
+/* ─── HEADER ─── */
+.header{background:#fff;border-bottom:1px solid var(--line);height:58px;padding:0 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200}
+.logo{display:flex;align-items:center;gap:10px;cursor:pointer}
+.logo-icon{width:34px;height:34px;background:var(--g700);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.logo-text{display:flex;flex-direction:column;gap:0}
+.logo-name{font-family:var(--f-head);font-weight:700;font-size:15px;color:var(--g700);letter-spacing:-0.04em;line-height:1.1}
+.logo-sub{font-size:9px;font-weight:500;color:var(--ink4);letter-spacing:.1em;text-transform:uppercase}
+.h-nav{display:flex;gap:2px}
+.hn{height:34px;padding:0 11px;border-radius:var(--r2);font-size:13px;font-weight:500;color:var(--ink3);display:flex;align-items:center;transition:all var(--t);cursor:pointer}
+.hn:hover{color:var(--ink);background:var(--sand)}
+.h-right{display:flex;gap:8px;align-items:center}
+.icon-btn{width:34px;height:34px;border-radius:var(--r2);display:flex;align-items:center;justify-content:center;color:var(--ink3);transition:all var(--t);cursor:pointer;position:relative}
+.icon-btn:hover{background:var(--sand);color:var(--ink)}
+.notif-dot{position:absolute;top:7px;right:7px;width:6px;height:6px;background:var(--orange);border-radius:50%;border:2px solid #fff}
+.user-btn{height:34px;padding:0 14px;background:var(--g700);color:#fff;border-radius:var(--r2);font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;cursor:pointer;transition:background var(--t)}
+.user-btn:hover{background:var(--g900)}
+.avatar{width:20px;height:20px;background:rgba(255,255,255,.2);border-radius:50%;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* ─── LAYOUT ─── */
+.layout{display:flex;min-height:calc(100vh - 92px)}
+
+/* ─── SIDEBAR ─── */
+.sidebar{width:210px;background:#fff;border-right:1px solid var(--line);padding:20px 0;flex-shrink:0;position:sticky;top:58px;height:calc(100vh - 58px);overflow-y:auto}
+.sb-profile{padding:0 18px 18px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.sb-av{width:38px;height:38px;background:var(--g700);border-radius:50%;color:#fff;font-family:var(--f-head);font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+.sb-name{font-family:var(--f-head);font-weight:600;font-size:13px;color:var(--ink)}
+.sb-sub{font-size:11px;color:var(--ink4);margin-top:1px}
+.sb-trips{display:flex;gap:12px;margin-top:10px}
+.sb-stat{display:flex;flex-direction:column;gap:1px}
+.sb-val{font-family:var(--f-head);font-weight:700;font-size:16px;color:var(--g700)}
+.sb-lbl{font-size:10px;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em}
+.sb-sec{padding:12px 18px 4px;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
+.sb-item{display:flex;align-items:center;gap:10px;padding:8px 18px;font-size:13px;font-weight:500;color:var(--ink3);width:100%;text-align:left;cursor:pointer;border-right:2px solid transparent;transition:all var(--t);position:relative}
+.sb-item:hover{color:var(--ink);background:var(--sand)}
+.sb-item.active{color:var(--g700);background:var(--g50);border-right-color:var(--g700);font-weight:600}
+.sb-item svg{color:var(--ink4);width:15px;height:15px;transition:color var(--t)}
+.sb-item.active svg,.sb-item:hover svg{color:var(--g500)}
+.sb-item.active svg{color:var(--g700)}
+.sb-islandia{color:#1a5276!important;font-weight:600}
+.sb-islandia.active{color:#1a5276!important;background:#e8f4fd!important;border-right-color:#1a5276!important}
+.sb-islandia svg,.sb-islandia:hover svg,.sb-islandia.active svg{color:#1a5276!important}
+.sb-notif{margin-left:auto;background:var(--orange);color:#fff;font-size:9px;font-weight:700;min-width:16px;height:16px;padding:0 4px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.star.lit{color:var(--orange)!important}
+
+/* Trip header in sidebar */
+.sb-trip-header{padding:8px 18px;font-size:13px;font-weight:600;color:var(--g700);display:flex;align-items:center;justify-content:space-between;cursor:pointer;width:100%;border:none;background:none;transition:all var(--t)}
+.sb-trip-header:hover{color:var(--g900)}
+.sb-trip-header.expanded::before{content:'▼';display:inline-block;width:12px;height:12px;margin-right:6px}
+.sb-trip-header:not(.expanded)::before{content:'▶';display:inline-block;width:12px;height:12px;margin-right:6px}
+.sb-trip-items{display:none;overflow:hidden}
+.sb-trip-items.show{display:flex;flex-direction:column}
+.sb-trip-item{padding-left:36px;font-size:12px;padding-top:6px;padding-bottom:6px;padding-right:18px}
+
+/* ─── MAIN ─── */
+.main{flex:1;padding:28px 32px}
+.page{display:none;animation:fadeUp .2s ease}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.ph{margin-bottom:22px}
+.ph h1{font-size:22px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.ph p{font-size:13px;color:var(--ink3)}
+
+/* ─── TRIP TABS ─── */
+.trip-tabs{display:none;border-bottom:1px solid var(--line);margin-bottom:20px;gap:0}
+.trip-tabs.active{display:flex}
+.trip-tab{padding:12px 16px;font-size:13px;font-weight:600;color:var(--ink3);border:none;background:none;cursor:pointer;transition:all var(--t);border-bottom:2px solid transparent;position:relative;top:1px}
+.trip-tab:hover{color:var(--ink)}
+.trip-tab.active{color:var(--g700);border-bottom-color:var(--g700)}
+
+/* ─── COMPONENTS ─── */
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:14px}
+.card-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.card-title{font-family:var(--f-head);font-size:14px;font-weight:600;color:var(--ink);display:flex;align-items:center;gap:7px}
+.btn{height:34px;padding:0 14px;border-radius:var(--r2);font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;letter-spacing:-.01em;cursor:pointer;transition:all var(--t)}
+.btn-p{background:var(--g700);color:#fff;border:none}.btn-p:hover{background:var(--g900)}
+.btn-o{background:var(--orange);color:#fff;border:none}.btn-o:hover{background:#c94e00}
+.btn-g{color:var(--ink3);border:1px solid var(--line);background:#fff}.btn-g:hover{color:var(--ink);border-color:var(--ink3)}
+.btn-link{color:var(--g700);font-size:13px;font-weight:600;padding:0;height:auto;border:none;background:none}.btn-link:hover{color:var(--g900)}
+.btn-sm{height:28px;padding:0 10px;font-size:12px}
+.pill{height:20px;padding:0 7px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;display:inline-flex;align-items:center}
+.pill-g{background:var(--g50);color:var(--g700)}
+.pill-o{background:var(--warnbg);color:var(--warn)}
+.pill-gray{background:var(--sand);color:var(--ink4);border:1px solid var(--line)}
+.pill-blue{background:#e8f4fd;color:#1a5276;border:1px solid #bde0fe}
+.pill-trail{background:#f3efe7;color:#5c4033;border:1px solid #d4c5a9}
+.pill-workshop{background:#fef3c7;color:#92400e;border:1px solid #fde68a}
+
+/* ─── UPCOMING TRIPS SECTION ─── */
+.upcoming-section{margin-top:24px}
+.upcoming-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.upcoming-header h2{font-size:17px;font-weight:700;color:var(--ink)}
+.upcoming-header .uh-count{font-size:12px;color:var(--ink4);font-weight:500}
+.upcoming-month{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);padding:10px 0 8px;margin-top:18px}
+.upcoming-month:first-of-type{margin-top:0}
+.upcoming-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.vcard{border-radius:10px;overflow:hidden;cursor:pointer;transition:all .25s ease;position:relative;background:#1a1a1a}
+.vcard:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.vcard-img{width:100%;height:150px;object-fit:cover;display:block;transition:transform .4s ease}
+.vcard:hover .vcard-img{transform:scale(1.04)}
+.vcard-overlay{position:absolute;bottom:0;left:0;right:0;padding:14px;background:linear-gradient(0deg,rgba(0,0,0,.75) 0%,rgba(0,0,0,.3) 60%,transparent 100%)}
+.vcard-flag{font-size:14px;margin-bottom:2px}
+.vcard-name{font-family:var(--f-head);font-size:14px;font-weight:700;color:#fff;line-height:1.25;margin-bottom:3px}
+.vcard-date{font-size:11px;color:rgba(255,255,255,.7);margin-bottom:6px}
+.vcard-bottom{display:flex;align-items:center;justify-content:space-between}
+.vcard-price{display:flex;align-items:baseline;gap:5px}
+.vcard-price-old{font-size:11px;color:rgba(255,255,255,.45);text-decoration:line-through}
+.vcard-price-new{font-family:var(--f-head);font-size:16px;font-weight:700;color:#fff}
+.vcard-tag{font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.2);color:#fff;padding:2px 6px;border-radius:2px;backdrop-filter:blur(4px)}
+.btn-inscrever{display:inline-flex;align-items:center;gap:5px;height:28px;padding:0 10px;background:var(--g500);color:#fff;border:none;border-radius:14px;font-size:11px;font-weight:600;cursor:pointer;transition:all var(--t);white-space:nowrap;backdrop-filter:blur(4px)}
+.btn-inscrever:hover{background:var(--g300)}
+.btn-inscrever svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.upcoming-cta{margin-top:16px;text-align:center;font-size:12px;color:var(--ink4)}
+.upcoming-grid-single{display:grid;grid-template-columns:1fr;gap:10px}
+.upcoming-grid-single .vcard-img{height:140px}
+.upcoming-grid-single .vcard-name{font-size:13px}
+.upcoming-grid-single .vcard-price-new{font-size:14px}
+.parcerias-section{display:flex;flex-direction:column;gap:10px}
+.parceria-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;transition:all var(--t)}
+.parceria-card:hover{border-color:var(--g300);box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.parceria-head{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.parceria-brand{font-size:12px;font-weight:700;color:var(--ink)}
+.parceria-tag{font-size:8px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 6px;border-radius:2px}
+.parceria-tag-evento{background:var(--g100);color:var(--g700)}
+.parceria-tag-desconto{background:#fff3e6;color:var(--orange)}
+.parceria-tag-oferta{background:#ede9fe;color:#7c3aed}
+.parceria-desc{font-size:11px;color:var(--ink3);line-height:1.45;margin-bottom:8px}
+.parceria-code{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;font-family:var(--f-mono,monospace);background:var(--bg);border:1px dashed var(--line);padding:4px 10px;border-radius:4px;color:var(--ink);cursor:pointer}
+.parceria-code:hover{border-color:var(--g500);background:var(--g100)}
+.parceria-cta{font-size:11px;font-weight:600;color:var(--g700);cursor:pointer;text-decoration:none}
+.parceria-cta:hover{text-decoration:underline}
+@media(max-width:700px){.upcoming-grid{grid-template-columns:1fr}}
+.tc-pricing{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;min-width:90px}
+.tc-price-old{font-size:11px;color:var(--ink4);text-decoration:line-through}
+.tc-price-new{font-family:var(--f-head);font-size:15px;font-weight:700;color:var(--g700)}
+.tc-discount{font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--g100);color:var(--g700);padding:2px 6px;border-radius:2px}
+.btn-inscrever{display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 12px;background:var(--g700);color:#fff;border:none;border-radius:var(--r2);font-size:11px;font-weight:600;cursor:pointer;transition:all var(--t);white-space:nowrap}
+.btn-inscrever:hover{background:var(--g900)}
+.btn-inscrever svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ─── TIER SYSTEM ─── */
+.tier-badge{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 9px;border-radius:11px;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.tier-badge svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tier-explorador{background:var(--sand);color:var(--ink3);border:1px solid var(--line)}
+.tier-aventureiro{background:var(--g50);color:var(--g500)}
+.tier-summit{background:#fff3e6;color:var(--orange)}
+.tier-expedição{background:var(--g700);color:#fff}
+
+.tier-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:14px;position:relative;overflow:hidden}
+.tier-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g500),var(--g300),var(--g500))}
+
+.tier-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.tier-title{display:flex;align-items:center;gap:10px}
+.tier-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--g100)}
+.tier-icon svg{width:18px;height:18px;stroke:var(--g700);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.tier-name{font-family:var(--f-head);font-size:16px;font-weight:700;color:var(--ink)}
+.tier-sub{font-size:11px;color:var(--ink3)}
+.tier-discount-badge{font-family:var(--f-head);font-size:20px;font-weight:700;color:var(--orange)}
+
+.tier-progress{margin-bottom:16px}
+.tier-progress-label{display:flex;justify-content:space-between;font-size:11px;color:var(--ink3);margin-bottom:6px}
+.tier-progress-bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.tier-progress-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--g500),var(--g300));transition:width .6s ease}
+
+.tier-benefits{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.tier-benefit-tag{display:inline-flex;align-items:center;gap:4px;height:26px;padding:0 10px;background:var(--g50);border:1px solid var(--g100);border-radius:13px;font-size:11px;font-weight:500;color:var(--g700)}
+.tier-benefit-tag svg{width:12px;height:12px;stroke:var(--g500);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+.tier-next{margin-top:14px;padding:10px 12px;background:var(--sand);border-radius:var(--r2);font-size:11px;color:var(--ink3);line-height:1.5}
+.tier-next strong{font-weight:600;color:var(--g700)}
+
+.sb-tier{margin-top:8px}
+.pbar{height:3px;background:var(--line);border-radius:2px;overflow:hidden}
+.pfill{height:100%;border-radius:2px;transition:width .5s ease}
+.pf-g{background:var(--g500)}.pf-o{background:var(--orange)}
+.alert{padding:11px 14px;border-radius:var(--r2);font-size:13px;display:flex;gap:10px;align-items:flex-start;line-height:1.5;margin-bottom:14px}
+.al-g{background:var(--g50);border-left:3px solid var(--g500);color:var(--ink2)}
+.al-o{background:var(--warnbg);border-left:3px solid var(--orange);color:var(--warn)}
+.alert svg{flex-shrink:0;margin-top:1px;width:14px;height:14px}
+.divider{height:1px;background:var(--line);margin:14px 0}
+.row{display:flex;align-items:center}.row-b{display:flex;align-items:center;justify-content:space-between}
+.gap-2{gap:8px}.gap-3{gap:12px}.mt-2{margin-top:8px}.mt-3{margin-top:12px}.mt-4{margin-top:16px}.mb-3{margin-bottom:12px}.mb-4{margin-bottom:16px}
+.muted{color:var(--ink4);font-size:12px}
+.fw6{font-weight:600}.t-g{color:var(--g700)}.t-o{color:var(--orange)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.ic{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.ic16{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+
+/* ─── NOTIFICATION PANEL ─── */
+.notif-panel{position:fixed;top:68px;right:20px;width:340px;background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:0 8px 40px rgba(0,0,0,.1);z-index:500;display:none}
+.notif-panel.open{display:block;animation:fadeUp .15s ease}
+.np-head{padding:14px 18px 10px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}
+.np-title{font-family:var(--f-head);font-size:14px;font-weight:600;display:flex;align-items:center;gap:8px}
+.np-count{background:var(--orange);color:#fff;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.np-close{width:26px;height:26px;border-radius:var(--r2);display:flex;align-items:center;justify-content:center;color:var(--ink4);cursor:pointer;transition:all var(--t)}
+.np-close:hover{background:var(--sand);color:var(--ink)}
+.np-item{padding:12px 18px;border-bottom:1px solid var(--sand);display:flex;gap:10px;cursor:pointer;transition:background var(--t)}
+.np-item:hover{background:var(--sand)}
+.np-item.unread{background:var(--g50)}
+.np-item.unread:hover{background:#e6f2eb}
+.np-ico{width:30px;height:30px;border-radius:var(--r2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.np-ico-g{background:var(--g50);color:var(--g700)}
+.np-ico-o{background:var(--warnbg);color:var(--warn)}
+.np-ico-n{background:var(--sand);color:var(--ink3)}
+.np-t{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.np-b{font-size:12px;color:var(--ink3);line-height:1.4}
+.np-time{font-size:11px;color:var(--ink4);margin-top:2px}
+.np-dot{width:5px;height:5px;background:var(--orange);border-radius:50%;margin-top:7px;flex-shrink:0}
+
+/* ─── DASHBOARD ─── */
+.trip-hero{border-radius:var(--r);padding:22px 24px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden;background-size:cover;background-position:center}
+.trip-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(15,42,26,.85) 0%,rgba(45,106,79,.6) 60%,rgba(45,106,79,.4) 100%);z-index:0}
+.trip-hero>*{position:relative;z-index:1}
+.th-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;opacity:.55;margin-bottom:6px}
+.th-title{font-family:var(--f-head);font-size:20px;font-weight:700;letter-spacing:-.03em;margin-bottom:3px;position:relative;z-index:1}
+.th-sub{font-size:13px;opacity:.65;margin-bottom:18px;position:relative;z-index:1}
+.th-meta{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:18px;position:relative;z-index:1}
+.th-m{display:flex;align-items:center;gap:5px;font-size:12px;opacity:.8}
+.th-acts{display:flex;gap:8px;flex-wrap:wrap;position:relative;z-index:1}
+.th-btn-p{height:34px;padding:0 16px;background:#fff;color:var(--g700);border-radius:var(--r2);font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:opacity var(--t)}.th-btn-p:hover{opacity:.9}
+.th-btn-s{height:34px;padding:0 14px;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2);border-radius:var(--r2);font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px;cursor:pointer;transition:all var(--t)}.th-btn-s:hover{background:rgba(255,255,255,.18)}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}
+.stat-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:4px;transition:border-color var(--t);cursor:default}
+.stat-card:hover{border-color:var(--g300)}
+.stat-val{font-family:var(--f-head);font-size:22px;font-weight:700;color:var(--g700);letter-spacing:-.03em}
+.stat-lbl{font-size:11px;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em}
+.stat-sub{font-size:12px;color:var(--ink3);margin-top:2px}
+.hero-summary{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.hero-summary-card{background:#fff;border:1px solid var(--line);border-radius:var(--r2);padding:14px;color:var(--ink)}
+.hero-summary-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px}
+.hero-summary-value{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:2px}
+.hero-summary-detail{font-size:12px;color:var(--ink3)}
+.checklist-mini{display:flex;flex-direction:column;gap:6px}
+.cl-row{display:flex;align-items:center;justify-content:space-between;font-size:13px}
+.cl-l{display:flex;align-items:center;gap:8px;color:var(--ink2)}
+.cl-done{color:var(--ink4);text-decoration:line-through}
+.check-circle{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all var(--t)}
+.check-circle.checked{background:var(--g500);border-color:var(--g500)}
+.check-circle.checked svg{display:block}
+.check-circle svg{display:none;width:9px;height:9px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+
+/* ─── TRIPS ─── */
+.trip-list{display:flex;flex-direction:column;gap:10px}
+.trip-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:all var(--t);display:flex}
+.trip-card:hover{border-color:var(--g300);box-shadow:0 2px 12px rgba(26,74,46,.08)}
+.tc-stripe{width:4px;flex-shrink:0}
+.tc-s-active{background:var(--g500)}
+.tc-s-past{background:var(--line)}
+.tc-s-future{background:var(--orange)}
+.tc-body{flex:1;padding:14px 16px;display:flex;align-items:center;gap:12px}
+.tc-thumb{width:56px;height:56px;border-radius:12px;flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;position:relative}
+.tc-thumb svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;position:relative;z-index:1;filter:drop-shadow(0 1px 2px rgba(0,0,0,.15))}
+.tc-thumb-mountain{background:linear-gradient(135deg,#2d6a4f 0%,#40916c 50%,#74c69d 100%)}
+.tc-thumb-ice{background:linear-gradient(135deg,#1a3a5c 0%,#2e6fa8 50%,#7ec8e3 100%)}
+.tc-thumb-trail{background:linear-gradient(135deg,#5c4033 0%,#8b6f47 50%,#c9a96e 100%)}
+.tc-thumb-coast{background:linear-gradient(135deg,#1a5276 0%,#2980b9 50%,#5dade2 100%)}
+.tc-info{flex:1;min-width:0}
+.tc-name{font-family:var(--f-head);font-size:14px;font-weight:600;color:var(--ink);margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tc-date{font-size:12px;color:var(--ink3);margin-bottom:4px}
+.tc-tags{display:flex;gap:4px;flex-wrap:wrap}
+.tc-right{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.tc-price{font-family:var(--f-head);font-size:13px;font-weight:600;color:var(--ink)}
+.tc-arrow{color:var(--ink4)}
+
+/* ─── CHECKLIST PAGE ─── */
+.cl-cats{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px}
+.cl-cat-btn{height:28px;padding:0 12px;border-radius:14px;font-size:12px;font-weight:600;border:1.5px solid var(--line);color:var(--ink3);cursor:pointer;transition:all var(--t)}
+.cl-cat-btn:hover{border-color:var(--g300);color:var(--g700)}
+.cl-cat-btn.active{background:var(--g700);color:#fff;border-color:var(--g700)}
+.checklist-group{margin-bottom:8px}
+.clg-title{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);padding:6px 0 4px}
+.cli{display:flex;align-items:flex-start;gap:8px;padding:7px 10px;border-radius:var(--r2);cursor:pointer;transition:background var(--t);border-bottom:1px solid var(--sand)}
+.cli:hover{background:var(--sand)}
+.cli-check{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all var(--t)}
+.cli-check.on{background:var(--g500);border-color:var(--g500)}
+.cli-check.on svg{display:block}
+.cli-check svg{display:none;width:10px;height:10px;stroke:#fff;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.cli-body{flex:1;min-width:0}
+.cli-name{font-size:13px;font-weight:500;color:var(--ink);transition:color var(--t)}
+.cli-name.done{color:var(--ink4);text-decoration:line-through}
+.cli-note{font-size:11px;color:var(--ink4);margin-top:1px}
+.cli-tag{height:16px;padding:0 6px;border-radius:2px;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-left:auto;flex-shrink:0;display:flex;align-items:center}
+.ct-ess{background:var(--g50);color:var(--g700)}
+.ct-opt{background:var(--sand);color:var(--ink4)}
+.ct-food{background:#fef9ec;color:#92600a}
+
+/* ─── PAYMENTS ─── */
+.pay-trip{margin-bottom:18px}
+.pt-head{font-family:var(--f-head);font-size:14px;font-weight:600;color:var(--ink);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.pay-phases{display:flex;flex-direction:column;gap:6px}
+.pay-phase{background:#fff;border:1px solid var(--line);border-radius:var(--r2);padding:12px 14px;display:flex;align-items:center;gap:12px;transition:all var(--t)}
+.pay-phase.urgent{border-color:var(--orange);background:#fff9f5}
+.pay-phase.paid{opacity:.7}
+.pp-status{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.pps-paid{background:var(--g50);color:var(--g500)}
+.pps-urgent{background:var(--warnbg);color:var(--orange)}
+.pps-future{background:var(--sand);color:var(--ink4)}
+.pp-info{flex:1;min-width:0}
+.pp-name{font-size:13px;font-weight:600;color:var(--ink)}
+.pp-date{font-size:12px;color:var(--ink3);margin-top:1px}
+.pp-amount{font-family:var(--f-head);font-size:15px;font-weight:700;color:var(--ink);flex-shrink:0}
+.pp-amount.paid{color:var(--g500)}.pp-amount.urgent{color:var(--orange)}
+
+/* ─── FEEDBACK ─── */
+.fb-list{display:flex;flex-direction:column;gap:10px}
+.fb-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.fb-head{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:12px}
+.fb-trip{font-family:var(--f-head);font-size:14px;font-weight:600;color:var(--ink)}
+.fb-date{font-size:12px;color:var(--ink4);margin-top:2px}
+.fb-blocked{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink4);font-style:italic}
+.stars{display:inline-flex;flex-direction:row-reverse;gap:4px;margin-bottom:10px;cursor:pointer;justify-content:flex-end}
+.star{width:28px;height:28px;color:var(--line);transition:all var(--t)}
+.star.lit{color:#f59e0b}
+.star:hover,.star:hover~.star{color:#f59e0b}
+.star.lit~.star:not(.lit){color:var(--line)}
+.fb-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.fb-tag{height:24px;padding:0 10px;border-radius:12px;font-size:11px;font-weight:500;border:1.5px solid var(--line);color:var(--ink3);cursor:pointer;transition:all var(--t)}
+.fb-tag:hover{border-color:var(--g300);color:var(--g700)}
+.fb-tag.sel{background:var(--g700);color:#fff;border-color:var(--g700)}
+.fb-textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r2);font-size:13px;resize:vertical;min-height:72px;color:var(--ink);outline:none;transition:border-color var(--t)}
+.fb-textarea:focus{border-color:var(--g300)}
+.fb-sent{background:var(--g50);border-radius:var(--r2);padding:12px 14px;font-size:13px;color:var(--ink2)}
+.fb-rating{display:flex;gap:3px;margin-bottom:6px}
+.fb-star{width:14px;height:14px;color:#f59e0b}
+
+/* ─── NINER ─── */
+.niner-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.niner-head{background:var(--g900);padding:18px 20px;display:flex;align-items:center;gap:14px}
+.niner-av{width:48px;height:48px;background:rgba(255,255,255,.15);border-radius:50%;border:2px solid rgba(255,255,255,.3);color:#fff;font-family:var(--f-head);font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center}
+.niner-name{font-family:var(--f-head);font-size:16px;font-weight:700;color:#fff;margin-bottom:2px}
+.niner-role{font-size:12px;color:rgba(255,255,255,.55)}
+.niner-body{padding:18px 20px}
+.niner-msg{font-family:var(--f-serif);font-style:italic;font-size:14px;color:var(--ink2);line-height:1.7;border-left:3px solid var(--g100);padding-left:12px;margin-bottom:14px}
+.niner-sig{font-size:12px;color:var(--ink4);margin-top:-6px;padding-left:12px}
+.niner-hist{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.nh-item{padding:10px 12px;background:var(--sand);border-radius:var(--r2);font-size:12px;color:var(--ink3)}
+.nh-date{font-size:10px;color:var(--ink4);margin-bottom:3px;text-transform:uppercase;letter-spacing:.06em}
+
+/* ─── MAP ─── */
+.map-wrap{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-bottom:14px}
+.map-svg-wrap{border-bottom:1px solid var(--line);background:#f5f0e8;overflow:hidden;cursor:default}
+.meet-points{display:flex;flex-direction:column;gap:8px;padding:16px}
+.mp-card{background:var(--sand);border-radius:var(--r2);padding:12px 14px;border:1.5px solid var(--line);transition:all var(--t);cursor:pointer;position:relative}
+.mp-card:hover{border-color:var(--g300)}
+.mp-card.sel{border-color:var(--g700);background:var(--g50)}
+.mp-card.expanded .mp-details{display:block}
+.mp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.mp-label{font-family:var(--f-head);font-size:13px;font-weight:600;color:var(--ink)}
+.mp-loc{font-size:12px;color:var(--ink3);margin-bottom:8px;display:flex;align-items:center;gap:5px}
+.mp-parts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+.mp-av{width:22px;height:22px;border-radius:50%;background:var(--g700);color:#fff;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.mp-av-ring{border:2px solid var(--g700)}
+.mp-count{font-size:12px;color:var(--ink3)}
+.mp-details{display:none;border-top:1px solid rgba(0,0,0,.08);padding-top:10px;margin-top:10px;font-size:12px;color:var(--ink3)}
+.mp-details-row{display:flex;justify-content:space-between;margin-bottom:6px}
+.ride-btns{display:flex;gap:6px;margin-top:8px}
+.ride-btn{height:26px;padding:0 10px;border-radius:var(--r2);font-size:11px;font-weight:600;border:1.5px solid var(--line);color:var(--ink3);cursor:pointer;transition:all var(--t)}
+.ride-btn:hover{border-color:var(--g300);color:var(--g700)}
+.ride-btn.sel-offer{background:var(--g700);color:#fff;border-color:var(--g700)}
+.ride-btn.sel-need{background:var(--warnbg);color:var(--warn);border-color:var(--orange)}
+.confirm-btn{display:flex;margin-top:10px}
+
+/* ─── RELATÓRIO ─── */
+.report-hero{background:var(--g900);border-radius:var(--r);padding:22px 24px;color:#fff;margin-bottom:14px;position:relative;overflow:hidden}
+.rep-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:14px}
+.rep-stat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:14px;text-align:center}
+.rs-val{font-family:var(--f-head);font-size:20px;font-weight:700;color:var(--g700);letter-spacing:-.02em}
+.rs-lbl{font-size:10px;color:var(--ink4);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+.altitude-svg{display:block;width:100%;height:80px;overflow:visible}
+.share-card{background:var(--g900);border-radius:var(--r);padding:18px 20px;color:#fff;margin-bottom:14px}
+.sc-data{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.sc-d{display:flex;flex-direction:column;gap:2px}
+.sc-v{font-family:var(--f-head);font-size:16px;font-weight:700;color:#fff}
+.sc-l{font-size:10px;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.06em}
+.share-btns{display:flex;gap:8px}
+.sb-ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;border:none}
+.sb-fb{background:#1877f2;color:#fff;border:none}
+.sb-dl{background:var(--g700);color:#fff;border:none}
+
+/* ─── MOBILE BOTTOM NAV ─── */
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:56px;background:#fff;border-top:1px solid var(--line);z-index:300;padding:0 4px;justify-content:space-around;align-items:center}
+.mobile-nav button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;background:none;border:none;color:var(--ink4);font-size:9px;font-weight:600;cursor:pointer;min-width:0;flex:1;transition:color var(--t)}
+.mobile-nav button svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.mobile-nav button.mn-active{color:var(--g700)}
+.mobile-nav button.mn-active svg{stroke:var(--g700)}
+.user-name{display:inline}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:768px){
+  .topbar{display:none}
+  .header{height:50px;padding:0 14px}
+  .logo-icon{width:28px;height:28px}.logo-icon svg{width:14px;height:14px}
+  .logo-name{font-size:13px}.logo-sub{font-size:8px}
+  .user-name{display:none}
+  .user-btn{padding:0;width:34px;height:34px;justify-content:center}
+  .user-btn .avatar{width:24px;height:24px;font-size:10px}
+  .sidebar{display:none}
+  .mobile-nav{display:flex}
+  .layout{min-height:calc(100vh - 50px);padding-bottom:56px}
+  .main{padding:16px;max-width:100%}
+  .ph h1{font-size:18px}.ph p{font-size:12px}
+  .trip-hero{padding:16px 18px}
+  .th-title{font-size:17px}.th-sub{font-size:12px;margin-bottom:12px}
+  .th-meta{gap:10px;margin-bottom:12px}.th-m{font-size:11px}
+  .th-acts{flex-direction:column;gap:6px}
+  .th-btn-p,.th-btn-s{width:100%;justify-content:center;height:38px}
+  .hero-summary{grid-template-columns:1fr}
+  .stats-row{grid-template-columns:1fr 1fr;gap:8px}.stat-val{font-size:18px}
+  .g2{grid-template-columns:1fr}
+  .card{padding:14px}
+  .trip-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;white-space:nowrap;scrollbar-width:none}
+  .trip-tabs::-webkit-scrollbar{display:none}
+  .trip-tab{padding:10px 12px;font-size:12px;flex-shrink:0}
+  .notif-panel{width:100%;right:0;top:50px;border-radius:0}
+  .rep-stats{grid-template-columns:1fr 1fr;gap:8px}.rs-val{font-size:17px}
+  .sc-data{grid-template-columns:1fr 1fr}
+  .share-btns{flex-wrap:wrap}
+  .map-svg-wrap{height:150px!important}
+  .cl-cats{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .cl-cats::-webkit-scrollbar{display:none}
+  .cl-cat-btn{flex-shrink:0}
+  .pay-phase{flex-wrap:wrap;gap:8px}
+}
+@media(max-width:480px){
+  .main{padding:12px}.ph h1{font-size:16px}
+  .stats-row{grid-template-columns:1fr}
+  .th-btn-p,.th-btn-s{font-size:12px}
+  .trip-tab{padding:8px 10px;font-size:11px}
+  .header{padding:0 10px}
+}
+
+</style>
 </head>
-
 <body>
-  <!-- NAV -->
-  <nav class="nav" id="nav">
-    <div class="nav-left">
-      <div class="nav-ham">
-        <span></span>
-        <span></span>
-        <span></span>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <span>borealis.travel</span>
+  <div class="tb-r">
+    <a href="#">Próximas Viagens</a>
+    <a href="#">Apoio</a>
+    <span class="tb-tag">Área Pessoal</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo" onclick="showPage('dashboard')">
+    <div class="logo-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 17l4-8 5 6 3-4 6 6"/>
+        <path d="M3 17h18"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <span class="logo-name">Borealis</span>
+      <span class="logo-sub">on Trekking</span>
+    </div>
+  </div>
+<div class="h-right">
+    <div class="icon-btn" onclick="toggleNotif()" id="notifBtn">
+      <svg class="ic16" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+      <span class="notif-dot"></span>
+    </div>
+    <div class="user-btn">
+      <div class="avatar">ZF</div>
+      <span class="user-name">Zé Forjaz</span>
+    </div>
+  </div>
+</div>
+
+<!-- NOTIF PANEL -->
+<div class="notif-panel" id="notifPanel">
+  <div class="np-head">
+    <div class="np-title">Notificações <span class="np-count">3</span></div>
+    <div class="np-close" onclick="toggleNotif()">
+      <svg class="ic" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </div>
+  </div>
+  <div class="np-item unread" onclick="showPage('pagamentos');toggleNotif()">
+    <div class="np-ico np-ico-o">
+      <svg class="ic" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+    </div>
+    <div style="flex:1">
+      <div class="np-t">Pagamento urgente</div>
+      <div class="np-b">Islândia 2026 — €720 em 5 dias</div>
+      <div class="np-time">há 2 horas</div>
+    </div>
+    <div class="np-dot"></div>
+  </div>
+  <div class="np-item unread" onclick="showPage('trip-picos');toggleNotif()">
+    <div class="np-ico np-ico-g">
+      <svg class="ic" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div style="flex:1">
+      <div class="np-t">Mensagem do Hugo</div>
+      <div class="np-b">Nova mensagem sobre Picos da Europa</div>
+      <div class="np-time">há 4 horas</div>
+    </div>
+    <div class="np-dot"></div>
+  </div>
+  <div class="np-item unread" onclick="showPage('pontos');toggleNotif()">
+    <div class="np-ico np-ico-g">
+      <svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>
+    </div>
+    <div style="flex:1">
+      <div class="np-t">Boleia disponível</div>
+      <div class="np-b">Ricardo oferece lugar Lisboa → Cangas</div>
+      <div class="np-time">há 1 dia</div>
+    </div>
+    <div class="np-dot"></div>
+  </div>
+  <div class="np-item" onclick="showPage('trip-picos');toggleNotif()">
+    <div class="np-ico np-ico-n">
+      <svg class="ic" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    </div>
+    <div style="flex:1">
+      <div class="np-t">Feedback pendente</div>
+      <div class="np-b">Caminho de Santiago — Etapa 5</div>
+      <div class="np-time">há 3 dias</div>
+    </div>
+  </div>
+  <div class="np-item" onclick="showPage('trip-picos');toggleNotif()">
+    <div class="np-ico np-ico-n">
+      <svg class="ic" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    </div>
+    <div style="flex:1">
+      <div class="np-t">Checklist actualizada</div>
+      <div class="np-b">4 novos itens para Picos da Europa</div>
+      <div class="np-time">há 5 dias</div>
+    </div>
+  </div>
+</div>
+
+<!-- LAYOUT -->
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sb-profile">
+      <div class="sb-av">ZF</div>
+      <div class="sb-name">Zé Forjaz</div>
+      <div class="sb-sub">Membro desde 2018</div>
+      <div class="sb-tier">
+        <span class="tier-badge tier-summit"><svg viewBox="0 0 24 24"><path d="M3 17l4-8 5 6 3-4 6 6"/></svg>Summit</span>
+        <div style="font-size:10px;color:var(--ink4);margin-top:4px">Próx: <strong style="color:var(--g700)">Expedição</strong></div>
+      </div>
+      <div class="sb-trips">
+        <div class="sb-stat"><span class="sb-val">11</span><span class="sb-lbl">Viagens</span></div>
+        <div class="sb-stat"><span class="sb-val">847km</span><span class="sb-lbl">Trilhados</span></div>
       </div>
     </div>
-    <a href="https://borealis.travel" class="nav-logo" title="Voltar ao site principal">
-      <div class="logo-mark">BOREALIS</div>
-      <div class="logo-sub">Corporate</div>
-    </a>
-    <div class="nav-right">
-      <div class="nav-links">
-        <a href="#programas" class="nl">Programas</a>
-        <a href="#lideranca" class="nl">Liderança</a>
-        <a href="#saude" class="nl">Saúde Mental</a>
-        <a href="#como" class="nl">Como Funciona</a>
-      </div>
-      <a href="#contacto" class="nav-cta">Contacto</a>
-    </div>
-  </nav>
+    <button class="sb-item active" onclick="showPage('dashboard')">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </button>
+    <div class="sb-sec">Viagens activas</div>
+    <button class="sb-item" onclick="showPage('trip-picos')" style="color:var(--g700);font-weight:600">
+      <svg viewBox="0 0 24 24" stroke="var(--g500)" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l4-8 5 6 3-4 6 6"/></svg>
+      Picos da Europa
+    </button>
+    <button class="sb-item sb-islandia" onclick="showPage('trip-islandia')">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l4-8 5 6 3-4 6 6"/></svg>
+      Islândia 2026
+    </button>
+    <div class="sb-sec">Histórico</div>
+    <button class="sb-item" onclick="showPage('viagens')">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l4-8 5 6 3-4 6 6"/></svg>
+      As Minhas Viagens
+    </button>
+    <div class="sb-sec">Conta</div>
+    <button class="sb-item" onclick="showPage('pagamentos')">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Pagamentos
+      <span class="sb-notif">1</span>
+    </button>
+    <button class="sb-item" onclick="showPage('suporte')">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Contacto
+    </button>
+  </aside>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">Borealis Corporate</div>
-      <h1>A natureza como<br><em>sala de reuniões.</em></h1>
-      <p class="hero-sub">Não é team building genérico. São programas desenhados para equipas que precisam de resultados reais — em terreno real, com desconforto calculado e impacto mensurável.</p>
-      <div class="hero-btns">
-        <a href="#contacto" class="btn-primary">Pedir Proposta Gratuita</a>
-        <a href="#programas" class="btn-outline-white">Ver Programas</a>
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="hstat">
-        <div class="hstat-num">+40K</div>
-        <div class="hstat-lbl">participantes</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-num">23</div>
-        <div class="hstat-lbl">países</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-num">25</div>
-        <div class="hstat-lbl">anos</div>
-      </div>
-      <div class="hstat">
-        <div class="hstat-num">100+</div>
-        <div class="hstat-lbl">guias ativos</div>
-      </div>
-    </div>
-  </section>
+  <main class="main">
 
-  <!-- INTRO STRIP -->
-  <section class="intro-strip">
-    <div class="intro-strip-inner">
-      <div class="strip-item">
-        <div class="strip-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
-        </div>
-        <div class="strip-text">
-          <strong>Programas 100% à medida</strong>
-          <span>Desenhados exclusivamente para a sua equipa</span>
-        </div>
+<!-- TRIP TABS (shown when in dashboard/checklist/pontos/niner for active trip) -->
+<div class="trip-tabs" id="tripTabs" style="display:none">
+  <button class="trip-tab active" onclick="switchTripTab(this,'trip-picos')">Resumo</button>
+  <button class="trip-tab" onclick="switchTripTab(this,'checklist')">Checklist</button>
+  <button class="trip-tab" onclick="switchTripTab(this,'niner')">Comunicação</button>
+  <button class="trip-tab" onclick="switchTripTab(this,'relatorio')">Relatório</button>
+  <button class="trip-tab" onclick="switchTripTab(this,'feedback')">Feedback</button>
+</div>
+
+<!-- ═══════════════ DASHBOARD ═══════════════ -->
+<div class="page active" id="pg-dashboard">
+  <!-- Header + Summit badge inline -->
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+    <div class="ph" style="margin-bottom:0"><h1>Bom dia, Zé</h1><p>Próxima viagem em 11 dias · <span style="color:var(--orange);cursor:pointer" onclick="showPage('pagamentos')">€720 pendente Islândia →</span></p></div>
+    <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
+      <div style="display:flex;align-items:center;gap:5px;background:linear-gradient(135deg,#c2410c,var(--orange));padding:5px 10px 5px 8px;border-radius:20px;color:#fff">
+        <svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M3 17l4-8 5 6 3-4 6 6"/></svg>
+        <span style="font-size:10px;font-weight:700;letter-spacing:.03em">SUMMIT</span>
       </div>
-      <div class="strip-item">
-        <div class="strip-icon">
-          <svg viewBox="0 0 24 24"><path d="M2 4h20v2H2V4zm0 6h20v2H2v-2zm0 6h20v2H2v-2zm0 6h20v2H2v-2z"></path></svg>
-        </div>
-        <div class="strip-text">
-          <strong>25 anos de experiência</strong>
-          <span>Desde 2001 a criar impacto em montanha</span>
-        </div>
-      </div>
-      <div class="strip-item">
-        <div class="strip-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-5-3.87m-2 0a4 4 0 0 0-5 3.87v2M9 7a4 4 0 1 0 8 0 4 4 0 0 0-8 0z"></path></svg>
-        </div>
-        <div class="strip-text">
-          <strong>10 a 50 pessoas por programa</strong>
-          <span>Turmas intimas para máximo impacto</span>
-        </div>
-      </div>
-      <div class="strip-item">
-        <div class="strip-icon">
-          <svg viewBox="0 0 24 24"><path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"></path></svg>
-        </div>
-        <div class="strip-text">
-          <strong>Logística 100% gerida</strong>
-          <span>Tudo organizado — da partida ao regresso</span>
-        </div>
+      <span style="font-size:10px;color:var(--ink4)">+9 viagens → <strong style="color:var(--g700)">Expedição</strong></span>
+    </div>
+  </div>
+
+  <!-- ═══ TRIP HERO + HUGO side by side ═══ -->
+  <div style="display:grid;grid-template-columns:1fr 280px;gap:12px;margin-bottom:14px">
+    <div class="trip-hero" style="cursor:pointer;background-image:url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&h=400&fit=crop');padding:16px 20px;margin-bottom:0" onclick="showPage('trip-picos')">
+      <div class="th-label" style="font-size:10px">Próxima viagem — em 11 dias</div>
+      <div class="th-title" style="font-size:20px">Picos da Europa</div>
+      <div class="th-sub" style="font-size:11px">🇪🇸 Espanha · 20–23 Mar 2026</div>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:6px;flex-wrap:wrap">
+        <div class="th-m"><svg class="ic" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>14</div>
+        <div class="th-m"><svg class="ic" viewBox="0 0 24 24"><path d="M3 17l4-8 5 6 3-4 6 6"/></svg>62km</div>
+        <div class="th-m"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>7h30</div>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:6px"><span style="font-size:10px;color:rgba(255,255,255,.6)" id="dash-cl-count">8/15</span><div class="pbar" style="width:60px;height:3px;background:rgba(255,255,255,.15)"><div class="pfill" id="dash-cl-bar" style="width:53%;background:rgba(255,255,255,.8)"></div></div></div>
       </div>
     </div>
-  </section>
-
-  <!-- PROGRAMS -->
-  <section class="programs-section" id="programas">
-    <div class="sec-inner">
-      <div class="sec-head">
-        <h2>Os Três Programas Core</h2>
-        <p>Survival Camp, Mindful Camp e Space Camp — cada um desenhado para objetivos específicos.</p>
-      </div>
-      <div class="programs-grid">
-        <!-- Survival Camp -->
-        <div class="prog-card" onclick="openModal('modal-survival')">
-          <div class="prog-img" style="background-image:url('https://images.unsplash.com/photo-1519904981063-b0cf448d479e?w=800&q=85')">
-            <span class="prog-badge">Mais Intenso</span>
-          </div>
-          <div class="prog-body">
-            <h3>Survival Camp</h3>
-            <p>Imersão de 3–5 dias em terreno selvagem. Sem conforto. Sem rede. Apenas o essencial.</p>
-            <ul class="prog-checks">
-              <li>Construção de abrigo e sobrevivência básica</li>
-              <li>Navegação em terreno real</li>
-              <li>Decisões sob incerteza extrema</li>
-              <li>Acampamento selvagem com facilitation</li>
-            </ul>
-            <div class="prog-meta">
-              <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 3–5 dias</span>
-              <span><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg> 10–40 pessoas</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Mindful Camp -->
-        <div class="prog-card" onclick="openModal('modal-mindful')">
-          <div class="prog-img" style="background-image:url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=85')">
-            <span class="prog-badge">Mental Health</span>
-          </div>
-          <div class="prog-body">
-            <h3>Mindful Camp</h3>
-            <p>Programa de bem-estar integrado. Meditação, movimento consciente e reflexão guiada em natureza.</p>
-            <ul class="prog-checks">
-              <li>Práticas de mindfulness e meditação</li>
-              <li>Caminhadas com silêncios estruturados</li>
-              <li>Círculos de reflexão e partilha</li>
-              <li>Protocolo clínico de saúde mental</li>
-            </ul>
-            <div class="prog-meta">
-              <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 2–3 dias</span>
-              <span><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg> 10–50 pessoas</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Space Camp -->
-        <div class="prog-card" onclick="openModal('modal-space')">
-          <div class="prog-img" style="background-image:url('https://images.unsplash.com/photo-1517976487492-5750f3195933?w=800&q=85')">
-            <span class="prog-badge">Inovação</span>
-          </div>
-          <div class="prog-body">
-            <h3>Space Camp</h3>
-            <p>Retiro intensivo de criatividade e inovação. Brainstorming estratégico no terreno.</p>
-            <ul class="prog-checks">
-              <li>Facilitação de inovação em contexto selvagem</li>
-              <li>Design thinking aplicado em natureza</li>
-              <li>Prototipagem de ideias em tempo real</li>
-              <li>Manifesto de equipa como deliverable</li>
-            </ul>
-            <div class="prog-meta">
-              <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> 1–2 dias</span>
-              <span><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg> 10–40 pessoas</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- NUMBERS BANNER -->
-  <section class="numbers-banner">
-    <div class="numbers-banner-inner">
+    <div class="card" style="padding:14px 16px;margin-bottom:0;display:flex;flex-direction:column;justify-content:space-between">
       <div>
-        <div class="nb-num">+40.000</div>
-        <div class="nb-lbl">participantes em 25 anos</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+          <div style="font-size:11px;font-weight:600;color:var(--ink)">Mensagem do Hugo</div>
+          <div style="font-size:9px;color:var(--ink4)">há 4h</div>
+        </div>
+        <div style="font-family:var(--f-serif);font-style:italic;font-size:11px;color:var(--ink2);line-height:1.45;border-left:2px solid var(--g100);padding-left:8px">"Condições perfeitas nos Picos. Nevoeiro de manhã mas sol total após o almoço. Tragam camadas intermédias."</div>
       </div>
+      <div style="text-align:right;margin-top:6px"><span style="font-size:10px;color:var(--g700);font-weight:500">— Hugo Palma</span></div>
+    </div>
+  </div>
+
+  <!-- ═══ ROW: VIAGENS (esquerda) + PARCERIAS (direita) ═══ -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start">
+  <!-- VIAGENS -->
+  <div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+      <h2 style="font-size:15px;font-weight:700;color:var(--ink)">Próximas Viagens</h2>
+      <span style="font-size:11px;color:var(--ink4)">10 confirmadas</span>
+    </div>
+
+    <!-- MARÇO -->
+    <div class="upcoming-month" style="margin-top:0">Março</div>
+    <div class="upcoming-grid-single">
+      <div class="vcard">
+        <img class="vcard-img" src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=600&h=360&fit=crop" alt="Vale do Ave">
+        <div class="vcard-overlay">
+          <div class="vcard-flag">🇵🇹</div>
+          <div class="vcard-name">Trilho Pelas Margens e Moinhos do Rio Bugio</div>
+          <div class="vcard-date">29 Mar · Vale do Ave</div>
+          <div class="vcard-bottom">
+            <div class="vcard-price"><span class="vcard-price-old">€25</span><span class="vcard-price-new">€21</span></div>
+            <button class="btn-inscrever" onclick="event.stopPropagation();alert('Pedido enviado!')">Inscrever-me</button>
+          </div>
+        </div>
+        <span class="vcard-tag" style="position:absolute;top:10px;left:10px">Trilho do Mês</span>
+      </div>
+    </div>
+
+    <!-- ABRIL -->
+    <div class="upcoming-month">Abril</div>
+    <div class="upcoming-grid-single">
+
+      <div class="vcard">
+        <img class="vcard-img" src="https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=600&h=360&fit=crop" alt="Aldeias Históricas">
+        <div class="vcard-overlay">
+          <div class="vcard-flag">🇵🇹</div>
+          <div class="vcard-name">Páscoa com a Magia das Aldeias Históricas</div>
+          <div class="vcard-date">3–5 Abr · 2 noites</div>
+          <div class="vcard-bottom">
+            <div class="vcard-price"><span class="vcard-price-old">€320</span><span class="vcard-price-new">€272</span></div>
+            <button class="btn-inscrever" onclick="event.stopPropagation();alert('Pedido enviado!')">Inscrever-me</button>
+          </div>
+        </div>
+        <span class="vcard-tag" style="position:absolute;top:10px;left:10px">Escapadinha</span>
+      </div>
+
+      <div class="vcard">
+        <img class="vcard-img" src="https://images.unsplash.com/photo-1583422409516-2895a77efded?w=600&h=360&fit=crop" alt="Costa Brava">
+        <div class="vcard-overlay">
+          <div class="vcard-flag">🇪🇸</div>
+          <div class="vcard-name">Dalí e Costa Brava: A Rota Surrealista</div>
+          <div class="vcard-date">9–12 Abr · 3 noites · Espanha</div>
+          <div class="vcard-bottom">
+            <div class="vcard-price"><span class="vcard-price-old">€520</span><span class="vcard-price-new">€442</span></div>
+            <button class="btn-inscrever" onclick="event.stopPropagation();alert('Pedido enviado!')">Inscrever-me</button>
+          </div>
+        </div>
+        <span class="vcard-tag" style="position:absolute;top:10px;left:10px">Cultural</span>
+      </div>
+
+      <div class="vcard">
+        <img class="vcard-img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=360&fit=crop" alt="Serra do Soajo">
+        <div class="vcard-overlay">
+          <div class="vcard-flag">🇵🇹</div>
+          <div class="vcard-name">PNPG — Serra do Soajo: Sistelo à Porta do Mezio</div>
+          <div class="vcard-date">11 Abr · Gerês</div>
+          <div class="vcard-bottom">
+            <div class="vcard-price"><span class="vcard-price-old">€35</span><span class="vcard-price-new">€30</span></div>
+            <button class="btn-inscrever" onclick="event.stopPropagation();alert('Pedido enviado!')">Inscrever-me</button>
+          </div>
+        </div>
+        <span class="vcard-tag" style="position:absolute;top:10px;left:10px">Trekking</span>
+      </div>
+
+      <div class="vcard">
+        <img class="vcard-img" src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&h=360&fit=crop" alt="Serra d'Arga">
+        <div class="vcard-overlay">
+          <div class="vcard-flag">🇵🇹</div>
+          <div class="vcard-name">Workshop de Sobrevivência na Serra d'Arga</div>
+          <div class="vcard-date">12 Abr · 1 dia</div>
+          <div class="vcard-bottom">
+            <div class="vcard-price"><span class="vcard-price-old">€55</span><span class="vcard-price-new">€47</span></div>
+            <button class="btn-inscrever" onclick="event.stopPropagation();alert('Pedido enviado!')">Inscrever-me</button>
+          </div>
+        </div>
+        <span class="vcard-tag" style="position:absolute;top:10px;left:10px">Workshop</span>
+      </div>
+
+      <div class="vcard">
+        <img class="vcard-img" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&h=360&fit=crop" alt="Vieira do Minho">
+        <div class="vcard-overlay">
+          <div class="vcard-flag">🇵🇹</div>
+          <div class="vcard-name">Trilho da Senhora da Lapa e Castro de Anissó</div>
+          <div class="vcard-date">19 Abr · Vieira do Minho</div>
+          <div class="vcard-bottom">
+            <div class="vcard-price"><span class="vcard-price-old">€25</span><span class="vcard-price-new">€21</span></div>
+            <button class="btn-inscrever" onclick="event.stopPropagation();alert('Pedido enviado!')">Inscrever-me</button>
+          </div>
+        </div>
+        <span class="vcard-tag" style="position:absolute;top:10px;left:10px">Trilho do Mês</span>
+      </div>
+
+      <div class="vcard">
+        <img class="vcard-img" src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=600&h=360&fit=crop" alt="Picos da Europa">
+        <div class="vcard-overlay">
+          <div class="vcard-flag">🇪🇸</div>
+          <div class="vcard-name">Picos da Europa Classic</div>
+          <div class="vcard-date">24–26 Abr · 2 noites · Espanha</div>
+          <div class="vcard-bottom">
+            <div class="vcard-price"><span class="vcard-price-old">€480</span><span class="vcard-price-new">€408</span></div>
+            <button class="btn-inscrever" onclick="event.stopPropagation();alert('Pedido enviado!')">Inscrever-me</button>
+          </div>
+        </div>
+        <span class="vcard-tag" style="position:absolute;top:10px;left:10px">Trekking</span>
+      </div>
+
+      <div class="vcard">
+        <img class="vcard-img" src="https://images.unsplash.com/photo-1580137189272-c9379f8864fd?w=600&h=360&fit=crop" alt="Sintra">
+        <div class="vcard-overlay">
+          <div class="vcard-flag">🇵🇹</div>
+          <div class="vcard-name">Sintra — Peninha e Anta de Adrenunes</div>
+          <div class="vcard-date">25 Abr · Sintra</div>
+          <div class="vcard-bottom">
+            <div class="vcard-price"><span class="vcard-price-old">€30</span><span class="vcard-price-new">€26</span></div>
+            <button class="btn-inscrever" onclick="event.stopPropagation();alert('Pedido enviado!')">Inscrever-me</button>
+          </div>
+        </div>
+        <span class="vcard-tag" style="position:absolute;top:10px;left:10px">Trekking</span>
+      </div>
+
+      <div class="vcard">
+        <img class="vcard-img" src="https://images.unsplash.com/photo-1532274402911-5a369e4c4bb5?w=600&h=360&fit=crop" alt="Guincho noturno">
+        <div class="vcard-overlay">
+          <div class="vcard-flag">🇵🇹</div>
+          <div class="vcard-name">Trekking Celta ao Luar: Guincho e Falésias</div>
+          <div class="vcard-date">25 Abr · Noturno · Cascais</div>
+          <div class="vcard-bottom">
+            <div class="vcard-price"><span class="vcard-price-old">€35</span><span class="vcard-price-new">€30</span></div>
+            <button class="btn-inscrever" onclick="event.stopPropagation();alert('Pedido enviado!')">Inscrever-me</button>
+          </div>
+        </div>
+        <span class="vcard-tag" style="position:absolute;top:10px;left:10px">Noturno</span>
+      </div>
+
+      <div class="vcard">
+        <img class="vcard-img" src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&h=360&fit=crop" alt="Cabo Espichel">
+        <div class="vcard-overlay">
+          <div class="vcard-flag">🇵🇹</div>
+          <div class="vcard-name">Workshop de Sobrevivência no Cabo Espichel</div>
+          <div class="vcard-date">26 Abr · 1 dia</div>
+          <div class="vcard-bottom">
+            <div class="vcard-price"><span class="vcard-price-old">€55</span><span class="vcard-price-new">€47</span></div>
+            <button class="btn-inscrever" onclick="event.stopPropagation();alert('Pedido enviado!')">Inscrever-me</button>
+          </div>
+        </div>
+        <span class="vcard-tag" style="position:absolute;top:10px;left:10px">Workshop</span>
+      </div>
+
+    </div>
+
+    <div class="upcoming-cta">Inscrições abertas — lugares limitados em cada experiência</div>
+  </div>
+  <!-- PARCERIAS -->
+  <div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <h2 style="font-size:13px;font-weight:700;color:var(--ink)">Parcerias &amp; Ofertas</h2>
+    </div>
+
+    <!-- Eventos -->
+    <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px">Eventos</div>
+    <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px">
+      <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:7px 10px;cursor:pointer;transition:border-color .15s" onmouseover="this.style.borderColor='var(--g300)'" onmouseout="this.style.borderColor='var(--line)'">
+        <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#e85d04,#f4845f);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:800;color:#fff;letter-spacing:-.02em">P</div>
+        <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;color:var(--ink)">Trail Running Night <span style="font-size:9px;font-weight:400;color:var(--ink4)">c/ Palomas</span></div><div style="font-size:9px;color:var(--ink4)">16 Mai · Arrábida · 12km</div></div>
+        <span style="font-size:9px;color:var(--g700);font-weight:600;flex-shrink:0">→</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:7px 10px;cursor:pointer;transition:border-color .15s" onmouseover="this.style.borderColor='var(--g300)'" onmouseout="this.style.borderColor='var(--line)'">
+        <div style="width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#1a5276,#5dade2);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;font-weight:800;color:#fff;letter-spacing:-.02em">N</div>
+        <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;color:var(--ink)">Meetup Porto <span style="font-size:9px;font-weight:400;color:var(--ink4)">c/ Norc</span></div><div style="font-size:9px;color:var(--ink4)">8 Mai · Preview verão</div></div>
+        <span style="font-size:9px;color:var(--g700);font-weight:600;flex-shrink:0">→</span>
+      </div>
+    </div>
+
+    <!-- Parceiros -->
+    <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px">Parceiros</div>
+    <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:10px">
+      <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:7px 10px">
+        <img src="https://www.google.com/s2/favicons?domain=osprey.com&sz=64" alt="Osprey" style="width:22px;height:22px;border-radius:4px;object-fit:contain;flex-shrink:0">
+        <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;color:var(--ink)">Osprey</div><div style="font-size:9px;color:var(--ink4)">Mochilas · até 30 Abr</div></div>
+        <div class="parceria-code" style="margin:0;font-size:9px;padding:2px 7px" onclick="navigator.clipboard.writeText('BOREALIS20');this.textContent='Copiado!'">−20%</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:7px 10px">
+        <img src="https://www.google.com/s2/favicons?domain=merrell.com&sz=64" alt="Merrell" style="width:22px;height:22px;border-radius:4px;object-fit:contain;flex-shrink:0">
+        <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;color:var(--ink)">Merrell</div><div style="font-size:9px;color:var(--ink4)">Calçado trekking</div></div>
+        <div class="parceria-code" style="margin:0;font-size:9px;padding:2px 7px" onclick="navigator.clipboard.writeText('MERRELLBOR');this.textContent='Copiado!'">−15%</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:7px 10px">
+        <img src="https://www.google.com/s2/favicons?domain=berg.pt&sz=64" alt="Berg" style="width:22px;height:22px;border-radius:4px;object-fit:contain;flex-shrink:0">
+        <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;color:var(--ink)">Berg Outdoor</div><div style="font-size:9px;color:var(--ink4)">Equipamento outdoor PT</div></div>
+        <div class="parceria-code" style="margin:0;font-size:9px;padding:2px 7px" onclick="navigator.clipboard.writeText('BERGBOR15');this.textContent='Copiado!'">−15%</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:6px;padding:7px 10px">
+        <img src="https://www.google.com/s2/favicons?domain=decathlon.pt&sz=64" alt="Decathlon" style="width:22px;height:22px;border-radius:4px;object-fit:contain;flex-shrink:0">
+        <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;color:var(--ink)">Decathlon</div><div style="font-size:9px;color:var(--ink4)">Quechua &amp; Forclaz</div></div>
+        <div class="parceria-code" style="margin:0;font-size:9px;padding:2px 7px" onclick="navigator.clipboard.writeText('BOREALIS10');this.textContent='Copiado!'">−10%</div>
+      </div>
+    </div>
+
+    <!-- Oferta -->
+    <div style="background:var(--g100);border-radius:6px;padding:8px 10px">
+      <div style="font-size:10px;font-weight:600;color:var(--g700)">Convida um amigo → 25% desc. na 1.ª viagem</div>
+      <a style="font-size:9px;font-weight:600;color:var(--g500);cursor:pointer;margin-top:2px;display:inline-block">Partilhar convite →</a>
+    </div>
+  </div>
+  </div><!-- /grid viagens+parcerias -->
+</div>
+
+<!-- ═══════════════ TRIP — PICOS DA EUROPA ═══════════════ -->
+<div class="page" id="pg-trip-picos">
+  <!-- Hero compacto -->
+  <div class="trip-hero" style="background-image:url('https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=1200&h=400&fit=crop');padding:16px 20px;margin-bottom:10px">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between">
       <div>
-        <div class="nb-num">23</div>
-        <div class="nb-lbl">países de operação</div>
+        <div style="font-size:10px;text-transform:uppercase;letter-spacing:.08em;opacity:.7">Em 11 dias</div>
+        <div style="font-family:var(--f-head);font-size:20px;font-weight:700">Picos da Europa</div>
+        <div style="font-size:12px;opacity:.8">🇪🇸 20–23 Mar · 14 part. · 62km · 3 etapas</div>
       </div>
-      <div>
-        <div class="nb-num">100+</div>
-        <div class="nb-lbl">guias ativos</div>
-      </div>
-      <div>
-        <div class="nb-num">6</div>
-        <div class="nb-lbl">programas proprietários</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CORPORATE WILDERNESS -->
-  <section class="wilderness-section" id="lideranca">
-    <div class="wilderness-inner">
-      <div class="wilderness-image">
-        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=85" alt="Corporate Wilderness">
-        <div class="wilderness-badge">
-          <div class="wilderness-badge-label">Programa</div>
-          <div class="wilderness-badge-value">100% à medida</div>
-        </div>
-      </div>
-      <div class="wilderness-content">
-        <h2>Não é team building.<br>É transformação no terreno.</h2>
-        <p class="wilderness-tagline">Onde os CEOs vão pensar o que não conseguem pensar no escritório.</p>
-        <p class="wilderness-desc">Retiros de liderança imersivos de 3 a 5 dias. Desenhados com psicólogos organizacionais e coaches executivos. Para líderes que precisam de perspectiva real — não de exercícios de sala. As empresas gastam fortunas em retiros genéricos em hotéis. A natureza como sala de reuniões é disruptiva e o impacto é mensurável.</p>
-        <ul class="wilderness-features">
-          <li>Caminhadas com silêncios obrigatórios e reflexão estruturada</li>
-          <li>Tomada de decisão em contexto de incerteza real: tempo, terreno, recursos limitados</li>
-          <li>Facilitação por coaches executivos certificados integrados nos Niners</li>
-          <li>Manifesto de equipa produzido no campo como deliverable final</li>
-          <li>Índice Borealis — métrica proprietária de coesão medida antes e depois</li>
-        </ul>
-        <div class="wilderness-info">
-          Parceria com CHROs e consultoras de gestão. Proposta personalizada com programa, território e facilitadores.
-        </div>
-        <div>
-          <a href="javascript:void(0)" onclick="openModal('modal-wilderness')" class="btn-primary">Saber Mais</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SAÚDE MENTAL -->
-  <section class="health-section" id="saude">
-    <div class="health-header">
-      <h2>A natureza como prescrição.</h2>
-      <p>Antes que a psiquiatria mainstream chegue lá. Nature-based therapy tem evidência científica crescente — a Borealis é o primeiro operador português com um protocolo clínico estruturado.</p>
-    </div>
-
-    <div class="health-grid">
-      <div class="health-card">
-        <div class="health-card-img" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80')"></div>
-        <div class="health-card-body">
-          <div class="health-card-tag">Mercado</div>
-          <h3>O mercado cresceu exponencialmente</h3>
-          <p>63% das empresas reportam burnout como top-3 risco operacional. O ticket médio de programas nature-based é 5–10x o de um retiro genérico em hotel.</p>
-        </div>
-      </div>
-
-      <div class="health-card">
-        <div class="health-card-img" style="background-image:url('https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=80')"></div>
-        <div class="health-card-body">
-          <div class="health-card-tag">Evidência</div>
-          <h3>Científicamente comprovado</h3>
-          <p>Nature-based therapy tem evidência crescente em redução de cortisol, melhoria de foco e regulação emocional. A natureza não é o cenário — é o agente terapêutico.</p>
-        </div>
-      </div>
-
-      <div class="health-card">
-        <div class="health-card-img" style="background-image:url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80')"></div>
-        <div class="health-card-body">
-          <div class="health-card-tag">Parceria Clínica</div>
-          <h3>Inês Gaya × Borealis</h3>
-          <p>Psicóloga clínica especializada em trauma e regulação emocional. Coordena o protocolo de saúde mental da Borealis — garantindo fundamentação científica rigorosa em cada programa. <a href="https://www.instagram.com/inesgaya/" target="_blank" style="color:var(--or);font-weight:600;">@inesgaya →</a></p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;">
-            <span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--gl);color:var(--g);">Nature-Based Therapy</span>
-            <span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--gl);color:var(--g);">Protocolo Clínico</span>
-            <span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--gl);color:var(--g);">Regulação Emocional</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bid-highlight">
-      <div>
-        <h3>BID — Behavioral Impact Design</h3>
-        <p>A Borealis desenvolveu uma métrica proprietária em parceria com a BID, que mede o impacto comportamental real dos programas.</p>
-        <p>Não é NPS. Não é satisfação. É mudança mensurável em coesão de equipa, decisão sob incerteza, e liderança resiliente.</p>
-      </div>
-      <div class="bid-stats">
-        <div class="bid-stat">
-          <div class="bid-stat-num">+76%</div>
-          <div class="bid-stat-lbl">Melhoria em coesão de equipa medida em 180 dias</div>
-        </div>
-        <div class="bid-stat">
-          <div class="bid-stat-num">+58%</div>
-          <div class="bid-stat-lbl">Aumento em tomada de decisão rápida</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- COMO FUNCIONA -->
-  <section class="process-section" id="como">
-    <div class="process-inner">
-      <div class="process-head">
-        <h2>Como Funciona</h2>
-      </div>
-      <div class="process-grid">
-        <div class="process-step">
-          <div class="process-step-num">1</div>
-          <h3>Diagnóstico</h3>
-          <p>Conversamos sobre a sua equipa: dinâmica, desafios, objetivos. Entendemos o contexto real.</p>
-        </div>
-        <div class="process-step">
-          <div class="process-step-num">2</div>
-          <h3>Proposta à medida</h3>
-          <p>Desenhamos um programa específico: duração, terreno, facilitadores, métricas de sucesso.</p>
-        </div>
-        <div class="process-step">
-          <div class="process-step-num">3</div>
-          <h3>Operação Niners</h3>
-          <p>Executamos em terreno real com guias certificados. Você foca — nós gerimos tudo.</p>
-        </div>
-        <div class="process-step">
-          <div class="process-step-num">4</div>
-          <h3>Impacto medido</h3>
-          <p>Métricas BID antes e depois. Relatório de impacto comportamental e recomendações.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact-section" id="contacto">
-    <div class="contact-inner">
-      <div class="contact-head">
-        <h2>Pronto para transformar equipas?</h2>
-      </div>
-      <div class="contact-wrapper">
-        <div class="contact-info">
-          <h3>Contacto Direto</h3>
-          <p><strong>Email:</strong> <a href="mailto:ola@corporate.borealis.travel" style="color:var(--or)">ola@corporate.borealis.travel</a></p>
-          <p><strong>Telefone:</strong> <a href="tel:+351910910930" style="color:var(--or)">+351 910 910 930</a></p>
-          <p><strong>Sede:</strong> Braga, Portugal</p>
-          <h3 style="margin-top:32px;">Processo</h3>
-          <p>Resposta em 24–48h · Sem compromisso</p>
-          <p>Proposta personalizada em 5 dias úteis</p>
-        </div>
-        <!-- Web3Forms: substitui YOUR_ACCESS_KEY pelo key recebido em ola@corporate.borealis.travel -->
-        <form class="contact-form" id="contactForm" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY">
-          <input type="hidden" name="subject" value="Novo Pedido de Proposta Corporate — Borealis">
-          <input type="hidden" name="from_name" value="Borealis Corporate Website">
-          <input type="hidden" name="redirect" value="">
-          <!-- Honeypot anti-spam -->
-          <input type="checkbox" name="botcheck" style="display:none">
-          <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" placeholder="O seu nome" required>
-          </div>
-          <div class="form-group">
-            <label for="empresa">Empresa</label>
-            <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email corporativo</label>
-            <input type="email" id="email" name="email" placeholder="email@empresa.com" required>
-          </div>
-          <div class="form-group">
-            <label for="pessoas">Número de pessoas (estimativa)</label>
-            <input type="number" id="pessoas" name="pessoas" placeholder="Ex: 25" min="5" max="200">
-          </div>
-          <div class="form-group">
-            <label for="programa">Programa de interesse</label>
-            <select id="programa" name="programa" required>
-              <option value="" disabled selected>Selecione...</option>
-              <option value="Survival Camp">Survival Camp</option>
-              <option value="Mindful Camp">Mindful Camp</option>
-              <option value="Space Camp">Space Camp</option>
-              <option value="Corporate Wilderness">Retiro de Liderança (Corporate Wilderness)</option>
-              <option value="BID — Borealis × Inês Gaya">BID — Borealis × Inês Gaya</option>
-              <option value="Ainda não sei">Ainda não sei — quero conversar</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="contexto">Contexto breve</label>
-            <textarea id="contexto" name="contexto" placeholder="O que quer resolver com a equipa? Objectivos, timing, orçamento..."></textarea>
-          </div>
-          <button type="submit" class="form-submit" id="submitBtn">Enviar Pedido de Proposta →</button>
-          <p style="font-size:12px;color:var(--i3);text-align:center;margin-top:12px;font-style:italic;">Resposta em 24–48h · Sem compromisso</p>
-        </form>
-        <!-- Success message (hidden by default) -->
-        <div id="formSuccess" style="display:none;text-align:center;padding:40px 20px;">
-          <div style="font-size:48px;margin-bottom:16px;">✓</div>
-          <h3 style="font-size:20px;font-weight:700;color:var(--g);margin-bottom:8px;">Pedido enviado com sucesso!</h3>
-          <p style="font-size:14px;color:var(--i3);">Entraremos em contacto nas próximas 24–48 horas com uma proposta personalizada.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- B2C TOP BANNER -->
-  <a href="https://borealis.travel" target="_blank" class="b2c-banner" id="b2cBanner">
-    <span class="b2c-banner-text">Procuras uma aventura pessoal?</span>
-    <span class="b2c-banner-cta">
-      Explora borealis.travel
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5l7 7-7 7"/></svg>
-    </span>
-  </a>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-inner">
-      <div class="footer-row">
-        <div class="footer-brand">BOREALIS ON TREKKING · Corporate</div>
-        <div class="footer-links">
-          <a href="#programas">Programas</a>
-          <a href="#lideranca">Liderança</a>
-          <a href="#saude">Saúde Mental</a>
-          <a href="#contacto">Contacto</a>
-          <a href="https://borealis.travel" target="_blank">borealis.travel</a>
-        </div>
-        <div class="footer-copy">© 2026 Borealis. Todos os direitos reservados.</div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- MODALS -->
-  <div class="modal" id="modal-survival">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal('modal-survival')">×</button>
-      <div class="modal-hero" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=85')">
-        <span class="modal-badge">Survival Camp</span>
-      </div>
-      <div class="modal-body">
-        <h2>Survival Camp</h2>
-        <p>Imersão total em ambiente selvagem. 3 a 5 dias sem conforto, sem rede. Apenas o essencial para sobreviver, pensar e repensar valores de equipa.</p>
-        <div class="modal-features">
-          <strong>O que está incluído:</strong>
-          <ul>
-            <li>Construção de abrigo e técnicas de sobrevivência base</li>
-            <li>Navegação em terreno real sem tecnologia</li>
-            <li>Círculos de reflexão noturnos guiados</li>
-            <li>Facilitação contínua de coaches executivos</li>
-            <li>Refeições preparadas em campo</li>
-            <li>Avaliação BID antes e após programa</li>
-          </ul>
-        </div>
-        <p>Ideal para líderes e equipas que precisam de reset radical. O impacto é profundo e duradouro.</p>
-        <a href="#contacto" class="modal-cta">Solicitar Informações</a>
+      <div style="display:flex;gap:5px;flex-shrink:0;margin-top:2px">
+        <button style="background:rgba(255,255,255,.2);color:#fff;border:none;padding:5px 11px;border-radius:5px;font-size:10px;font-weight:600;cursor:pointer;backdrop-filter:blur(4px)" onclick="window.open('https://maps.google.com/?q=Parque+das+Nações+Lisboa','_blank')">Encontro →</button>
+        <button style="background:#25d366;color:#fff;border:none;padding:5px 11px;border-radius:5px;font-size:10px;font-weight:600;cursor:pointer" onclick="window.open('https://wa.me/351910000000','_blank')">WhatsApp</button>
       </div>
     </div>
   </div>
 
-  <div class="modal" id="modal-mindful">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal('modal-mindful')">×</button>
-      <div class="modal-hero" style="background-image:url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&q=85')">
-        <span class="modal-badge">Mindful Camp</span>
+  <!-- ROW 1: Encontro + Checklist + Hugo — 3 cols -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px">Encontro</div>
+      <div style="font-size:12px;font-weight:600;color:var(--ink)">A — Parque das Nações</div>
+      <div style="font-size:11px;color:var(--ink3)">20 Mar · 7h30 · 5 confirmados</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4)">Checklist</div>
+        <span style="font-size:11px;font-weight:600;color:var(--g700)" id="picos-mini-count">8/15</span>
       </div>
-      <div class="modal-body">
-        <h2>Mindful Camp</h2>
-        <p>Programa de bem-estar e saúde mental integrado. Meditação estruturada, movimento consciente, e silêncios guiados em ambiente natural. Facilitado por psicólogos e guias especializados.</p>
-        <div class="modal-features">
-          <strong>O que está incluído:</strong>
-          <ul>
-            <li>Práticas diárias de mindfulness e meditação</li>
-            <li>Caminhadas com silêncios estruturados</li>
-            <li>Círculos de partilha e reflexão</li>
-            <li>Coaching individual em regulação emocional</li>
-            <li>Protocolo clínico de saúde mental</li>
-            <li>Avaliação de bem-estar antes e após</li>
-          </ul>
+      <div style="background:var(--line);border-radius:2px;height:4px;margin-bottom:5px"><div id="picos-mini-bar" style="width:53%;height:100%;background:var(--g500);border-radius:2px"></div></div>
+      <div style="font-size:10px;color:var(--ink3)">Falta: kit socorros, garrafa, calças, luvas, lanterna, protetor, snacks</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4)">Hugo Palma</div>
+        <span style="font-size:9px;color:var(--ink4)">4h</span>
+      </div>
+      <div style="font-family:var(--f-serif);font-style:italic;font-size:11px;color:var(--ink2);line-height:1.45;border-left:2px solid var(--g100);padding-left:7px">"Condições perfeitas nos Picos. Sol total após o almoço."</div>
+    </div>
+  </div>
+
+  <!-- ROW 2: Checklist completa — 2 cols de items -->
+  <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin-bottom:10px" id="picos-checklist">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+      <div style="font-size:12px;font-weight:700;color:var(--ink)">Checklist Completa</div>
+      <div style="font-size:11px;color:var(--ink4)" id="picos-cl-count">8/15</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3px 18px;font-size:12px" id="picos-cl-grid">
+      <div class="cl-item checked" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--g500);background:var(--g500);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink3);text-decoration:line-through;transition:all .15s">Botas impermeáveis</span></div>
+      <div class="cl-item checked" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--g500);background:var(--g500);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink3);text-decoration:line-through;transition:all .15s">Meias lã (3 pares)</span></div>
+      <div class="cl-item checked" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--g500);background:var(--g500);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink3);text-decoration:line-through;transition:all .15s">Impermeável compacto</span></div>
+      <div class="cl-item checked" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--g500);background:var(--g500);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink3);text-decoration:line-through;transition:all .15s">Fleece / camada intermédia</span></div>
+      <div class="cl-item checked" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--g500);background:var(--g500);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink3);text-decoration:line-through;transition:all .15s">Mochila 40–50L</span></div>
+      <div class="cl-item checked" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--g500);background:var(--g500);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink3);text-decoration:line-through;transition:all .15s">Bastões trekking</span></div>
+      <div class="cl-item checked" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--g500);background:var(--g500);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink3);text-decoration:line-through;transition:all .15s">Sandálias acampamento</span></div>
+      <div class="cl-item checked" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--g500);background:var(--g500);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink3);text-decoration:line-through;transition:all .15s">Protetor solar SPF50+</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Calças de trekking (x2)</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Luvas e gorro</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Lanterna frontal</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Kit primeiros socorros</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Garrafa 1.5L</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Snacks energia (3 dias)</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Saco-cama leve</span></div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Comunicação + Pagamento — 2 cols -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:5px">Comunicação</div>
+      <div style="display:flex;flex-direction:column;gap:5px;font-size:11px">
+        <div style="display:flex;align-items:center;gap:7px"><div style="width:24px;height:24px;border-radius:50%;background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--g700);flex-shrink:0">HP</div><div><span style="font-weight:600;color:var(--ink)">Hugo Palma</span><span style="color:var(--ink4)"> · Guia Sénior</span></div></div>
+        <div style="font-size:10px;color:var(--ink3);border-left:2px solid var(--g100);padding-left:7px;margin-left:12px">"Condições perfeitas. Tragam camadas intermédias."</div>
+        <div style="display:flex;gap:4px;margin-top:2px">
+          <button style="background:var(--g700);color:#fff;border:none;padding:4px 10px;border-radius:4px;font-size:10px;font-weight:600;cursor:pointer" onclick="window.open('https://wa.me/351910000000','_blank')">WhatsApp</button>
         </div>
-        <p>Ideal para equipas com stress elevado, burnout, ou necessidade de recalibração mental. Baseado em evidência científica.</p>
-        <a href="#contacto" class="modal-cta">Solicitar Informações</a>
+      </div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 14px">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:5px">Pagamento</div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:5px">
+        <span style="font-size:14px;font-weight:700;color:var(--ink)">€480</span>
+        <span style="font-size:11px;color:var(--g700);font-weight:600">2/3 pagos</span>
+      </div>
+      <div style="background:var(--line);border-radius:2px;height:4px;margin-bottom:7px"><div style="width:67%;height:100%;background:var(--g500);border-radius:2px"></div></div>
+      <div style="font-size:11px;color:var(--ink3)">
+        <div style="display:flex;justify-content:space-between;padding:2px 0"><span>1.ª Prestação</span><span style="color:var(--g500)">€160 ✓</span></div>
+        <div style="display:flex;justify-content:space-between;padding:2px 0"><span>2.ª Prestação</span><span style="color:var(--g500)">€160 ✓</span></div>
+        <div style="display:flex;justify-content:space-between;padding:2px 0"><span>3.ª — 25 Mar</span><span style="font-weight:600;color:var(--ink)">€160</span></div>
       </div>
     </div>
   </div>
 
-  <div class="modal" id="modal-space">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal('modal-space')">×</button>
-      <div class="modal-hero" style="background-image:url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=85')">
-        <span class="modal-badge">Space Camp</span>
+  <!-- Dica Hugo -->
+  <div style="background:var(--g100);border-radius:6px;padding:10px 12px;margin-bottom:10px;font-size:11px;color:var(--g700)">
+    <strong>Dica:</strong> Temperaturas nos Picos podem cair 10°C após o pôr do sol. Lã merino + impermeável compacto.
+  </div>
+
+  <!-- Feedback CTA -->
+  <div style="text-align:center;margin-top:4px">
+    <button onclick="showPage('feedback')" style="display:inline-flex;align-items:center;gap:6px;background:var(--g700);color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--g900)'" onmouseout="this.style.background='var(--g700)'">
+      <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Dá o teu feedback sobre esta viagem
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════ TRIP — ISLÂNDIA ═══════════════ -->
+<div class="page" id="pg-trip-islandia">
+  <!-- Hero -->
+  <div class="trip-hero" style="background-image:url('https://images.unsplash.com/photo-1491466424936-e304919aada7?w=1200&h=400&fit=crop');padding:14px 18px;margin-bottom:8px">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between">
+      <div>
+        <div style="font-size:9px;text-transform:uppercase;letter-spacing:.08em;opacity:.7">Jul 2026</div>
+        <div style="font-family:var(--f-head);font-size:18px;font-weight:700">Islândia — Laugavegur Trail</div>
+        <div style="font-size:11px;opacity:.8">🇮🇸 Landmannalaugar → Þórsmörk · 7 noites · 55km</div>
       </div>
-      <div class="modal-body">
-        <h2>Space Camp</h2>
-        <p>Retiro de inovação e criatividade. 1 a 2 dias intensivos onde o terreno é sala de aula para design thinking, prototipagem de ideias, e geração de soluções estratégicas.</p>
-        <div class="modal-features">
-          <strong>O que está incluído:</strong>
-          <ul>
-            <li>Facilitação de design thinking em natureza</li>
-            <li>Prototipagem rápida de ideias</li>
-            <li>Brainstorming estratégico estruturado</li>
-            <li>Manifesto de equipa como deliverable</li>
-            <li>Coaching de liderança para inovação</li>
-            <li>Avaliação de criatividade e alinhamento</li>
-          </ul>
-        </div>
-        <p>Ideal para equipas em transformação, desenvolvimento de novos produtos, ou reposicionamento estratégico. Resultado: ideias e alinhamento real.</p>
-        <a href="#contacto" class="modal-cta">Solicitar Informações</a>
+      <div style="display:flex;gap:5px;flex-shrink:0;margin-top:2px">
+        <button style="background:rgba(255,255,255,.2);color:#fff;border:none;padding:5px 10px;border-radius:5px;font-size:10px;font-weight:600;cursor:pointer;backdrop-filter:blur(4px)">Encontro →</button>
+        <button style="background:#25d366;color:#fff;border:none;padding:5px 10px;border-radius:5px;font-size:10px;font-weight:600;cursor:pointer">WhatsApp</button>
       </div>
     </div>
   </div>
 
-  <div class="modal" id="modal-wilderness">
-    <div class="modal-content">
-      <button class="modal-close" onclick="closeModal('modal-wilderness')">×</button>
-      <div class="modal-hero" style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=85')">
-        <span class="modal-badge">Corporate Wilderness</span>
+  <!-- ROW 1: Info + Checklist + Guia — 3 cols -->
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px">Detalhes</div>
+      <div style="font-size:11px;font-weight:600;color:var(--ink)">9 participantes</div>
+      <div style="font-size:10px;color:var(--ink3);margin-top:2px">55km · ↑2.800m · 5 etapas</div>
+      <div style="font-size:10px;color:var(--ink3)">Dificuldade: Avançado</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4)">Checklist</div>
+        <span style="font-size:10px;font-weight:600;color:var(--g700)" id="islandia-mini-count">2/12</span>
       </div>
-      <div class="modal-body">
-        <h2>Corporate Wilderness — Retiros de Liderança</h2>
-        <p>Retiros imersivos de 3 a 5 dias desenhados especificamente para CEOs e equipas de liderança. Facilitados por coaches executivos certificados integrados nos Niners.</p>
-        <div class="modal-features">
-          <strong>O que está incluído:</strong>
-          <ul>
-            <li>Caminhadas com silêncios obrigatórios e reflexão estruturada</li>
-            <li>Facilitação de decisão em contexto de incerteza real</li>
-            <li>Coaching executivo 1:1 durante o programa</li>
-            <li>Manifesto de equipa produzido em campo</li>
-            <li>Índice Borealis — métrica de coesão proprietária</li>
-            <li>Relatório executivo com recomendações pós-programa</li>
-          </ul>
+      <div style="background:var(--line);border-radius:2px;height:3px;margin-bottom:5px"><div id="islandia-mini-bar" style="width:17%;height:100%;background:var(--g500);border-radius:2px"></div></div>
+      <div style="font-size:10px;color:var(--ink3)">Falta: saco-cama, crampons, gaiter, fato impermeável...</div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+        <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4)">Hugo Palma</div>
+        <span style="font-size:9px;color:var(--ink4)">2d</span>
+      </div>
+      <div style="font-family:var(--f-serif);font-style:italic;font-size:10px;color:var(--ink2);line-height:1.4;border-left:2px solid var(--g100);padding-left:6px">"Preparação começa agora. Vou enviar plano de treino para Laugavegur."</div>
+    </div>
+  </div>
+
+  <!-- ROW 2: Checklist Islândia -->
+  <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin-bottom:8px" id="islandia-checklist">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+      <div style="font-size:11px;font-weight:700;color:var(--ink)">Checklist Completa</div>
+      <div style="font-size:10px;color:var(--ink4)" id="islandia-cl-count">2/12</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px 16px;font-size:11px" id="islandia-cl-grid">
+      <div class="cl-item checked" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--g500);background:var(--g500);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink3);text-decoration:line-through;transition:all .15s">Passaporte (válido)</span></div>
+      <div class="cl-item checked" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--g500);background:var(--g500);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink3);text-decoration:line-through;transition:all .15s">Seguro viagem</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Saco-cama -5°C</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Crampons leves</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Gaiters impermeáveis</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Fato impermeável completo</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Camadas térmicas (x3)</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Botas alta montanha</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">GPS / Power bank</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Comida liofilizada (5 dias)</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Filtro de água</span></div>
+      <div class="cl-item" onclick="toggleCLItem(this)" style="display:flex;align-items:center;gap:5px;padding:3px 0;cursor:pointer;border-radius:4px;transition:background .1s" onmouseover="this.style.background='var(--sand)'" onmouseout="this.style.background='transparent'"><span class="cl-icon" style="width:14px;height:14px;border-radius:50%;border:1.5px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s"><svg viewBox="0 0 24 24" style="width:8px;height:8px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0"><polyline points="20 6 9 17 4 12"/></svg></span><span class="cl-label" style="color:var(--ink);transition:all .15s">Kit primeiros socorros</span></div>
+    </div>
+  </div>
+
+  <!-- ROW 3: Comunicação + Pagamento -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px">Comunicação</div>
+      <div style="display:flex;flex-direction:column;gap:4px;font-size:11px">
+        <div style="display:flex;align-items:center;gap:6px"><div style="width:22px;height:22px;border-radius:50%;background:var(--g100);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--g700);flex-shrink:0">HP</div><div><span style="font-weight:600;color:var(--ink)">Hugo Palma</span><span style="color:var(--ink4)"> · Guia</span></div></div>
+        <div style="font-size:10px;color:var(--ink3);border-left:2px solid var(--g100);padding-left:6px;margin-left:11px">"Preparação começa agora. Plano de treino a caminho."</div>
+        <div style="display:flex;gap:4px;margin-top:2px">
+          <button style="background:var(--g700);color:#fff;border:none;padding:3px 8px;border-radius:4px;font-size:10px;font-weight:600;cursor:pointer">WhatsApp</button>
         </div>
-        <p>Parceria com CHROs e consultoras. Proposta personalizada com programa, território e facilitadores específicos.</p>
-        <a href="#contacto" class="modal-cta">Solicitar Proposta Executiva</a>
+      </div>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 12px">
+      <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px">Pagamento</div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:4px">
+        <span style="font-size:13px;font-weight:700;color:var(--ink)">€1.890</span>
+        <span style="font-size:10px;color:var(--orange);font-weight:600">1/3 pagos</span>
+      </div>
+      <div style="background:var(--line);border-radius:2px;height:3px;margin-bottom:6px"><div style="width:33%;height:100%;background:var(--orange);border-radius:2px"></div></div>
+      <div style="font-size:10px;color:var(--ink3)">
+        <div style="display:flex;justify-content:space-between;padding:1px 0"><span>1.ª Prestação</span><span style="color:var(--g500)">€450 ✓</span></div>
+        <div style="display:flex;justify-content:space-between;padding:1px 0"><span style="font-weight:600;color:var(--orange)">2.ª — 14 Mar</span><span style="font-weight:600;color:var(--orange)">€720 URGENTE</span></div>
+        <div style="display:flex;justify-content:space-between;padding:1px 0"><span>3.ª — 1 Jun</span><span style="color:var(--ink)">€720</span></div>
       </div>
     </div>
   </div>
 
-  <!-- SCRIPTS -->
-  <script>
-    // Nav scroll effect
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
+  <!-- Dica -->
+  <div style="background:var(--g100);border-radius:6px;padding:8px 10px;margin-bottom:8px;font-size:10px;color:var(--g700)">
+    <strong>Dica:</strong> Laugavegur tem travessias de rio. Sandálias específicas para vadear são essenciais. Treinar com mochila carregada (15kg+).
+  </div>
+
+  <!-- Feedback CTA -->
+  <div style="text-align:center;margin-top:4px">
+    <button onclick="showPage('feedback')" style="display:inline-flex;align-items:center;gap:6px;background:var(--g700);color:#fff;border:none;padding:7px 16px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--g900)'" onmouseout="this.style.background='var(--g700)'">
+      <svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Dá o teu feedback sobre esta viagem
+    </button>
+  </div>
+</div>
+
+<!-- ═══════════════ VIAGENS ═══════════════ -->
+<div class="page" id="pg-viagens">
+  <div class="ph" style="margin-bottom:6px"><h1 style="font-size:18px">As Minhas Viagens</h1><p>8 viagens · 2 activas</p></div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px">Activas</div>
+  <div class="upcoming-grid" style="margin-bottom:20px">
+    <div class="vcard" onclick="showPage('trip-picos')" style="box-shadow:0 0 0 2px var(--g300)">
+      <img class="vcard-img" src="https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=600&h=360&fit=crop" alt="Picos da Europa">
+      <div class="vcard-overlay">
+        <div class="vcard-flag">🇪🇸</div>
+        <div class="vcard-name">Picos da Europa</div>
+        <div class="vcard-date">20–23 Mar 2026 · 3 etapas · 62km</div>
+        <div class="vcard-bottom">
+          <div class="vcard-price"><span class="vcard-price-new">€480</span></div>
+          <span class="vcard-tag" style="background:rgba(45,106,79,.9)">Activa — em 11 dias</span>
+        </div>
+      </div>
+    </div>
+    <div class="vcard" onclick="showPage('trip-islandia')" style="box-shadow:0 0 0 2px var(--orange)">
+      <img class="vcard-img" src="https://images.unsplash.com/photo-1491466424936-e304919aada7?w=600&h=360&fit=crop" alt="Islândia">
+      <div class="vcard-overlay">
+        <div class="vcard-flag">🇮🇸</div>
+        <div class="vcard-name">Islândia — Laugavegur Trail</div>
+        <div class="vcard-date">Jul 2026 · 7 noites · 9 participantes</div>
+        <div class="vcard-bottom">
+          <div class="vcard-price"><span class="vcard-price-new">€1.890</span></div>
+          <span class="vcard-tag" style="background:rgba(232,93,4,.9)">Activa — Jul 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px">Concluídas</div>
+  <div class="upcoming-grid">
+    <div class="vcard" onclick="showPage('trip-picos')">
+      <img class="vcard-img" src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&h=360&fit=crop" alt="Caminho de Santiago">
+      <div class="vcard-overlay">
+        <div class="vcard-flag">🇪🇸</div>
+        <div class="vcard-name">Caminho de Santiago — Etapa 5</div>
+        <div class="vcard-date">Fev 2026 · 27km · ↑1.320m</div>
+        <div class="vcard-bottom">
+          <div class="vcard-price"><span class="vcard-price-new">€320</span></div>
+          <span class="vcard-tag">Concluída</span>
+        </div>
+      </div>
+    </div>
+    <div class="vcard" onclick="showPage('trip-picos')">
+      <img class="vcard-img" src="https://images.unsplash.com/photo-1589802829985-817e51171b92?w=600&h=360&fit=crop" alt="Dolomitas">
+      <div class="vcard-overlay">
+        <div class="vcard-flag">🇮🇹</div>
+        <div class="vcard-name">Dolomitas — Grande Traversata</div>
+        <div class="vcard-date">Ago 2025 · 6 dias · 87km · ↑4.200m</div>
+        <div class="vcard-bottom">
+          <div class="vcard-price"><span class="vcard-price-new">€1.240</span></div>
+          <span class="vcard-tag">Concluída</span>
+        </div>
+      </div>
+    </div>
+    <div class="vcard" onclick="showPage('trip-picos')">
+      <img class="vcard-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=360&fit=crop" alt="Costa Vicentina">
+      <div class="vcard-overlay">
+        <div class="vcard-flag">🇵🇹</div>
+        <div class="vcard-name">Costa Vicentina — Rota Vicentina</div>
+        <div class="vcard-date">Abr 2025 · 4 dias · 72km</div>
+        <div class="vcard-bottom">
+          <div class="vcard-price"><span class="vcard-price-new">€560</span></div>
+          <span class="vcard-tag">Concluída</span>
+        </div>
+      </div>
+    </div>
+    <div class="vcard" onclick="showPage('trip-picos')">
+      <img class="vcard-img" src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?w=600&h=360&fit=crop" alt="Serra da Estrela">
+      <div class="vcard-overlay">
+        <div class="vcard-flag">🇵🇹</div>
+        <div class="vcard-name">Serra da Estrela — Rota das Lagoas</div>
+        <div class="vcard-date">Mar 2025 · 3 dias · 45km</div>
+        <div class="vcard-bottom">
+          <div class="vcard-price"><span class="vcard-price-new">€380</span></div>
+          <span class="vcard-tag">Concluída</span>
+        </div>
+      </div>
+    </div>
+    <div class="vcard" onclick="showPage('trip-picos')">
+      <img class="vcard-img" src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&h=360&fit=crop" alt="GR20 Corsica">
+      <div class="vcard-overlay">
+        <div class="vcard-flag">🇫🇷</div>
+        <div class="vcard-name">GR20 Corsica — Sector Norte</div>
+        <div class="vcard-date">Jun 2024 · 5 dias · 82km</div>
+        <div class="vcard-bottom">
+          <div class="vcard-price"><span class="vcard-price-new">€1.580</span></div>
+          <span class="vcard-tag">Concluída</span>
+        </div>
+      </div>
+    </div>
+    <div class="vcard" onclick="showPage('trip-picos')">
+      <img class="vcard-img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=360&fit=crop" alt="Gerês">
+      <div class="vcard-overlay">
+        <div class="vcard-flag">🇵🇹</div>
+        <div class="vcard-name">Gerês — Travessia Peneda</div>
+        <div class="vcard-date">Set 2024 · 2 dias · 38km</div>
+        <div class="vcard-bottom">
+          <div class="vcard-price"><span class="vcard-price-new">€290</span></div>
+          <span class="vcard-tag">Concluída</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════ PAGAMENTOS ═══════════════ -->
+<div class="page" id="pg-pagamentos">
+  <div class="ph" style="margin-bottom:6px"><h1 style="font-size:18px">Pagamentos</h1><p>Gestão das tuas prestações.</p></div>
+  <div style="display:flex;align-items:center;gap:6px;font-size:11px;color:var(--orange);margin-bottom:10px">
+    <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--orange);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span>1 pagamento urgente nos próximos 5 dias</span>
+  </div>
+  <div class="card">
+    <div class="pay-trip">
+      <div class="pt-head">Picos da Europa <span class="pill pill-g">Total: €480</span></div>
+      <div class="pay-phases">
+        <div class="pay-phase paid">
+          <div class="pp-status pps-paid"><svg class="ic" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="pp-info"><div class="pp-name">1.ª Prestação — Reserva</div><div class="pp-date">Pago em 10 Jan 2026</div></div>
+          <div class="pp-amount paid">€160</div>
+        </div>
+        <div class="pay-phase paid">
+          <div class="pp-status pps-paid"><svg class="ic" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="pp-info"><div class="pp-name">2.ª Prestação</div><div class="pp-date">Pago em 4 Fev 2026</div></div>
+          <div class="pp-amount paid">€160</div>
+        </div>
+        <div class="pay-phase">
+          <div class="pp-status pps-future"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="pp-info"><div class="pp-name">3.ª Prestação — Restante</div><div class="pp-date">Vence 25 Mar 2026</div></div>
+          <div class="pp-amount">€160</div>
+        </div>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="pay-trip">
+      <div class="pt-head">Islândia 2026 <span class="pill pill-o">1 pagamento urgente</span></div>
+      <div class="pay-phases">
+        <div class="pay-phase paid">
+          <div class="pp-status pps-paid"><svg class="ic" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="pp-info"><div class="pp-name">1.ª Prestação — Reserva</div><div class="pp-date">Pago em 15 Jan 2026</div></div>
+          <div class="pp-amount paid">€450</div>
+        </div>
+        <div class="pay-phase urgent">
+          <div class="pp-status pps-urgent"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="pp-info"><div class="pp-name">2.ª Prestação — <strong>URGENTE</strong></div><div class="pp-date" style="color:var(--orange)">Vence em 5 dias — 14 Mar 2026</div></div>
+          <div class="pp-amount urgent">€720</div>
+        </div>
+        <div class="pay-phase paid" style="opacity:.5">
+          <div class="pp-status pps-future"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div class="pp-info"><div class="pp-name">3.ª Prestação — Restante</div><div class="pp-date">Vence 1 Jun 2026</div></div>
+          <div class="pp-amount">€720</div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <button class="btn btn-o" style="width:100%;justify-content:center">
+        <svg class="ic" viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        Pagar €720 agora — Islândia 2026
+      </button>
+    </div></div>
+</div>
+
+
+<!-- ═══════════════ SUPORTE ═══════════════ -->
+<div class="page" id="pg-suporte">
+  <div class="ph" style="margin-bottom:6px"><h1 style="font-size:18px">Contacto</h1><p>Equipa Borealis ou grupo da viagem.</p></div>
+
+  <div class="card" style="border-color:rgba(37,211,102,.3);background:#f0fdf4">
+    <div class="card-hd">
+      <div class="card-title" style="color:#166534">
+        <svg class="ic16" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.555 4.116 1.528 5.845L0 24l6.335-1.505A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        Grupo da Viagem — Picos da Europa
+      </div>
+    </div>
+    <p style="font-size:13px;color:#166534;margin-bottom:14px">Canal directo de comunicação com o guia Hugo Palma e os outros 13 Niners.</p>
+    <button class="btn btn-p btn-sm" style="background:#25d366;font-size:13px;height:38px;padding:0 18px" onclick="window.open('https://wa.me/351910000000','_blank')">
+      Abrir Grupo WhatsApp →
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="card-hd"><div class="card-title">Equipa Borealis</div></div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink2)">
+        <svg class="ic16" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.78a16 16 0 0 0 6.29 6.29l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +351 910 000 000
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink2)">
+        <svg class="ic16" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@borealis.travel
+      </div>
+      <div style="font-size:12px;color:var(--ink4);padding-top:4px;border-top:1px solid var(--line)">Segunda a Sexta · 9h–18h</div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- ═══════════════ FEEDBACK ═══════════════ -->
+<div class="page" id="pg-feedback">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+    <button onclick="showPage('trip-picos')" style="background:none;border:none;cursor:pointer;color:var(--ink4);display:flex;align-items:center;padding:0"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <div class="ph" style="margin-bottom:0"><h1 style="font-size:18px">Feedback — Picos da Europa</h1><p>A tua opinião ajuda-nos a melhorar cada viagem.</p></div>
+  </div>
+
+  <!-- Star Ratings -->
+  <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 16px;margin-bottom:8px">
+    <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px">Avaliação por categoria</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:11px;color:var(--ink2)">Organização</span><div class="stars" style="display:flex;flex-direction:row-reverse;gap:2px"><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:11px;color:var(--ink2)">Guia</span><div class="stars" style="display:flex;flex-direction:row-reverse;gap:2px"><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:11px;color:var(--ink2)">Percurso</span><div class="stars" style="display:flex;flex-direction:row-reverse;gap:2px"><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:11px;color:var(--ink2)">Alojamento</span><div class="stars" style="display:flex;flex-direction:row-reverse;gap:2px"><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:11px;color:var(--ink2)">Alimentação</span><div class="stars" style="display:flex;flex-direction:row-reverse;gap:2px"><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:11px;color:var(--ink2)">Segurança</span><div class="stars" style="display:flex;flex-direction:row-reverse;gap:2px"><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span></div></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="font-size:11px;color:var(--ink2)">Valor / preço</span><div class="stars" style="display:flex;flex-direction:row-reverse;gap:2px"><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span><span class="star" style="cursor:pointer;font-size:16px;color:var(--line);transition:color .1s">★</span></div></div>
+    </div>
+  </div>
+
+  <!-- Espírito de grupo (1-10) -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 16px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px">Espírito de grupo</div>
+      <div style="display:flex;gap:3px;flex-wrap:wrap">
+        <button onclick="selectScale(this)" style="width:28px;height:28px;border-radius:6px;border:1px solid var(--line);background:#fff;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s">1</button>
+        <button onclick="selectScale(this)" style="width:28px;height:28px;border-radius:6px;border:1px solid var(--line);background:#fff;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s">2</button>
+        <button onclick="selectScale(this)" style="width:28px;height:28px;border-radius:6px;border:1px solid var(--line);background:#fff;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s">3</button>
+        <button onclick="selectScale(this)" style="width:28px;height:28px;border-radius:6px;border:1px solid var(--line);background:#fff;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s">4</button>
+        <button onclick="selectScale(this)" style="width:28px;height:28px;border-radius:6px;border:1px solid var(--line);background:#fff;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s">5</button>
+        <button onclick="selectScale(this)" style="width:28px;height:28px;border-radius:6px;border:1px solid var(--line);background:#fff;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s">6</button>
+        <button onclick="selectScale(this)" style="width:28px;height:28px;border-radius:6px;border:1px solid var(--line);background:#fff;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s">7</button>
+        <button onclick="selectScale(this)" style="width:28px;height:28px;border-radius:6px;border:1px solid var(--line);background:#fff;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s">8</button>
+        <button onclick="selectScale(this)" style="width:28px;height:28px;border-radius:6px;border:1px solid var(--line);background:#fff;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s">9</button>
+        <button onclick="selectScale(this)" style="width:28px;height:28px;border-radius:6px;border:1px solid var(--line);background:#fff;font-size:11px;font-weight:600;color:var(--ink3);cursor:pointer;transition:all .15s">10</button>
+      </div>
+    </div>
+
+    <!-- Quick Tags -->
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 16px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px">O que mais gostaste?</div>
+      <div style="display:flex;gap:4px;flex-wrap:wrap" id="feedbackTags">
+        <button onclick="this.classList.toggle('active');this.style.background=this.classList.contains('active')?'var(--g700)':'#fff';this.style.color=this.classList.contains('active')?'#fff':'var(--ink3)';this.style.borderColor=this.classList.contains('active')?'var(--g700)':'var(--line)'" style="padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;font-size:10px;font-weight:500;color:var(--ink3);cursor:pointer;transition:all .15s">Paisagens</button>
+        <button onclick="this.classList.toggle('active');this.style.background=this.classList.contains('active')?'var(--g700)':'#fff';this.style.color=this.classList.contains('active')?'#fff':'var(--ink3)';this.style.borderColor=this.classList.contains('active')?'var(--g700)':'var(--line)'" style="padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;font-size:10px;font-weight:500;color:var(--ink3);cursor:pointer;transition:all .15s">Grupo</button>
+        <button onclick="this.classList.toggle('active');this.style.background=this.classList.contains('active')?'var(--g700)':'#fff';this.style.color=this.classList.contains('active')?'#fff':'var(--ink3)';this.style.borderColor=this.classList.contains('active')?'var(--g700)':'var(--line)'" style="padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;font-size:10px;font-weight:500;color:var(--ink3);cursor:pointer;transition:all .15s">Guia</button>
+        <button onclick="this.classList.toggle('active');this.style.background=this.classList.contains('active')?'var(--g700)':'#fff';this.style.color=this.classList.contains('active')?'#fff':'var(--ink3)';this.style.borderColor=this.classList.contains('active')?'var(--g700)':'var(--line)'" style="padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;font-size:10px;font-weight:500;color:var(--ink3);cursor:pointer;transition:all .15s">Desafio</button>
+        <button onclick="this.classList.toggle('active');this.style.background=this.classList.contains('active')?'var(--g700)':'#fff';this.style.color=this.classList.contains('active')?'#fff':'var(--ink3)';this.style.borderColor=this.classList.contains('active')?'var(--g700)':'var(--line)'" style="padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;font-size:10px;font-weight:500;color:var(--ink3);cursor:pointer;transition:all .15s">Comida</button>
+        <button onclick="this.classList.toggle('active');this.style.background=this.classList.contains('active')?'var(--g700)':'#fff';this.style.color=this.classList.contains('active')?'#fff':'var(--ink3)';this.style.borderColor=this.classList.contains('active')?'var(--g700)':'var(--line)'" style="padding:4px 10px;border-radius:14px;border:1px solid var(--line);background:#fff;font-size:10px;font-weight:500;color:var(--ink3);cursor:pointer;transition:all .15s">Logística</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comentário + Sugestões -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 16px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px">Comentário</div>
+      <textarea placeholder="O que correu bem? O que pode melhorar?" style="width:100%;height:60px;border:1px solid var(--line);border-radius:6px;padding:8px;font-size:11px;font-family:var(--f-body);resize:vertical;color:var(--ink)"></textarea>
+    </div>
+    <div style="background:#fff;border:1px solid var(--line);border-radius:8px;padding:12px 16px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px">Sugestões para próximas viagens</div>
+      <textarea placeholder="Destinos, actividades, melhorias..." style="width:100%;height:60px;border:1px solid var(--line);border-radius:6px;padding:8px;font-size:11px;font-family:var(--f-body);resize:vertical;color:var(--ink)"></textarea>
+    </div>
+  </div>
+
+  <button onclick="alert('Feedback enviado! Obrigado.')" style="width:100%;background:var(--g700);color:#fff;border:none;padding:10px;border-radius:6px;font-size:12px;font-weight:700;cursor:pointer;transition:background .15s" onmouseover="this.style.background='var(--g900)'" onmouseout="this.style.background='var(--g700)'">Enviar Feedback</button>
+</div>
+
+
+  </main>
+</div>
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-nav" id="mobileNav">
+  <button class="mn-active" onclick="showPage('dashboard')">
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    <span>Resumo</span>
+  </button>
+  <button onclick="showPage('trip-picos')">
+    <svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+    <span>Checklist</span>
+  </button>
+  <button onclick="showPage('trip-picos')">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="10" r="3"/><path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 14 8 14s8-8.75 8-14a8 8 0 0 0-8-8z"/></svg>
+    <span>Encontro</span>
+  </button>
+  <button onclick="showPage('viagens')">
+    <svg viewBox="0 0 24 24"><path d="M3 17l4-8 5 6 3-4 6 6"/></svg>
+    <span>Viagens</span>
+  </button>
+  <button onclick="showPage('pagamentos')">
+    <svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+    <span>Pagar</span>
+  </button>
+</nav>
+
+<script>
+// ─── NAVIGATION ───
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(b=>b.classList.remove('active'));
+  const pg=document.getElementById('pg-'+id);
+  if(pg) pg.classList.add('active');
+  updateTripTabs(id);
+  document.querySelectorAll('.sb-item').forEach(b=>{
+    const onclick=b.getAttribute('onclick')||'';
+    if(onclick.includes("'"+id+"'")) b.classList.add('active');
+  });
+  // Mobile nav
+  const mnMap={dashboard:0,checklist:1,viagens:2,pagamentos:3,niner:4};
+  const nav=document.getElementById('mobileNav');
+  if(nav){
+    nav.querySelectorAll('button').forEach(b=>b.classList.remove('mn-active'));
+    const idx=mnMap[id];
+    if(idx!==undefined) nav.children[idx].classList.add('mn-active');
+  }
+}
+
+// ─── TRIP TABS ───
+function updateTripTabs(pageId){
+  const tabsContainer=document.getElementById('tripTabs');
+  const tripPages = ['trip-picos','trip-islandia','checklist','niner','feedback','relatorio'];
+  if(tripPages.includes(pageId)){
+    tabsContainer.classList.add('active');
+    document.querySelectorAll('.trip-tab').forEach(t=>t.classList.remove('active'));
+    document.querySelector(`.trip-tab[onclick*="'${pageId}'"]`)?.classList.add('active');
+  }else{
+    tabsContainer.classList.remove('active');
+  }
+}
+
+function switchTripTab(btn,pageId){
+  document.querySelectorAll('.trip-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  showPage(pageId);
+}
+
+// ─── SIDEBAR TRIP MENU ───
+function toggleTripMenu(btn){
+  btn.classList.toggle('expanded');
+  const items=btn.nextElementSibling;
+  if(items) items.classList.toggle('show');
+}
+
+// ─── NOTIFICATIONS ───
+function toggleNotif(){
+  const p=document.getElementById('notifPanel');
+  p.classList.toggle('open');
+}
+document.addEventListener('click',function(e){
+  const panel=document.getElementById('notifPanel');
+  const btn=document.getElementById('notifBtn');
+  if(panel.classList.contains('open')&&!panel.contains(e.target)&&!btn.contains(e.target)){
+    panel.classList.remove('open');
+  }
+});
+
+// ─── CHECKLIST TOGGLE ───
+function toggleCheck(el){
+  el.classList.toggle('checked');
+  updateProgress();
+}
+function toggleCLI(row){
+  const check=row.querySelector('.cli-check');
+  const name=row.querySelector('.cli-name');
+  check.classList.toggle('on');
+  name.classList.toggle('done');
+  updateProgress();
+}
+function updateProgress(){
+  const all=document.querySelectorAll('#checklist-container .cli-check');
+  const done=document.querySelectorAll('#checklist-container .cli-check.on');
+  const pct=all.length?Math.round(done.length/all.length*100):0;
+  const bar=document.getElementById('cl-progress');
+  if(bar) bar.style.width=pct+'%';
+}
+
+// ─── CHECKLIST FILTER ───
+function filterCat(btn, cat){
+  document.querySelectorAll('.cl-cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.checklist-group').forEach(g=>{
+    g.style.display=(cat==='all'||g.dataset.cat===cat)?'block':'none';
+  });
+}
+
+// ─── STARS FEEDBACK ───
+document.querySelectorAll('.stars').forEach(container=>{
+  const stars=[...container.querySelectorAll('.star')];
+  // Stars are in reverse order in DOM (flex-direction:row-reverse), so index 0 = star 5, index 4 = star 1
+  stars.forEach((star,i)=>{
+    star.addEventListener('click',function(e){
+      e.stopPropagation();
+      // In reversed flex, clicking star at index i means selecting (stars.length - i) stars
+      const rating=stars.length-i;
+      stars.forEach((s,j)=>{
+        // Light up this star and all after it (which visually appear before it)
+        s.classList.toggle('lit',j>=i);
+      });
     });
+  });
+});
 
-    // Hero bg animation
-    window.addEventListener('load', () => {
-      const heroBg = document.querySelector('.hero-bg');
-      if (heroBg) heroBg.classList.add('loaded');
-    });
+// ─── MAP POINT SELECT ───
+function selectPoint(card){
+  document.querySelectorAll('.mp-card').forEach(c=>c.classList.remove('sel'));
+  card.classList.add('sel');
+}
 
-    // Modal functions
-    function openModal(id) {
-      const modal = document.getElementById(id);
-      if (modal) {
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-    }
+function togglePointDetails(card){
+  const allCards=document.querySelectorAll('.mp-card');
+  allCards.forEach(c=>{
+    if(c!==card) c.classList.remove('expanded');
+  });
+  card.classList.toggle('expanded');
+}
 
-    function closeModal(id) {
-      const modal = document.getElementById(id);
-      if (modal) {
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      }
-    }
+// ─── NPS SELECTION ───
+function selectNPS(btn, score){
+  btn.parentElement.querySelectorAll('button').forEach(b=>{b.style.background='';b.style.color=''});
+  btn.style.background='var(--g500)';
+  btn.style.color='#fff';
+}
+function selectScale(btn){
+  btn.parentElement.querySelectorAll('button').forEach(b=>{b.style.background='';b.style.color=''});
+  btn.style.background='var(--g500)';
+  btn.style.color='#fff';
+}
 
-    // Close modal on outside click
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('modal')) {
-        e.target.classList.remove('active');
-        document.body.style.overflow = 'auto';
-      }
-    });
+// ─── TOGGLE MORE TRIPS ───
+function toggleMoreTrips(){
+  const extra=document.getElementById('extra-trips');
+  const btn=document.getElementById('btnMoreTrips');
+  if(extra.style.display==='none'){
+    extra.style.display='flex';
+    extra.style.flexDirection='column';
+    extra.style.gap='10px';
+    btn.innerHTML='<svg class="ic" viewBox="0 0 24 24"><polyline points="6 15 12 9 18 15"/></svg> Mostrar menos';
+  } else {
+    extra.style.display='none';
+    btn.innerHTML='<svg class="ic" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg> Ver mais viagens (3)';
+  }
+}
 
-    // Web3Forms submission with AJAX
-    const form = document.getElementById('contactForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const formSuccess = document.getElementById('formSuccess');
+// ─── ALTITUDE GRAPH ZOOM ───
+let graphZoom=1;
+function zoomGraph(factor){
+  graphZoom*=factor;
+  graphZoom=Math.max(0.5,Math.min(3,graphZoom));
+  const svg=document.getElementById('altitudeGraph');
+  const cx=350,cy=100;
+  const w=700/graphZoom,h=200/graphZoom;
+  svg.setAttribute('viewBox',`${cx-w/2} ${cy-h/2} ${w} ${h}`);
+}
+function resetGraph(){
+  graphZoom=1;
+  const svg=document.getElementById('altitudeGraph');
+  svg.setAttribute('viewBox','0 0 700 200');
+}
 
-    form?.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      submitBtn.textContent = 'A enviar...';
-      submitBtn.disabled = true;
-      submitBtn.style.opacity = '0.6';
+// ─── INTERACTIVE CHECKLIST ───
+function toggleCLItem(el){
+  const isChecked = el.classList.contains('checked');
+  const icon = el.querySelector('.cl-icon');
+  const label = el.querySelector('.cl-label');
+  const svg = icon.querySelector('svg');
+  if(isChecked){
+    el.classList.remove('checked');
+    icon.style.borderColor='var(--line)';
+    icon.style.background='#fff';
+    svg.style.opacity='0';
+    label.style.color='var(--ink)';
+    label.style.textDecoration='none';
+  } else {
+    el.classList.add('checked');
+    icon.style.borderColor='var(--g500)';
+    icon.style.background='var(--g500)';
+    svg.style.opacity='1';
+    label.style.color='var(--ink3)';
+    label.style.textDecoration='line-through';
+  }
+  // Update counter
+  const grid = el.closest('[id$="-checklist"]');
+  if(grid){
+    const all = grid.querySelectorAll('.cl-item');
+    const done = grid.querySelectorAll('.cl-item.checked');
+    const counter = grid.querySelector('[id$="-cl-count"]');
+    if(counter) counter.textContent = done.length+'/'+all.length;
+    // Also update the mini-checklist progress in ROW 1 if it exists
+    const miniCount = document.querySelector('#picos-mini-count');
+    const miniBar = document.querySelector('#picos-mini-bar');
+    if(miniCount) miniCount.textContent = done.length+'/'+all.length;
+    if(miniBar) miniBar.style.width = Math.round(done.length/all.length*100)+'%';
+    // Update dashboard hero progress
+    const dashCount = document.querySelector('#dash-cl-count');
+    const dashBar = document.querySelector('#dash-cl-bar');
+    if(dashCount) dashCount.textContent = done.length+'/'+all.length;
+    if(dashBar) dashBar.style.width = Math.round(done.length/all.length*100)+'%';
+  }
+}
 
-      try {
-        const response = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          body: new FormData(form)
-        });
-        const data = await response.json();
-
-        if (data.success) {
-          form.style.display = 'none';
-          formSuccess.style.display = 'block';
-        } else {
-          submitBtn.textContent = 'Erro — tente novamente';
-          submitBtn.disabled = false;
-          submitBtn.style.opacity = '1';
-          submitBtn.style.background = '#c0392b';
-          setTimeout(() => {
-            submitBtn.textContent = 'Enviar Pedido de Proposta →';
-            submitBtn.style.background = '';
-          }, 3000);
-        }
-      } catch (err) {
-        submitBtn.textContent = 'Erro de ligação — tente novamente';
-        submitBtn.disabled = false;
-        submitBtn.style.opacity = '1';
-        setTimeout(() => {
-          submitBtn.textContent = 'Enviar Pedido de Proposta →';
-        }, 3000);
-      }
-    });
-  </script>
+</script>
 </body>
 </html>
