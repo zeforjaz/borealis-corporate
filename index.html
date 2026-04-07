@@ -853,157 +853,6 @@
       font-weight: 600;
     }
 
-    .bid-highlight {
-      max-width: 1200px;
-      margin: 0 auto;
-      background: var(--g);
-      border-radius: 16px;
-      padding: 48px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-      color: #fff;
-    }
-
-    .bid-highlight h3 {
-      font-size: 28px;
-      font-weight: 900;
-      margin-bottom: 12px;
-      line-height: 1.1;
-    }
-
-    .bid-highlight p {
-      font-size: 15px;
-      color: rgba(255, 255, 255, 0.8);
-      line-height: 1.7;
-      margin-bottom: 12px;
-    }
-
-    .bid-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .bid-stat {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .bid-stat-num {
-      font-size: 24px;
-      font-weight: 900;
-      color: #fff;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .bid-stat-lbl {
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.7);
-      line-height: 1.4;
-    }
-
-    /* ── BID / INÊS GAYA ─── */
-    .bid-section {
-      padding: 80px 24px;
-      background: var(--bg);
-    }
-
-    .bid-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .bid-photo {
-      position: relative;
-    }
-
-    .bid-photo img {
-      width: 100%;
-      height: 520px;
-      object-fit: cover;
-      border-radius: 16px;
-      display: block;
-    }
-
-    .bid-photo-tag {
-      position: absolute;
-      bottom: 24px;
-      left: 24px;
-      background: #fff;
-      border-radius: 12px;
-      padding: 16px 20px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-    }
-
-    .bid-photo-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .bid-photo-role {
-      font-size: 12px;
-      color: var(--i3);
-      margin-top: 2px;
-    }
-
-    .bid-photo-ig {
-      font-size: 11px;
-      color: var(--or);
-      font-weight: 600;
-      margin-top: 6px;
-    }
-
-    .bid-content h2 {
-      font-size: clamp(32px, 4vw, 48px);
-      font-weight: 900;
-      color: var(--ink);
-      margin-bottom: 12px;
-      line-height: 1.1;
-      letter-spacing: -0.02em;
-    }
-
-    .bid-tagline {
-      font-size: 16px;
-      color: var(--i3);
-      line-height: 1.6;
-      margin-bottom: 20px;
-      font-weight: 300;
-    }
-
-    .bid-desc {
-      font-size: 15px;
-      color: var(--i3);
-      line-height: 1.75;
-      margin-bottom: 24px;
-    }
-
-    .bid-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-
-    .bid-pill {
-      font-size: 12px;
-      font-weight: 600;
-      padding: 8px 16px;
-      border-radius: 20px;
-      background: var(--gl);
-      color: var(--g);
-      border: 1px solid rgba(38, 92, 46, 0.15);
-    }
-
     /* ── COMO FUNCIONA ─── */
     .process-section {
       padding: 80px 24px;
@@ -1454,16 +1303,7 @@
         max-width: calc(100% - 48px);
       }
 
-      .wilderness-inner,
-      .bid-inner {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .bid-highlight {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
+      .wilderness-inner {
 
       .contact-wrapper {
         grid-template-columns: 1fr;
@@ -1524,8 +1364,7 @@
       .contact-head h2,
       .process-head h2,
       .health-header h2,
-      .wilderness-content h2,
-      .bid-content h2 {
+      .wilderness-content h2 {
         font-size: 28px;
       }
     }
@@ -1781,38 +1620,6 @@
           <p>Nature-based therapy tem evidência crescente em redução de cortisol, melhoria de foco e regulação emocional. A natureza não é o cenário — é o agente terapêutico.</p>
         </div>
       </div>
-
-      <div class="health-card">
-        <div class="health-card-img" style="background-image:url('https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&q=80')"></div>
-        <div class="health-card-body">
-          <div class="health-card-tag">Parceria Clínica</div>
-          <h3>Inês Gaya × Borealis</h3>
-          <p>Psicóloga clínica especializada em trauma e regulação emocional. Coordena o protocolo de saúde mental da Borealis — garantindo fundamentação científica rigorosa em cada programa. <a href="https://www.instagram.com/inesgaya/" target="_blank" style="color:var(--or);font-weight:600;">@inesgaya →</a></p>
-          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;">
-            <span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--gl);color:var(--g);">Nature-Based Therapy</span>
-            <span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--gl);color:var(--g);">Protocolo Clínico</span>
-            <span style="font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;background:var(--gl);color:var(--g);">Regulação Emocional</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="bid-highlight">
-      <div>
-        <h3>BID — Behavioral Impact Design</h3>
-        <p>A Borealis desenvolveu uma métrica proprietária em parceria com a BID, que mede o impacto comportamental real dos programas.</p>
-        <p>Não é NPS. Não é satisfação. É mudança mensurável em coesão de equipa, decisão sob incerteza, e liderança resiliente.</p>
-      </div>
-      <div class="bid-stats">
-        <div class="bid-stat">
-          <div class="bid-stat-num">+76%</div>
-          <div class="bid-stat-lbl">Melhoria em coesão de equipa pós-programa</div>
-        </div>
-        <div class="bid-stat">
-          <div class="bid-stat-num">+58%</div>
-          <div class="bid-stat-lbl">Aumento em tomada de decisão rápida</div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -1842,7 +1649,7 @@
         <div class="process-step">
           <div class="process-step-num">4</div>
           <h3>Impacto medido</h3>
-          <p>Métricas BID antes e depois. Relatório de impacto comportamental e recomendações.</p>
+          <p>Métricas de impacto antes e depois. Relatório comportamental e recomendações.</p>
         </div>
       </div>
     </div>
@@ -1896,7 +1703,6 @@
               <option value="Mindful Camp">Mindful Camp</option>
               <option value="Space Camp">Space Camp</option>
               <option value="Corporate Wilderness">Retiro de Liderança (Corporate Wilderness)</option>
-              <option value="BID — Borealis × Inês Gaya">BID — Borealis × Inês Gaya</option>
               <option value="Ainda não sei">Ainda não sei — quero conversar</option>
             </select>
           </div>
@@ -1961,7 +1767,7 @@
             <li>Círculos de reflexão noturnos guiados</li>
             <li>Facilitação contínua de coaches executivos</li>
             <li>Refeições preparadas em campo</li>
-            <li>Avaliação BID antes e após programa</li>
+            <li>Avaliação de impacto antes e após programa</li>
           </ul>
         </div>
         <p>Ideal para líderes e equipas que precisam de reset radical. O impacto é profundo e duradouro.</p>
